@@ -1,0 +1,1034 @@
+:root {
+    --primary: #2e7d32;
+    --primary-dark: #1b5e20;
+    --bg-color: #f8f9fa;
+    --card-bg: #ffffff;
+    --text-color: #212529;
+    --border-color: #000000;
+    --border-width: 2px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #0d1b10; /* Fondo oscuro de reserva mientras carga la imagen */
+    color: var(--text-color);
+    line-height: 1.6;
+    padding: 20px;
+    position: relative;
+    min-height: 100vh;
+}
+
+/* Capa fija de la imagen de fondo con filtro de opacidad/oscuridad */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    /* Imagen de fondo */
+    background-image: url('assets/ImagenFondo.png');  
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    /* Capa oscura (overlay) + opacidad atenuada */
+    opacity: 0.50; /* Puedes probar entre 0.15 y 0.35 para ajustar qué tan sutil se ve */
+    filter: brightness(0.7); /* Oscurece ligeramente los tonos brillantes */
+
+    z-index: -1; /* Mantiene la imagen detrás de todo el contenido */
+    pointer-events: none;
+}
+
+.main-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* TÍTULO PRINCIPAL RUTRAVESÍA - OPCIÓN BANNER/STICKER */
+header h1, 
+.logo-title {
+    font-family: 'Caveat Brush', cursive;
+    font-size: 3.8rem;
+    color: #1b4d3e;                     /* Verde institucional */
+    text-align: center;
+    letter-spacing: 2px;
+    
+    /* Estilo Sticker/Caja */
+    background-color: #ffffff;
+    border: 3px solid #000000;
+    border-radius: 12px;
+    box-shadow: 5px 5px 0px #000000;
+    
+    /* Ubicación y relleno */
+    display: table;
+    margin: 10px auto 15px auto;
+    padding: 4px 30px;
+}
+
+/* ALINEACIÓN Y ESPACIADO DEL HEADER */
+.main-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    padding: 25px 15px 15px 15px;
+}
+
+/* 1. ETIQUETA PRINCIPAL BLANCA (LOGO + TÍTULO RUTRAVESÍA) */
+.logo-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;                          /* Espacio entre el logo y las letras */
+    background-color: #ffffff;
+    border: 3px solid #000000;
+    border-radius: 12px;
+    box-shadow: 5px 5px 0px #000000;
+    padding: 6px 28px;
+    margin: 0;
+}
+
+.logo-badge .header-logo {
+    width: 100px;                        /* Tamaño ajustado para que encaje al lado del texto */
+    height: auto;
+    object-fit: contain;
+}
+
+.logo-badge span {
+    font-family: 'Caveat Brush', cursive;
+    font-size: 3.8rem;                  /* Tamaño de letra de Rutravesía */
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: #1b5e20;                     /* Verde institucional */
+    text-transform: uppercase;
+    line-height: 1;
+}
+
+/* 2. ETIQUETA DEL SLOGAN (DESTACADO SOBRE EL PAISAJE) */
+.slogan-badge {
+    background-color: #ffffff;
+    border: 2px solid #000000;
+    border-radius: 8px;
+    box-shadow: 3px 3px 0px #000000;
+    padding: 6px 22px;
+    max-width: 90%;
+    text-align: center;
+}
+
+.slogan-badge p {
+    font-family: 'Caveat Brush', cursive; /* Mantiene tu estilo original */
+    font-size: 2rem;
+    font-weight: 500;
+    color: #222222;
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.search-section {
+    margin-bottom: 40px;
+}
+
+.search-box {
+    position: relative;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 15px 20px;
+    font-size: 1.1rem;
+    border: var(--border-width) solid var(--border-color);
+    border-radius: 8px;
+    outline: none;
+}
+
+.search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--card-bg);
+    border: var(--border-width) solid var(--border-color);
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 10;
+}
+
+.search-item {
+    padding: 12px 20px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+}
+
+.search-item:hover {
+    background-color: #e8f5e9;
+}
+
+.section-title {
+    font-family: 'Caveat Brush', cursive; /* Aplica la fuente oficial de Rutravesía */
+    text-align: center;
+    font-size: 2.3rem;                   /* Tamaño destacado para llamar la atención */
+    color: #1b4d3e;                      /* Verde oscuro institucional */
+    margin-bottom: 10px;
+    margin-top: 5px; /* Entre más alto el número, más BAJA el texto */
+    letter-spacing: 1px;                 /* Espaciado suave entre letras */
+    text-transform: uppercase;
+    display: inline-block;
+    padding-bottom: 5px;
+    text-shadow: 
+        2px  2px 4px rgba(255, 255, 255, 0.9),
+       -2px -2px 4px rgba(255, 255, 255, 0.9),
+        2px -2px 4px rgba(255, 255, 255, 0.9),
+       -2px  2px 4px rgba(255, 255, 255, 0.9);
+}
+/* ==============================================================================
+   PASO 2: ESTILOS PARA EL TÍTULO "PRÓXIMAS RUTAS CONFIRMADAS"
+   ============================================================================== */
+
+.upcoming-section {
+    position: relative;
+    margin-top: 35px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* Insignia / Badge para el Título Principal */
+.upcoming-section .section-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #1b5e20;
+    color: #ffffff !important; /* Blanco puro */
+    padding: 10px 24px;
+    border-radius: 50px;
+    
+ /* Mantenemos tu fuente estilizada previa */
+    font-family: 'Caveat Brush', cursive !important; 
+    font-size: 1.5rem; /* Un poco más grande para que la fuente manuscrita respire */
+    font-weight: 400;
+    letter-spacing: 2px; /* Separa las letras para evitar que se amontonen */
+    
+    border: 2px solid #4caf50;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);
+    
+    /* Quitamos cualquier sombra que borronee el texto */
+    text-shadow: none !important;
+    filter: none !important;
+    
+    position: relative;
+    z-index: 2;
+}
+
+/* Efecto hover suave al pasar la mano por el título */
+.upcoming-section .section-title:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 8px 20px rgba(76, 175, 80, 0.4);
+}
+
+/* Línea vertical que 'conecta' el título con la cuadrícula de tarjetas */
+.upcoming-section::after {
+    content: "";
+    position: absolute;
+    top: 45px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 35px;
+    background: linear-gradient(to bottom, #4caf50 0%, rgba(76, 175, 80, 0) 100%);
+    z-index: 1;
+}
+
+/* Margen superior a la cuadrícula de tarjetas para que no choque con la línea */
+#cardsContainer {
+    margin-top: 25px;
+}
+
+/* CONTENEDOR DE TARJETAS (GRILLA) */
+.cards-grid {
+    display: grid;
+    /* Reducimos el ancho de cada columna a 215px para un tamaño más compacto */
+    grid-template-columns: repeat(auto-fit, 215px); 
+    
+    /* Centra el grupo de tarjetas horizontalmente */
+    justify-content: center; 
+    
+    /* Separación entre tarjetas */
+    gap: 30px; 
+    
+    margin-top: 20px;
+}
+
+/* TARJETA DE RUTA */
+.card {
+    background: var(--card-bg);
+    border: var(--border-width) solid var(--border-color);
+    border-radius: 10px;
+    padding: 14px; /* Relleno ajustado para aprovechar mejor el espacio interno */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 4px 4px 0px var(--border-color);
+    transition: transform 0.2s ease;
+
+    /* REDUCCIÓN PROPORCIONAL DE TAMAÑO */
+    height: 285px; /* Altura ajustada (antes 320px) */
+    aspect-ratio: 3 / 4; /* Conserva la proporción 3:4 original */
+    background-size: cover !important;
+    background-position: center !important;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+}
+
+/* TÍTULO DE LA RUTA EN LA TARJETA */
+.card h3 {
+    font-size: 1.15rem; /* Tamaño de letra más fino para no saturar */
+    font-family: inherit; /* Utiliza la fuente original de la web */
+    margin-bottom: 6px;
+}
+
+/* FECHA U OTROS TEXTOS INTERNOS */
+.card .date {
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+
+.btn-details {
+    background: transparent;
+    border: var(--border-width) solid var(--border-color);
+    padding: 10px 15px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+.btn-details:hover {
+    background: #e0e0e0;
+}
+
+.catalog-section {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.btn-catalog {
+    width: 100%;
+    max-width: 700px;
+    padding: 18px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    background: var(--primary);
+    color: white;
+    border: var(--border-width) solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 4px 4px 0px var(--border-color);
+}
+
+.btn-catalog:hover {
+    background: var(--primary-dark);
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.modal-card {
+    background: white;
+    border: var(--border-width) solid var(--border-color);
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    padding: 30px;
+    position: relative;
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+.btn-whatsapp {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    background: #25D366;
+    color: white;
+    padding: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 8px;
+    margin-top: 20px;
+    border: 2px solid #000;
+}
+
+.hidden {
+    display: none !important;
+}
+/* LOGO SUPERIOR IZQUIERDO */
+.fixed-logo-container {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    z-index: 50;
+}
+
+.fixed-logo {
+    width: 170px; /* Puedes ajustar el tamaño si lo quieres más grande o pequeño */
+    height: auto;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.4)); /* Sombra para que destaque sobre el fondo */
+}
+
+/* Adaptación para pantallas pequeñas de teléfonos */
+@media (max-width: 768px) {
+    .fixed-logo-container {
+        position: static;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    .fixed-logo {
+        width: 70px;
+    }
+}
+/* ========================================================= */
+/* AJUSTE DE CONTRASTE PARA TARJETAS CON FOTO DE FONDO        */
+/* ========================================================= */
+
+.card h3 {
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9); /* Sombra negra intensa para separar del fondo */
+}
+
+.card p {
+    color: #f0f0f0;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
+}
+
+.card .date {
+    color: #a5d6a7 !important; /* Verde claro visible sobre fotos oscuras */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
+}
+
+.btn-details {
+    background: rgba(255, 255, 255, 0.9); /* Botón ligeramente opaco sobre la foto */
+    border: var(--border-width) solid var(--border-color);
+}
+
+.btn-details:hover {
+    background: #ffffff;
+}
+.modal-large {
+    max-width: 800px;
+    max-height: 85vh;
+    overflow-y: auto;
+}
+/* SECCIÓN DE INTERÉS Y BOTÓN SILUETA */
+.interest-section {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.btn-interest {
+    background: transparent;
+    border: 2px solid #e74c3c;
+    color: #e74c3c;
+    padding: 10px 22px;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-interest:hover, .btn-interest.active {
+    background-color: #e74c3c;
+    color: white;
+}
+
+/* ÁREA DESPLEGABLE DE VOTACIÓN */
+.voting-container {
+    margin-top: 20px;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+}
+
+.voting-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+/* CALENDARIO INTERACTIVO */
+.calendar-wrapper {
+    background: white;
+    border-radius: 8px;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+
+
+.btn-cal-nav {
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 2px 8px;
+    color: var(--primary);
+}
+
+.calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: #777;
+    margin-bottom: 5px;
+}
+
+/* NUEVAS REGLAS PARA VOTACIÓN DE FINES DE SEMANA */
+.weekend-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.weekend-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    border: 2px solid #e0e0e0;
+    padding: 12px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+}
+
+.weekend-btn:hover {
+    border-color: var(--primary);
+    background-color: #f0fdf4;
+}
+
+.weekend-btn.selected {
+    border-color: var(--primary);
+    background-color: var(--primary);
+    color: white;
+}
+
+.weekend-btn .vote-badge {
+    background-color: #eee;
+    color: #333;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.weekend-btn.selected .vote-badge {
+    background-color: white;
+    color: var(--primary);
+}
+
+
+
+
+
+
+
+
+/* INPUT Y BOTÓN FINAL */
+.voter-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.voter-input-group input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.9rem;
+}
+
+.btn-submit-vote {
+    background-color: #25d366;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.btn-submit-vote:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+/* --- FORZAR 3 COLUMNAS SOLO EN EL CATÁLOGO --- */
+#catalogCardsContainer {
+    display: grid; /* Activa el sistema de cuadrícula en el catálogo */
+    grid-template-columns: repeat(3, 1fr); /* Fuerza a que siempre se organicen en 3 columnas iguales */
+    gap: 12px; /* Mantiene la separación corta de 12px entre tarjetas */
+}
+@media (max-width: 768px) {
+    #catalogCardsContainer {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Cambia automáticamente a 1 o 2 columnas en teléfonos */
+    }
+}
+/* BOTÓN FILTRAR DENTRO DEL CATÁLOGO */
+.btn-filter-trigger {
+    background: var(--btn-bg, #2e7d32);
+    color: #fff;
+    border: var(--border-width, 2px) solid var(--border-color, #000);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    box-shadow: 2px 2px 0px var(--border-color, #000);
+    transition: transform 0.1s ease;
+}
+
+.btn-filter-trigger:active {
+    transform: translate(2px, 2px);
+    box-shadow: 0px 0px 0px #000;
+}
+
+/* MODAL DE FILTROS */
+.filter-modal-card {
+    max-width: 500px;
+    width: 90%;
+    padding: 20px;
+}
+
+.filter-group {
+    margin-bottom: 16px;
+}
+
+.filter-label {
+    display: block;
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+}
+
+.filter-pills-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+/* BOTONES TIPO PILL */
+.filter-pill {
+    background: #f0f0f0;
+    border: 1.5px solid #000;
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 0.82rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.filter-pill.active {
+    background: #2e7d32;
+    color: #ffffff;
+    font-weight: bold;
+    box-shadow: 2px 2px 0px #000;
+}
+
+/* ACCIONES DEL MODAL */
+.filter-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1.5px solid #ccc;
+}
+
+.btn-clear-filters {
+    background: #e0e0e0;
+    border: 2px solid #000;
+    border-radius: 6px;
+    padding: 8px 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-apply-filters {
+    background: #2e7d32;
+    color: #fff;
+    border: 2px solid #000;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 2px 2px 0px #000;
+}
+
+.modal-content, 
+.modal-catalogo { 
+    max-width: 880px; /* Amplía el modal para que quepan holgadamente los 6 elementos */
+    width: 90%;
+}
+
+/* BARRA DE FILTROS INTEGRADA DENTRO DEL CATÁLOGO */
+.filter-controls {
+    display: flex;             /* Alinea los selectores y botones en horizontal */
+    flex-wrap: nowrap;         /* Evita que los elementos salten a una segunda fila */
+    align-items: center;       /* Centra verticalmente todos los elementos */
+    gap: 8px;                  /* Espaciado óptimo entre cada campo */
+    background: #f4f4f4;       /* Fondo neutro claro */
+    padding: 10px 12px;
+    border: 2px solid #000;    /* Estilo de borde limpio */
+    border-radius: 10px;
+    margin-top: 15px;
+}
+
+.filter-select {
+    flex: 1;                   /* Reparte el espacio equitativamente */
+    min-width: 110px;          /* Ajuste leve para garantizar cabida en la fila */
+    padding: 7px 8px;
+    border: 1.5px solid #000;
+    border-radius: 6px;
+    background-color: #ffffff;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* BOTÓN DE BÚSQUEDA */
+.btn-search-filter {
+    background-color: #2e7d32;
+    color: #ffffff;
+    border: 2px solid #000;
+    border-radius: 6px;
+    padding: 7px 14px;
+    font-weight: bold;
+    font-size: 0.88rem;
+    white-space: nowrap;        /* Evita que el texto "Buscar" se divida */
+    cursor: pointer;
+    box-shadow: 2px 2px 0px #000;
+    transition: transform 0.1s ease;
+}
+
+.btn-search-filter:active {
+    transform: translate(2px, 2px);
+    box-shadow: 0px 0px 0px #000;
+}
+
+/* BOTÓN SILUETA DE RESTABLECER FILTROS */
+.btn-reset-filter {
+    background-color: transparent; /* Fondo transparente */
+    color: #000000;                /* Icono/Texto negro */
+    border: 2px solid #000000;     /* Borde negro brutalista */
+    border-radius: 6px;
+    padding: 5px 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 2px 2px 0px #000000;
+    transition: all 0.1s ease;
+}
+
+.btn-reset-filter:hover {
+    background-color: #e0e0e0;
+}
+
+.btn-reset-filter:active {
+    transform: translate(2px, 2px);
+    box-shadow: 0px 0px 0px #000000;
+}
+/* CENTRAR TÍTULO DEL CATÁLOGO */
+.catalog-header h2 {
+    text-align: center;         /* Centra el texto en el medio */
+    width: 100%;                /* Asegura que tome todo el ancho disponible */
+    margin-bottom: 15px;        /* Separa el título de la barra de filtros */
+    font-family: 'Caveat Brush', cursive;/* Aplica la fuente oficial de Rutravesía */
+    font-size: 2.2rem;          /* Tamaño proporcional y limpio */
+    font-weight: 700;           /* Grosor marcado */
+    color: #1b4d3e;             /* O el color verde/oscuro principal de Rutravesía */
+}
+/* BOTÓN SILUETA PARA RESTABLECER FILTROS */
+.btn-reset-filter {
+    background-color: transparent;      /* Fondo transparente (estilo silueta) */
+    color: #000000;                     /* Texto/icono negro */
+    border: 2px solid #000000;          /* Borde negro marcado */
+    border-radius: 6px;
+    padding: 8px 14px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 2px 2px 0px #000000;    /* Sombra plana brutalista */
+    transition: all 0.1s ease;
+}
+
+/* Efecto al pasar el ratón */
+.btn-reset-filter:hover {
+    background-color: #e0e0e0;
+}
+
+/* Efecto al hacer clic */
+.btn-reset-filter:active {
+    transform: translate(2px, 2px);
+    box-shadow: 0px 0px 0px #000000;
+}
+/* MODAL DEL CATÁLOGO (Capa base) */
+#catalogModal, .catalog-modal {
+    z-index: 1000; /* Queda por encima de la página principal */
+}
+
+/* MODAL DE DETALLES DE RUTA (Capa superior) */
+#routeModal, .route-modal {
+    z-index: 2000; /* ← Al ser mayor (2000 > 1000), siempre se abrirá POR ENCIMA del catálogo */
+}
+
+/* MODAL DE DETALLE Y VOTACIÓN DEL CATÁLOGO */
+#catalogDetailModal, .catalog-detail-modal {
+    z-index: 2000; /* Se muestra por encima del catálogo general */
+}
+/* ==============================================================================
+   ESTILOS: GALERÍA DE MINIATURAS VERTICALES + MODAL LIGHTBOX FLOTANTE
+   ============================================================================== */
+
+.filmstrip-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+/* ENVOLTORIO DE LA TIRA DESLIZANTE */
+.filmstrip-carousel-wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+    background-color: #181818;
+    border-radius: 8px;
+    padding: 8px 6px;
+    border: 2px solid #000;
+    box-shadow: 2px 2px 0px #000;
+    gap: 6px;
+}
+
+/* TIRA HORIZONTAL DESLIZANTE */
+.filmstrip-thumbs-container {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 6px 4px;
+    width: 100%;
+}
+
+.filmstrip-thumbs-container::-webkit-scrollbar {
+    height: 4px;
+}
+.filmstrip-thumbs-container::-webkit-scrollbar-thumb {
+    background: #1b5e20;
+    border-radius: 4px;
+}
+
+/* MINIATURAS EN FORMATO VERTICAL (PROPORCIÓN 3:4) */
+.filmstrip-thumb {
+    width: 65px;
+    height: 95px; /* Formato vertical adaptado a fotos móviles/retratos */
+    object-fit: cover;
+    border-radius: 6px;
+    border: 2px solid #666;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s, border-color 0.2s;
+    flex-shrink: 0;
+    background-color: #222;
+}
+
+.filmstrip-thumb:hover {
+    opacity: 1;
+    transform: scale(1.1) translateY(-3px);
+    z-index: 10;
+    border-color: #4caf50;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.6);
+}
+
+/* BOTONES FLECHA ◀ / ▶ EN LA TIRA */
+.film-arrow {
+    background: #000;
+    color: #fff;
+    border: 1px solid #4caf50;
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 11px;
+    z-index: 2;
+    flex-shrink: 0;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.film-arrow:hover {
+    background: #1b5e20;
+    transform: scale(1.1);
+}
+
+/* ==============================================================================
+   VENTANA EMERGENTE (LIGHTBOX) FLOTANTE PARA FOTO EN TAMAÑO REAL
+   ============================================================================== */
+
+/* Capa principal flotante sobre todo el sitio */
+.lightbox-modal {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 999999 !important; /* Asegura quedar por encima de cualquier otro modal */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Estado oculto obligatorio con alta prioridad */
+.lightbox-modal.hidden {
+    display: none !important;
+}
+
+.lightbox-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(5px);
+}
+
+.lightbox-container {
+    position: relative;
+    z-index: 1000000 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 90vw;
+    max-height: 90vh;
+}
+
+.lightbox-img-wrapper {
+    max-width: 80vw;
+    max-height: 85vh;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 3px solid #fff;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #000;
+}
+
+.lightbox-img-wrapper img {
+    max-width: 100%;
+    max-height: 85vh;
+    object-fit: contain; /* Mantiene la proporción vertical intacta */
+    display: block;
+}
+
+/* FLECHAS DE NAVEGACIÓN Y BOTÓN CERRAR EN EL LIGHTBOX */
+.lightbox-close {
+    position: absolute;
+    top: -45px;
+    right: 0;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 35px;
+    cursor: pointer;
+    line-height: 1;
+    z-index: 1000001 !important;
+}
+
+.lightbox-arrow {
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border: 2px solid #4caf50;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: absolute;
+    z-index: 1000001 !important;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.lightbox-arrow:hover {
+    background: #1b5e20;
+    transform: scale(1.15);
+}
+
+.lightbox-arrow.prev { left: -60px; }
+.lightbox-arrow.next { right: -60px; }
+
+/* Responsive para celulares */
+@media (max-width: 600px) {
+    .lightbox-arrow.prev { left: 10px; }
+    .lightbox-arrow.next { right: 10px; }
+    .lightbox-img-wrapper { max-width: 95vw; }
+}

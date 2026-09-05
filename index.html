@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rutravesía | Senderismo y Montaña Caracas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">   
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+
+<!-- HEADER & LOGO -->
+<header class="main-header">
+    <!-- ETIQUETA PRINCIPAL: LOGO + TÍTULO JUNTOS -->
+    <h1 class="logo-badge">
+        <img src="assets/LogoSinLetraSinFondo.png" alt="Logo Rutravesía" class="header-logo">
+        <span>RUTRAVESÍA</span>
+    </h1>
+
+    <!-- ETIQUETA SECUNDARIA: SLOGAN -->
+    <div class="slogan-badge">
+        <p>Te mostramos la ruta, tu pones el ritmo. Caminemos y conozcamos juntos Venezuela.</p>
+    </div>
+</header>
+
+    <main class="container">
+        
+        <!-- BUSCADOR -->
+        <section class="search-section">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="¿Qué ruta buscas? (Ej. Naiguatá, Galipán, Sabas Nieves)...">
+                <div id="searchResults" class="search-results hidden"></div>
+            </div>
+        </section>
+
+        <!-- PRÓXIMAS RUTAS CONFIRMADAS -->
+        <section class="upcoming-section">
+            <h2 class="section-title">🧭 Próximas Rutas Confirmadas</h2>
+            <div class="cards-grid" id="cardsContainer">
+                <!-- Las tarjetas se generan dinámicamente desde JS -->
+            </div>
+        </section>
+
+        <!-- ACCESO AL CATÁLOGO GENERAL -->
+        <section class="catalog-section">
+            <button class="btn-catalog" id="btnCatalog">
+                Catálogo de rutas: explora la ruta que mejor se adapte a ti
+            </button>
+        </section>
+
+    </main>
+
+    <!-- VENTANA MODAL (DETALLE DE LA RUTA) -->
+    <div class="modal-overlay hidden" id="routeModal">
+        <div class="modal-card">
+            <button class="modal-close" id="closeModal">&times;</button>
+            <div class="modal-content" id="modalContent">
+                <!-- Información inyectada por JS -->
+            </div>
+        </div>
+    </div>
+<!-- MODAL DEL CATÁLOGO GENERAL -->
+<div class="modal-overlay hidden" id="catalogModal">
+    <div class="modal-card modal-large">
+        <button class="modal-close" id="closeCatalogModal">&times;</button>
+
+        <!-- CABECERA DEL CATÁLOGO CON BARRA DE BÚSQUEDA INTEGRADA -->
+        <div class="catalog-header" style="margin-bottom: 20px; padding-right: 30px;">
+            <h2>Catálogo Completo de Rutas</h2>
+            
+            <!-- BARRA HORIZONTAL CON LOS 4 FILTROS -->
+            <div class="filter-controls">
+                
+                <!-- 1. Filtro Estado -->
+                <select id="filterEstado" class="filter-select">
+                    <option value="todos">Estado: Todos</option>
+                    <option value="programada">Programada (con fecha confirmada)</option>
+                    <option value="por-votar">Por Votar (sin fecha confirmada)</option>
+                    <option value="catalogo-abierto">Catálogo Abierto</option>
+                </select>
+
+                <!-- 2. Filtro Dificultad -->
+                <select id="filterDificultad" class="filter-select">
+                    <option value="todos">Dificultad: Todas</option>
+                    <option value="Baja">Baja</option>
+                    <option value="Media">Media</option>
+                    <option value="Alta">Alta</option>
+                    <option value="Extrema">Extrema / Expedición / Reto</option>
+                </select>
+
+                <!-- 3. Filtro Duración -->
+                <select id="filterDuracion" class="filter-select">
+                    <option value="todos">Duración: Todas</option>
+                    <option value="3-5h">3 a 5 horas</option>
+                    <option value="6-9h">6 a 9 horas</option>
+                    <option value="multidia">Multidía / Pernocta</option>
+                </select>
+
+                <!-- 4. Filtro Atractivo -->
+                <select id="filterAtractivo" class="filter-select">
+                    <option value="todos">Atractivo: Todos</option>
+                    <option value="cascadas">Ríos / Cascadas</option>
+                    <option value="cumbres">Cumbres / Miradores</option>
+                    <option value="camping">Camping / Pernocta</option>
+                    <option value="patrimonio">Patrimonio / Ruinas / Monumentos</option>
+                </select>
+
+                <!-- Botón de Ejecución -->
+                <button id="btnEjecutarFiltro" class="btn-search-filter" type="button">Buscar</button>
+                <button id="btnLimpiarFiltros" class="btn-reset-filter" type="button" title="Restablecer filtros">↺</button>
+                
+            </div>
+        </div>
+
+        <!-- Tarjetas del catálogo inyectadas por JS -->
+        <div class="cards-grid" id="catalogCardsContainer"></div>
+    </div>
+</div>
+ <!-- MODAL DETALLE DE RUTA DEL CATÁLOGO + CALENDARIO DE VOTACIÓN -->
+    <div class="modal-overlay hidden" id="catalogDetailModal">
+        <div class="modal-card">
+            <button class="modal-close" id="closeCatalogDetailModal">&times;</button>
+            <div id="catalogDetailContent">
+                <!-- Se inyecta la info de la ruta desde JS -->
+            </div>
+
+            <!-- BOTÓN ME INTERESA -->
+            <div class="interest-section">
+                <button class="btn-interest" id="btnInterest">
+                    <span id="heartIcon">🤍</span> Me interesa realizarla
+                </button>
+            </div>
+
+            <!-- ÁREA DESPLEGABLE CON OPCIONES DE FIN DE SEMANA -->
+            <div class="voting-container hidden" id="votingContainer">
+                <p class="voting-title">📅 Selecciona una fecha:</p>
+                
+                <!-- BOTONES DE FINES DE SEMANA -->
+                <div class="weekend-options" id="weekendOptions">
+                    <!-- Opciones inyectadas dinámicamente por JS -->
+                </div>
+
+                <div class="voter-input-group">
+                    <input type="text" id="voterName" placeholder="Tu nombre (opcional)" />
+                    <button class="btn-submit-vote" id="btnSubmitVote" disabled>
+                        📩 Enviar mi voto
+                    </button>
+                </div>
+            </div> <!-- Cierre correcto de voting-container -->
+        </div> <!-- Cierre correcto de modal-card -->
+    </div> <!-- Cierre correcto de catalogDetailModal -->
+
+    <!-- MODAL LIGHTBOX FLOTANTE PARA VER FOTO VERTICAL AMPLIADA -->
+    <div class="lightbox-modal hidden" id="lightboxModal">
+        <div class="lightbox-overlay" onclick="cerrarLightbox()"></div>
+        <div class="lightbox-container">
+            <button class="lightbox-close" onclick="cerrarLightbox()">&times;</button>
+            <button class="lightbox-arrow prev" onclick="cambiarFotoLightbox(-1)">◀</button>
+            <div class="lightbox-img-wrapper">
+                <img id="lightboxImg" src="" alt="Vista ampliada">
+            </div>
+            <button class="lightbox-arrow next" onclick="cambiarFotoLightbox(1)">▶</button>
+        </div>
+    </div>
+    
+    <!-- ENLACES A JAVASCRIPT (AL FINAL DEL BODY Y EN ESTE ORDEN) -->
+    <script src="datos.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
