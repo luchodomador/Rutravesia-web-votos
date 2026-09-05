@@ -1,5 +1,5 @@
 // NUMERO DE TELEFONO DE TU GRUPO/GUIATURA (Incluir código de país)
-const TELEFONO_WHATSAPP = "584120000000";
+const TELEFONO_WHATSAPP = "584242249841";
 
 /* 
 ==============================================================================
