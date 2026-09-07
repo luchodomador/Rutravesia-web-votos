@@ -1051,3 +1051,42 @@ header h1,
     .lightbox-arrow.next { right: 10px; }
     .lightbox-img-wrapper { max-width: 95vw; }
 }
+
+/* ==============================================================================
+   AJUSTES PARA MODALES Y VOTACIÓN EN MÓVILES (SCROLL INTERNO Y FORMATO COMPACTO)
+   ============================================================================== */
+
+/* 1. Limita el alto de la tarjeta del modal y permite scroll con el pulgar */
+.modal-content, 
+#catalogDetailModal .modal-card,
+.modal {
+    max-height: 85vh !important;       /* Ocupa como máximo el 85% del alto de la pantalla */
+    overflow-y: auto !important;       /* Permite scrollear internamente si el contenido es largo */
+    -webkit-overflow-scrolling: touch; /* Desplazamiento fluido en dispositivos iOS */
+    padding: 16px 14px !important;
+}
+
+/* 2. Compacta los botones de fechas para que ocupen menos espacio vertical */
+.weekend-btn {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 8px 12px !important;       /* Reduce el relleno interno excesivo */
+    margin-bottom: 8px !important;
+    font-size: 0.9rem !important;
+}
+
+/* 3. Ajusta la etiqueta con el número de interesados */
+.vote-badge {
+    font-size: 0.8rem !important;
+    padding: 4px 8px !important;
+    white-space: nowrap !important;     /* Evita que "interesados" se rompa en dos líneas */
+}
+
+/* 4. Asegura que el botón de enviar voto sea cómodo de presionar */
+#btnSubmitVote {
+    width: 100% !important;
+    margin-top: 10px !important;
+    padding: 12px !important;
+    font-size: 1rem !important;
+}
