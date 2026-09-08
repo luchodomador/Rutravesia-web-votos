@@ -763,46 +763,26 @@ body::before {
    AJUSTES RESPONSIVE PARA MÓVILES (Pantallas de 768px o menos)
    ============================================================================== */
 @media (max-width: 768px) {
-    /* 1. Modal adaptado a la pantalla */
+    /* Modal adaptable */
     .modal-card.modal-large {
         width: 95% !important;
         max-width: 95% !important;
-        padding: 15px 10px !important;
-        margin: 10px auto !important;
+        padding: 15px 8px !important;
     }
 
-    /* 2. Filtros organizados en cuadrícula de 2 columnas para no apretarse */
-    .filter-controls {
-        display: grid !important;
-        grid-template-columns: 1fr 1fr !important;
-        gap: 8px !important;
+    /* Selects con tamaño de fuente adecuado para móvil */
+    .filter-select {
+        font-size: 0.85rem !important;
+        padding: 6px 4px !important;
+        text-overflow: ellipsis;
     }
 
-    /* El botón buscar y reset ocupan toda la fila inferior */
-    .btn-search-filter {
-        grid-column: 1 / 2;
-        width: 100%;
-    }
-
-    .btn-reset-filter {
-        grid-column: 2 / 3;
-        width: 100%;
-    }
-
-    /* 3. Tarjetas más delgadas en móvil para ver la siguiente tarjeta asomándose */
-    .cards-carousel .card {
-        flex: 0 0 210px !important;
-        width: 210px !important;
-        min-width: 210px !important;
-        height: 300px !important;
-    }
-
-    /* 4. Flechas posicionadas hacia los bordes externos para no tapar texto */
+    /* Flechas ligeramente ajustadas para no montar sobre la primera tarjeta */
     .btn-prev {
-        left: -5px !important;
+        left: -8px !important;
     }
 
     .btn-next {
-        right: -5px !important;
+        right: -8px !important;
     }
 }
