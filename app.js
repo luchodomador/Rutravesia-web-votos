@@ -193,21 +193,20 @@ function abrirModal(idRuta) {
     );
     const linkWhatsApp = `https://wa.me/${typeof TELEFONO_WHATSAPP !== 'undefined' ? TELEFONO_WHATSAPP : ''}?text=${textoWhatsApp}`;
 
-    modalContent.innerHTML = `
-        <h2>${ruta.nombre}</h2>
-        <p style="color: var(--primary); font-weight: bold; margin-bottom: 15px;">${fechaTexto}</p>
-        ${galeriaHTML}
-        <p><strong>Duración:</strong> ${ruta.duracionTexto || ruta.duracion || 'Por definir'}</p>
-        <p><strong>Dificultad:</strong> ${ruta.dificultad || 'Media'}</p>
-        <p style="margin: 15px 0;">${ruta.descripcion || 'Sin descripción disponible.'}</p>
-        <p><strong>Incluye:</strong> ${ruta.incluye || 'Guiatura profesional'}</p>
-        <p><strong>Costo de la guiatura:</strong> ${ruta.precio || 'Consultar'}</p>
-        
-        <a href="${linkWhatsApp}" target="_blank" class="btn-whatsapp">
-            📲 Consultar / Reservar vía WhatsApp
-        </a>
-    `;
-
+   modalContent.innerHTML = `
+    <h2 style="margin-bottom: 10px;">${ruta.nombre}</h2>
+   
+    <p style="margin-bottom: 8px;"><strong>Dificultad:</strong> ${ruta.dificultad || 'Media'}</p>
+    <p style="margin-bottom: 8px;"><strong>Duración estimada:</strong> ${ruta.duracionTexto || ruta.duracion || 'Por definir'}</p>
+    ${galeriaHTML}
+    <p style="margin: 12px 0; color: #444; line-height: 1.5;">${ruta.descripcion || 'Sin descripción disponible.'}</p>
+    <p style="margin-bottom: 4px;"><strong>Incluye:</strong> ${ruta.incluye || 'Guiatura profesional'}</p>
+    <p style="margin-bottom: 1px;"><strong>Costo:</strong> ${ruta.precio || 'Consultar'}</p>
+    
+    <a href="${linkWhatsApp}" target="_blank" class="btn-whatsapp">
+        📲 Consultar / Reservar vía WhatsApp
+    </a>
+`;
     if (routeModal) routeModal.classList.remove("hidden");
     if (searchResults) searchResults.classList.add("hidden");
 }
@@ -242,10 +241,20 @@ function abrirDetalleCatalogo(idRuta) {
 
     ocultarSeccionVoto();
 
+    // 1. Cargamos las imágenes en la galería global
+    imagenesGaleriaActual = (Array.isArray(ruta.imagenes) && ruta.imagenes.length > 0)
+        ? ruta.imagenes
+        : [ruta.imagen || 'assets/placeholder.jpg'];
+
+    // 2. Generamos el HTML del Filmstrip
+    const galeriaHTML = construirFilmstripHTML(ruta);
+
+    // 3. Inyectamos los datos + la galería
     catalogDetailContent.innerHTML = `
         <h2 style="margin-bottom: 10px;">${ruta.nombre}</h2>
         <p style="margin-bottom: 8px;"><strong>Dificultad:</strong> ${ruta.dificultad}</p>
         <p style="margin-bottom: 8px;"><strong>Duración estimada:</strong> ${ruta.duracion || ruta.duracionTexto || 'Por definir'}</p>
+        ${galeriaHTML}
         <p style="margin: 15px 0; color: #444; line-height: 1.5;">${ruta.descripcion}</p>
     `;
 
@@ -303,11 +312,6 @@ function generarOpcionesFinesDeSemana() {
     const meta = rutaSeleccionadaCatalogo.metaInteresados || 10;
 
     if (tieneFechas) {
-        const infoMeta = document.createElement("div");
-        infoMeta.style.cssText = "background: #eef7ee; border: 1px solid #4caf50; border-radius: 8px; padding: 10px; margin-bottom: 12px; font-size: 0.88em; color: #1b5e20; text-align: center;";
-        infoMeta.innerHTML = `📌 <strong>Mínimo de interesados para confirmar fecha:</strong> ${meta} personas.`;
-        weekendOptions.appendChild(infoMeta);
-
         const opciones = rutaSeleccionadaCatalogo.fechasPropuestas;
 
         opciones.forEach((fechaStr, index) => {
@@ -341,12 +345,14 @@ function generarOpcionesFinesDeSemana() {
         if (votoPrevio) {
             if (btnSubmitVote) {
                 btnSubmitVote.disabled = true;
+                btnSubmitVote.classList.add("btn-disabled");
                 btnSubmitVote.textContent = "✓ Ya registraste tu voto";
             }
             if (voterNameInput) voterNameInput.placeholder = "Ya votaste para esta ruta";
         } else {
             if (btnSubmitVote) {
                 btnSubmitVote.disabled = true;
+                btnSubmitVote.classList.remove("btn-disabled");
                 btnSubmitVote.textContent = "📩 Enviar mi voto";
             }
             if (voterNameInput) voterNameInput.placeholder = "Tu nombre (opcional)";
@@ -359,27 +365,17 @@ function generarOpcionesFinesDeSemana() {
         const votosLocales = parseInt(localStorage.getItem(claveInteresadosGeneral) || "0");
         const interesadosTotales = (rutaSeleccionadaCatalogo.interesados || 0) + votosLocales;
 
-        const infoGeneral = document.createElement("div");
-        infoGeneral.style.cssText = "background: #f5f5f5; border: 1px solid #ddd; border-radius: 8px; padding: 12px; margin-bottom: 12px; text-align: center;";
-        infoGeneral.innerHTML = `
-            <p style="margin: 0 0 6px 0; font-weight: bold; color: #2e7d32; font-size: 1.05em;">
-                🔥 ${interesadosTotales} interesados acumulados
-            </p>
-            <p style="margin: 0; font-size: 0.85em; color: #555;">
-                Mínimo de interesados para proponer fechas oficiales: <strong>${meta} personas</strong>.
-            </p>
-        `;
-        weekendOptions.appendChild(infoGeneral);
-
         if (votoPrevio) {
             if (btnSubmitVote) {
                 btnSubmitVote.disabled = true;
+                btnSubmitVote.classList.add("btn-disabled");
                 btnSubmitVote.textContent = "✓ Ya registraste tu interés";
             }
             if (voterNameInput) voterNameInput.placeholder = "Ya registraste tu interés";
         } else {
             if (btnSubmitVote) {
                 btnSubmitVote.disabled = false;
+                btnSubmitVote.classList.remove("btn-disabled");
                 btnSubmitVote.textContent = "📩 Registrar mi interés";
             }
             if (voterNameInput) voterNameInput.placeholder = "Tu nombre (opcional)";
@@ -426,7 +422,6 @@ if (btnSubmitVote) {
         generarOpcionesFinesDeSemana();
     });
 }
-
 // ==============================================================================
 // 8. CIERRE DE MODALES AL HACER CLIC FUERA
 // ==============================================================================

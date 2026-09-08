@@ -393,7 +393,7 @@ body::before {
 .modal-card, 
 .modal-content {
     background: #ffffff !important;
-    border: var(--border-width) solid var(--border-color);
+    border: 1px solid #e0e0e0 !important; /* Borde muy fino y claro en lugar del grueso negro */
     border-radius: 12px;
     width: 90%;
     max-width: 500px;
@@ -402,7 +402,7 @@ body::before {
     -webkit-overflow-scrolling: touch;
     padding: 20px;
     position: relative;
-    box-shadow: var(--shadow-solid);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important; /* Sombra suave de difuminado plano */
     margin: auto;
 }
 
@@ -616,4 +616,30 @@ body::before {
     .slogan-badge p {
         font-size: 1.5rem;
     }
+}
+/* Fuerza el botón a color gris y quita la manito de clic cuando tiene la clase btn-disabled o está deshabilitado */
+.btn-disabled,
+#btnSubmitVote:disabled {
+    background-color: #cccccc !important;
+    background-image: none !important;
+    color: #666666 !important;
+    border-color: #bbbbbb !important;
+    cursor: not-allowed !important;
+    box-shadow: none !important;
+    transform: none !important;
+    }
+    /* Oculta los bloques de texto con el mínimo de interesados */
+#weekendOptions > div:not(.weekend-btn) {
+    display: none !important;
+}
+
+/* Pon el botón gris y con cursor de "no permitido" únicamente cuando esté deshabilitado */
+#btnSubmitVote:disabled {
+    background-color: #cccccc !important;
+    background-image: none !important;
+    color: #666666 !important;
+    border-color: #bbbbbb !important;
+    cursor: not-allowed !important;
+    box-shadow: none !important;
+    transform: none !important;
 }
