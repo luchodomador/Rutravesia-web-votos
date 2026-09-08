@@ -52,7 +52,7 @@ const rutasConfirmadas = [
         dificultad: "Extrema",                             // Se ajustó a Extrema
         duracion: "6-9h",                                  // Clave estandarizada
         duracionTexto: "12 - 14 horas", 
-        descripcion: "Ascenso a la cumbre más alta de la Cordillera de la Costa (2.765 msnm). Requiere buena condición física.",
+        descripcion: "Ascenso a la cumbre más alta de la Cordillera de la Costa (2.765 msnm). Requiere una excelente condición física ya que el desnivel es continuo. Durante el recorrido atravesaremos diferentes pisos térmicos, desde la selva nublada hasta el subpáramo del anfiteatro. Es una expedición exigente que premia con vistas panorámicas únicas de Caracas y el Mar Caribe. Se recomienda llevar al menos 3 litros de agua, frutos secos, abrigo para la cumbre y calzado de montaña con buen agarre.",
         incluye: "Guía certificado, kit de primeros auxilios, fotos digitales.",
         imagen: "assets/ImagenNaiguata.png",
         precio: "$25 por persona",

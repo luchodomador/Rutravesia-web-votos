@@ -61,13 +61,14 @@ function renderizarTarjetas() {
 // 4. GENERADOR Y ABRIR MODAL DEL CATÁLOGO GENERAL
 // ==============================================================================
 function renderizarCatalogo(listaAMostrar = null) {
+    const catalogCardsContainer = document.getElementById("catalogCardsContainer");
     if (!catalogCardsContainer) return;
     catalogCardsContainer.innerHTML = "";
     
     const todasLasRutas = listaAMostrar || [...rutasConfirmadas, ...catalogoGeneral];
 
     if (todasLasRutas.length === 0) {
-        catalogCardsContainer.innerHTML = `<p style="grid-column: 1/-1; text-align: center; padding: 20px; color: #666;">No se encontraron rutas que coincidan con los filtros seleccionados.</p>`;
+        catalogCardsContainer.innerHTML = `<p style="width: 100%; text-align: center; padding: 20px; color: #666;">No se encontraron rutas que coincidan con los filtros seleccionados.</p>`;
         return;
     }
 
@@ -112,6 +113,32 @@ if (closeCatalogModal && catalogModal) {
         abiertoDesdeCatalogo = false;
     });
 }
+
+// ==============================================================================
+// LÓGICA DE DESPLAZAMIENTO DEL CARRUSEL (FLECHAS MERCADOLIBRE)
+// ==============================================================================
+const btnPrevCatalog = document.getElementById("btnPrevCatalog");
+const btnNextCatalog = document.getElementById("btnNextCatalog");
+
+if (btnPrevCatalog) {
+    btnPrevCatalog.addEventListener("click", () => {
+        const container = document.getElementById("catalogCardsContainer");
+        if (container) {
+            container.scrollBy({ left: -256, behavior: 'smooth' });
+        }
+    });
+}
+
+if (btnNextCatalog) {
+    btnNextCatalog.addEventListener("click", () => {
+        const container = document.getElementById("catalogCardsContainer");
+        if (container) {
+            container.scrollBy({ left: 256, behavior: 'smooth' });
+        }
+    });
+}
+
+
 
 // ==============================================================================
 // 5. LÓGICA DEL BUSCADOR EN TIEMPO REAL
@@ -193,20 +220,49 @@ function abrirModal(idRuta) {
     );
     const linkWhatsApp = `https://wa.me/${typeof TELEFONO_WHATSAPP !== 'undefined' ? TELEFONO_WHATSAPP : ''}?text=${textoWhatsApp}`;
 
-   modalContent.innerHTML = `
-    <h2 style="margin-bottom: 10px;">${ruta.nombre}</h2>
-   
-    <p style="margin-bottom: 8px;"><strong>Dificultad:</strong> ${ruta.dificultad || 'Media'}</p>
-    <p style="margin-bottom: 8px;"><strong>Duración estimada:</strong> ${ruta.duracionTexto || ruta.duracion || 'Por definir'}</p>
-    ${galeriaHTML}
-    <p style="margin: 12px 0; color: #444; line-height: 1.5;">${ruta.descripcion || 'Sin descripción disponible.'}</p>
-    <p style="margin-bottom: 4px;"><strong>Incluye:</strong> ${ruta.incluye || 'Guiatura profesional'}</p>
-    <p style="margin-bottom: 1px;"><strong>Costo:</strong> ${ruta.precio || 'Consultar'}</p>
-    
-    <a href="${linkWhatsApp}" target="_blank" class="btn-whatsapp">
-        📲 Consultar / Reservar vía WhatsApp
-    </a>
-`;
+    // 1. INYECCIÓN LIMPIA DEL HTML
+    modalContent.innerHTML = `
+        <h2 style="margin-bottom: 10px;">${ruta.nombre}</h2>
+       
+        <p style="margin-bottom: 8px;"><strong>Dificultad:</strong> ${ruta.dificultad || 'Media'}</p>
+        <p style="margin-bottom: 8px;"><strong>Duración estimada:</strong> ${ruta.duracionTexto || ruta.duracion || 'Por definir'}</p>
+        
+        ${galeriaHTML}
+
+        <!-- CONTENEDOR DE DESCRIPCIÓN RESTRINGIDO -->
+        <div class="descripcion-wrapper" style="margin: 12px 0;">
+            <p id="textoDescripcion" class="texto-colapsado">
+                ${ruta.descripcion || 'Sin descripción disponible.'}
+            </p>
+            <button type="button" id="btnExpandirTexto" class="btn-expandir">
+                Ver más detalles ▼
+            </button>
+        </div>
+
+        <p style="margin-bottom: 4px; margin-top: 10px;"><strong>Incluye:</strong> ${ruta.incluye || 'Guiatura profesional'}</p>
+        <p style="margin-bottom: 12px;"><strong>Costo:</strong> ${ruta.precio || 'Consultar'}</p>
+        
+        <a href="${linkWhatsApp}" target="_blank" class="btn-whatsapp">
+            📲 Consultar / Reservar vía WhatsApp
+        </a>
+    `;
+
+ // 2. LÓGICA DE ACTIVACIÓN DIRECTA
+    const btnExpandir = document.getElementById("btnExpandirTexto");
+    const textoDesc = document.getElementById("textoDescripcion");
+
+    if (btnExpandir && textoDesc) {
+        btnExpandir.addEventListener("click", () => {
+            textoDesc.classList.toggle("texto-colapsado");
+            
+            if (textoDesc.classList.contains("texto-colapsado")) {
+                btnExpandir.innerHTML = "Ver más detalles ▼";
+            } else {
+                btnExpandir.innerHTML = "Ver menos ▲";
+            }
+        });
+    }
+
     if (routeModal) routeModal.classList.remove("hidden");
     if (searchResults) searchResults.classList.add("hidden");
 }
@@ -246,17 +302,52 @@ function abrirDetalleCatalogo(idRuta) {
         ? ruta.imagenes
         : [ruta.imagen || 'assets/placeholder.jpg'];
 
-    // 2. Generamos el HTML del Filmstrip
+    // 2. Generamos el HTML del Filmstrip y variables de contacto
     const galeriaHTML = construirFilmstripHTML(ruta);
+    const textoWhatsApp = encodeURIComponent(
+        `¡Hola! Quisiera información/reservar un cupo para la ruta "${ruta.nombre}".`
+    );
+    const linkWhatsApp = `https://wa.me/${typeof TELEFONO_WHATSAPP !== 'undefined' ? TELEFONO_WHATSAPP : ''}?text=${textoWhatsApp}`;
 
-    // 3. Inyectamos los datos + la galería
+    // 3. Inyectamos los datos + la galería (Sin duplicados)
     catalogDetailContent.innerHTML = `
         <h2 style="margin-bottom: 10px;">${ruta.nombre}</h2>
-        <p style="margin-bottom: 8px;"><strong>Dificultad:</strong> ${ruta.dificultad}</p>
+        <p style="margin-bottom: 8px;"><strong>Dificultad:</strong> ${ruta.dificultad || 'Media'}</p>
         <p style="margin-bottom: 8px;"><strong>Duración estimada:</strong> ${ruta.duracion || ruta.duracionTexto || 'Por definir'}</p>
+        
         ${galeriaHTML}
-        <p style="margin: 15px 0; color: #444; line-height: 1.5;">${ruta.descripcion}</p>
+
+        <!-- CONTENEDOR DE DESCRIPCIÓN CON BOTÓN EXPANDIBLE -->
+        <div class="descripcion-wrapper" style="margin: 12px 0;">
+            <p id="textoDescripcionCatalogo" class="texto-colapsado">
+                ${ruta.descripcion || 'Sin descripción disponible.'}
+            </p>
+            <button type="button" id="btnExpandirTextoCatalogo" class="btn-expandir">
+                Ver más detalles ▼
+            </button>
+        </div>
+
+        <p style="margin-bottom: 4px; margin-top: 10px;"><strong>Incluye:</strong> ${ruta.incluye || 'Guiatura profesional'}</p>
+        <p style="margin-bottom: 12px;"><strong>Costo:</strong> ${ruta.precio || 'Consultar'}</p>
+        
+       
     `;
+
+    // 4. LÓGICA DE INTERACCIÓN (FUERA DEL INNERHTML)
+    const btnExpandirCat = document.getElementById("btnExpandirTextoCatalogo");
+    const textoDescCat = document.getElementById("textoDescripcionCatalogo");
+
+    if (btnExpandirCat && textoDescCat) {
+        btnExpandirCat.addEventListener("click", () => {
+            textoDescCat.classList.toggle("texto-colapsado");
+            
+            if (textoDescCat.classList.contains("texto-colapsado")) {
+                btnExpandirCat.innerHTML = "Ver más detalles ▼";
+            } else {
+                btnExpandirCat.innerHTML = "Ver menos ▲";
+            }
+        });
+    }
 
     if (catalogDetailModal) catalogDetailModal.classList.remove("hidden");
 }
@@ -273,7 +364,6 @@ function cerrarModalCatalogoDetalle() {
 if (closeCatalogDetailModal) {
     closeCatalogDetailModal.addEventListener("click", cerrarModalCatalogoDetalle);
 }
-
 function ocultarSeccionVoto() {
     if (votingContainer) votingContainer.classList.add("hidden");
     if (btnInterest) btnInterest.classList.remove("active");
