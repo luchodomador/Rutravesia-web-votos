@@ -204,26 +204,22 @@ const catalogoGeneral = [
             "assets/naiguata003.jpg"
         ]
     },
-   {
-        id: "c6",
-        nombre: "Grietas de San Pedro - Camino de los Libertadores",
-        dificultad: "Media",
-        duracion: "6-9h", // Estandarizado para el filtro
-        duracionTexto: "4-6 horas", // Opcional: Para mostrarlo amigable en la tarjeta
-        tipo: ["patrimonio", "cumbres"], // Propiedad nueva para los filtros
-        descripcion: "Ruta de vegetación frondosa que conecta varios puestos icónicos de la montaña.",
-        imagen: "assets/ImagenGrietasDeSanPedro.png",
-        /* OPCIONES DE FECHA ESPECÍFICAS PARA ESTA RUTA */
-        interesados: 0,
-   fechasPropuestas: [
-        {  },
-        { }
-        ],
-        imagenes: [
-            "assets/naiguata60.jpg",
-            "assets/naiguata61.jpg",
-            "assets/naiguata62.jpg"
-        ]
-    }
+  {
+    id: "c6",
+    nombre: "Grietas de San Pedro - Camino de los Libertadores",
+    dificultad: "Media",
+    duracion: "6-9h",
+    duracionTexto: "4-6 horas",
+    tipo: ["patrimonio", "cumbres"],
+    descripcion: "Ruta de vegetación frondosa que conecta varios puestos icónicos de la montaña.",
+    imagen: "assets/ImagenGrietasDeSanPedro.png",
+    interesados: 0,
+    fechasPropuestas: [], // <--- AHORA ESTÁ VACÍO Y NO ROMPERÁ
+    imagenes: [
+        "assets/naiguata60.jpg",
+        "assets/naiguata61.jpg",
+        "assets/naiguata62.jpg"
+    ]
+}
     
 ];
