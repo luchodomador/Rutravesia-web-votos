@@ -215,13 +215,78 @@ body::before {
 }
 
 .cards-grid {
-    display: grid;
-    /* Ajusta el ancho mínimo de cada tarjeta en el inicio (actualmente 220px) */
-    grid-template-columns: repeat(auto-fit, 220px); 
-    justify-content: center; 
-    gap: 25px;                       /* Espacio de separación entre tarjetas */
-    margin-top: 25px;
+    display: flex !important;            /* Fuerza a que las tarjetas vayan de izquierda a derecha */
+    flex-direction: row !important;      /* Asegura la fila horizontal */
+    justify-content: flex-start;         /* Alinea desde la izquierda */
+    align-items: center;
+    gap: 20px;                           /* Espacio horizontal entre tarjetas */
+    overflow-x: auto;                    /* Permite el scroll horizontal */
+    overflow-y: hidden;                  /* Evita que se estire hacia abajo */
+    scroll-behavior: smooth;
+    width: 100%;
+    max-width: 900px;                    /* Ancho visible del carrusel */
+    margin: 20px auto;
+    padding: 10px 5px;
+    scrollbar-width: thin;               /* Barra sutil */
 }
+
+/* Ocultar/estilizar scrollbar en Navegadores Webkit */
+.cards-grid::-webkit-scrollbar {
+    height: 6px;
+}
+.cards-grid::-webkit-scrollbar-thumb {
+    background: #2e7d32;
+    border-radius: 10px;
+}
+
+/* ENVOLTORIO PARA LAS FLECHAS Y LAS TARJETAS */
+.carousel-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ASEGURA EL TAMAÑO INDIVIDUAL DE CADA TARJETA EN LA FILA */
+.cards-grid .card {
+    min-width: 220px !important;         /* Ancho fijo para cada tarjeta */
+    max-width: 220px !important;
+    height: 320px !important;            /* Altura fija */
+    flex-shrink: 0 !important;           /* EVITA que se pongan una debajo de otra */
+}
+
+/* ESTILO DE LAS FLECHAS LATERALE S (< y >) */
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.95);
+    border: 1px solid #ccc;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.carousel-arrow:hover {
+    background-color: #ffffff;
+    transform: translateY(-50%) scale(1.08);
+}
+
+.carousel-arrow.prev { left: -15px; }
+.carousel-arrow.next { right: -15px; }
 
 .card {
     background: var(--card-bg);
@@ -786,3 +851,14 @@ body::before {
         right: -8px !important;
     }
 }
+
+
+
+
+
+
+
+
+
+
+

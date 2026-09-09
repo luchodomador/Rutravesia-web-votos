@@ -55,6 +55,27 @@ function renderizarTarjetas() {
         `;
         cardsContainer.innerHTML += cardHTML;
     });
+
+    // Activar el movimiento de las flechas
+    activarFlechasCarrusel();
+}
+
+// Lógica para desplazar horizontalmente
+function activarFlechasCarrusel() {
+    const btnNext = document.getElementById("btnNextConfirmed");
+    const btnPrev = document.getElementById("btnPrevConfirmed");
+
+    if (btnNext && cardsContainer) {
+        btnNext.onclick = () => {
+            cardsContainer.scrollBy({ left: 240, behavior: 'smooth' });
+        };
+    }
+
+    if (btnPrev && cardsContainer) {
+        btnPrev.onclick = () => {
+            cardsContainer.scrollBy({ left: -240, behavior: 'smooth' });
+        };
+    }
 }
 
 // ==============================================================================
@@ -203,7 +224,6 @@ function abrirModal(idRuta) {
     
     if (!ruta) return;
 
-    // Si el catálogo está visible, lo ocultamos para que no tape este modal
     if (catalogModal && !catalogModal.classList.contains("hidden")) {
         abiertoDesdeCatalogo = true;
         catalogModal.classList.add("hidden");
@@ -214,13 +234,11 @@ function abrirModal(idRuta) {
         : [ruta.imagen || 'assets/placeholder.jpg'];
 
     const galeriaHTML = construirFilmstripHTML(ruta);
-    const fechaTexto = ruta.fecha ? `📅 ${ruta.fecha}` : "Fecha por confirmar (Disponible en catálogo)";
     const textoWhatsApp = encodeURIComponent(
         `¡Hola! Quisiera información/reservar un cupo para la ruta "${ruta.nombre}".`
     );
     const linkWhatsApp = `https://wa.me/${typeof TELEFONO_WHATSAPP !== 'undefined' ? TELEFONO_WHATSAPP : ''}?text=${textoWhatsApp}`;
 
-    // 1. INYECCIÓN LIMPIA DEL HTML
     modalContent.innerHTML = `
         <h2 style="margin-bottom: 10px;">${ruta.nombre}</h2>
        
@@ -229,7 +247,6 @@ function abrirModal(idRuta) {
         
         ${galeriaHTML}
 
-        <!-- CONTENEDOR DE DESCRIPCIÓN RESTRINGIDO -->
         <div class="descripcion-wrapper" style="margin: 12px 0;">
             <p id="textoDescripcion" class="texto-colapsado">
                 ${ruta.descripcion || 'Sin descripción disponible.'}
@@ -247,19 +264,15 @@ function abrirModal(idRuta) {
         </a>
     `;
 
- // 2. LÓGICA DE ACTIVACIÓN DIRECTA
     const btnExpandir = document.getElementById("btnExpandirTexto");
     const textoDesc = document.getElementById("textoDescripcion");
 
     if (btnExpandir && textoDesc) {
         btnExpandir.addEventListener("click", () => {
             textoDesc.classList.toggle("texto-colapsado");
-            
-            if (textoDesc.classList.contains("texto-colapsado")) {
-                btnExpandir.innerHTML = "Ver más detalles ▼";
-            } else {
-                btnExpandir.innerHTML = "Ver menos ▲";
-            }
+            btnExpandir.innerHTML = textoDesc.classList.contains("texto-colapsado")
+                ? "Ver más detalles ▼"
+                : "Ver menos ▲";
         });
     }
 
@@ -269,7 +282,6 @@ function abrirModal(idRuta) {
 
 function cerrarModalDetalles() {
     if (routeModal) routeModal.classList.add("hidden");
-    // Si veníamos del catálogo, lo volvemos a mostrar
     if (abiertoDesdeCatalogo && catalogModal) {
         catalogModal.classList.remove("hidden");
     }
@@ -279,14 +291,14 @@ if (closeModal) {
     closeModal.addEventListener("click", cerrarModalDetalles);
 }
 
+
 // ==============================================================================
-// 7. MODAL DETALLE DE CATÁLOGO + VOTACIÓN CON METAS DE INTERESADOS
+// 7. MODAL DETALLE DE CATÁLOGO + VOTACIÓN (SISTEMA MANUAL CENTRALIZADO)
 // ==============================================================================
 function abrirDetalleCatalogo(idRuta) {
     const ruta = catalogoGeneral.find(r => String(r.id) === String(idRuta));
     if (!ruta) return;
 
-    // Ocultar modal del catálogo para evitar solapamiento
     if (catalogModal && !catalogModal.classList.contains("hidden")) {
         abiertoDesdeCatalogo = true;
         catalogModal.classList.add("hidden");
@@ -297,19 +309,12 @@ function abrirDetalleCatalogo(idRuta) {
 
     ocultarSeccionVoto();
 
-    // 1. Cargamos las imágenes en la galería global
     imagenesGaleriaActual = (Array.isArray(ruta.imagenes) && ruta.imagenes.length > 0)
         ? ruta.imagenes
         : [ruta.imagen || 'assets/placeholder.jpg'];
 
-    // 2. Generamos el HTML del Filmstrip y variables de contacto
     const galeriaHTML = construirFilmstripHTML(ruta);
-    const textoWhatsApp = encodeURIComponent(
-        `¡Hola! Quisiera información/reservar un cupo para la ruta "${ruta.nombre}".`
-    );
-    const linkWhatsApp = `https://wa.me/${typeof TELEFONO_WHATSAPP !== 'undefined' ? TELEFONO_WHATSAPP : ''}?text=${textoWhatsApp}`;
 
-    // 3. Inyectamos los datos + la galería (Sin duplicados)
     catalogDetailContent.innerHTML = `
         <h2 style="margin-bottom: 10px;">${ruta.nombre}</h2>
         <p style="margin-bottom: 8px;"><strong>Dificultad:</strong> ${ruta.dificultad || 'Media'}</p>
@@ -317,7 +322,6 @@ function abrirDetalleCatalogo(idRuta) {
         
         ${galeriaHTML}
 
-        <!-- CONTENEDOR DE DESCRIPCIÓN CON BOTÓN EXPANDIBLE -->
         <div class="descripcion-wrapper" style="margin: 12px 0;">
             <p id="textoDescripcionCatalogo" class="texto-colapsado">
                 ${ruta.descripcion || 'Sin descripción disponible.'}
@@ -329,23 +333,17 @@ function abrirDetalleCatalogo(idRuta) {
 
         <p style="margin-bottom: 4px; margin-top: 10px;"><strong>Incluye:</strong> ${ruta.incluye || 'Guiatura profesional'}</p>
         <p style="margin-bottom: 12px;"><strong>Costo:</strong> ${ruta.precio || 'Consultar'}</p>
-        
-       
     `;
 
-    // 4. LÓGICA DE INTERACCIÓN (FUERA DEL INNERHTML)
     const btnExpandirCat = document.getElementById("btnExpandirTextoCatalogo");
     const textoDescCat = document.getElementById("textoDescripcionCatalogo");
 
     if (btnExpandirCat && textoDescCat) {
         btnExpandirCat.addEventListener("click", () => {
             textoDescCat.classList.toggle("texto-colapsado");
-            
-            if (textoDescCat.classList.contains("texto-colapsado")) {
-                btnExpandirCat.innerHTML = "Ver más detalles ▼";
-            } else {
-                btnExpandirCat.innerHTML = "Ver menos ▲";
-            }
+            btnExpandirCat.innerHTML = textoDescCat.classList.contains("texto-colapsado")
+                ? "Ver más detalles ▼"
+                : "Ver menos ▲";
         });
     }
 
@@ -355,7 +353,6 @@ function abrirDetalleCatalogo(idRuta) {
 function cerrarModalCatalogoDetalle() {
     if (catalogDetailModal) catalogDetailModal.classList.add("hidden");
     ocultarSeccionVoto();
-    // Volver al catálogo si venía de allí
     if (abiertoDesdeCatalogo && catalogModal) {
         catalogModal.classList.remove("hidden");
     }
@@ -364,6 +361,7 @@ function cerrarModalCatalogoDetalle() {
 if (closeCatalogDetailModal) {
     closeCatalogDetailModal.addEventListener("click", cerrarModalCatalogoDetalle);
 }
+
 function ocultarSeccionVoto() {
     if (votingContainer) votingContainer.classList.add("hidden");
     if (btnInterest) btnInterest.classList.remove("active");
@@ -391,41 +389,46 @@ if (btnInterest) {
 }
 
 function generarOpcionesFinesDeSemana() {
-    if (!weekendOptions) return;
+    if (!weekendOptions || !rutaSeleccionadaCatalogo) return;
     weekendOptions.innerHTML = "";
-    
-    const tieneFechas = rutaSeleccionadaCatalogo && 
-                        Array.isArray(rutaSeleccionadaCatalogo.fechasPropuestas) && 
-                        rutaSeleccionadaCatalogo.fechasPropuestas.length > 0;
 
+    const fechasValidas = Array.isArray(rutaSeleccionadaCatalogo.fechasPropuestas)
+        ? rutaSeleccionadaCatalogo.fechasPropuestas.filter(f => f !== null && f !== undefined && f !== "")
+        : [];
+
+    const tieneFechas = fechasValidas.length > 0;
     const votoPrevio = localStorage.getItem(`usuario_voto_${rutaSeleccionadaCatalogo.id}`);
-    const meta = rutaSeleccionadaCatalogo.metaInteresados || 10;
+    const tituloVotacion = document.querySelector(".voting-title");
 
     if (tieneFechas) {
-        const opciones = rutaSeleccionadaCatalogo.fechasPropuestas;
+        // CASO 1: RUTA CON FECHAS PROPUESTAS
+        if (tituloVotacion) tituloVotacion.textContent = "📅 Selecciona una fecha:";
 
-        opciones.forEach((fechaStr, index) => {
-            const claveVotos = `votos_${rutaSeleccionadaCatalogo.id}_${fechaStr}`;
-            const votosActuales = parseInt(localStorage.getItem(claveVotos) || "0");
+        fechasValidas.forEach((opcion) => {
+            const fechaTexto = typeof opcion === 'object' ? opcion.fecha : opcion;
+            const numInteresados = typeof opcion === 'object' ? (opcion.interesados || 0) : 0;
 
             const btn = document.createElement("div");
             btn.classList.add("weekend-btn");
 
-            if (votoPrevio === fechaStr) {
+            if (votoPrevio === fechaTexto) {
                 btn.classList.add("selected");
             }
 
             btn.innerHTML = `
-                <span>📅 ${fechaStr}</span>
-                <span class="vote-badge" id="badge-${index}">${votosActuales} interesados</span>
+                <span>📅 ${fechaTexto}</span>
+                <span class="vote-badge">${numInteresados} interesados</span>
             `;
 
             if (!votoPrevio) {
                 btn.addEventListener("click", () => {
                     document.querySelectorAll(".weekend-btn").forEach(b => b.classList.remove("selected"));
                     btn.classList.add("selected");
-                    fechaVotoSeleccionada = fechaStr;
-                    if (btnSubmitVote) btnSubmitVote.disabled = false;
+                    fechaVotoSeleccionada = fechaTexto;
+                    if (btnSubmitVote) {
+                        btnSubmitVote.disabled = false;
+                        btnSubmitVote.classList.remove("btn-disabled");
+                    }
                 });
             }
 
@@ -449,11 +452,24 @@ function generarOpcionesFinesDeSemana() {
         }
 
     } else {
+        // CASO 2: CATÁLOGO ABIERTO (SIN FECHAS PROPUESTAS)
+        if (tituloVotacion) tituloVotacion.textContent = "🔥 Estado de interés:";
         fechaVotoSeleccionada = "Sin fecha fija";
 
-        const claveInteresadosGeneral = `interesados_general_${rutaSeleccionadaCatalogo.id}`;
-        const votosLocales = parseInt(localStorage.getItem(claveInteresadosGeneral) || "0");
-        const interesadosTotales = (rutaSeleccionadaCatalogo.interesados || 0) + votosLocales;
+        const interesadosTotales = rutaSeleccionadaCatalogo.interesados || 0;
+
+        const infoBox = document.createElement("div");
+        infoBox.className = "weekend-btn selected";
+        infoBox.style.justifyContent = "center";
+        infoBox.style.cursor = "default";
+        infoBox.style.width = "100%";
+        infoBox.style.padding = "10px";
+        infoBox.innerHTML = `
+            <span style="font-weight: bold; font-size: 0.95rem;">
+                🙋‍♂️ ${interesadosTotales} personas interesadas en agendar esta ruta
+            </span>
+        `;
+        weekendOptions.appendChild(infoBox);
 
         if (votoPrevio) {
             if (btnSubmitVote) {
@@ -466,7 +482,8 @@ function generarOpcionesFinesDeSemana() {
             if (btnSubmitVote) {
                 btnSubmitVote.disabled = false;
                 btnSubmitVote.classList.remove("btn-disabled");
-                btnSubmitVote.textContent = "📩 Registrar mi interés";
+                btnSubmitVote.style.cursor = "pointer";
+                btnSubmitVote.textContent = "📩 Registrar mi interés por WhatsApp";
             }
             if (voterNameInput) voterNameInput.placeholder = "Tu nombre (opcional)";
         }
@@ -477,41 +494,65 @@ if (btnSubmitVote) {
     btnSubmitVote.addEventListener("click", () => {
         if (!rutaSeleccionadaCatalogo) return;
 
-        const tieneFechas = Array.isArray(rutaSeleccionadaCatalogo.fechasPropuestas) && 
-                            rutaSeleccionadaCatalogo.fechasPropuestas.length > 0;
+        const fechasValidas = Array.isArray(rutaSeleccionadaCatalogo.fechasPropuestas)
+            ? rutaSeleccionadaCatalogo.fechasPropuestas.filter(f => f !== null && f !== undefined && f !== "")
+            : [];
+        const tieneFechas = fechasValidas.length > 0;
 
         if (tieneFechas && !fechaVotoSeleccionada) return;
 
+        // 1. SUMAR +1 INMEDIATAMENTE AL CONTADOR DE LA RUTA EN MEMORIA
+        if (tieneFechas) {
+            const index = rutaSeleccionadaCatalogo.fechasPropuestas.findIndex(f => {
+                const texto = typeof f === 'object' ? f.fecha : f;
+                return texto === fechaVotoSeleccionada;
+            });
+
+            if (index !== -1) {
+                const opcion = rutaSeleccionadaCatalogo.fechasPropuestas[index];
+                if (typeof opcion === 'object') {
+                    opcion.interesados = (opcion.interesados || 0) + 1;
+                } else {
+                    rutaSeleccionadaCatalogo.fechasPropuestas[index] = {
+                        fecha: fechaVotoSeleccionada,
+                        interesados: 1
+                    };
+                }
+            }
+        } else {
+            rutaSeleccionadaCatalogo.interesados = (rutaSeleccionadaCatalogo.interesados || 0) + 1;
+        }
+
+        // 2. GUARDAR EN LOCALSTORAGE
+        localStorage.setItem(`usuario_voto_${rutaSeleccionadaCatalogo.id}`, fechaVotoSeleccionada || "interesado");
+
+        // 3. RE-RENDERIZAR EN EL ACTO PARA MOSTRAR EL +1
+        generarOpcionesFinesDeSemana();
+        if (typeof renderizarCatalogo === 'function') {
+            renderizarCatalogo();
+        }
+
+        // 4. ABRIR WHATSAPP
         const nombreUsuario = voterNameInput.value.trim() || "Un senderista";
         let textoWhatsApp = "";
 
         if (tieneFechas) {
-            const claveVotos = `votos_${rutaSeleccionadaCatalogo.id}_${fechaVotoSeleccionada}`;
-            const votosActuales = parseInt(localStorage.getItem(claveVotos) || "0");
-            localStorage.setItem(claveVotos, votosActuales + 1);
-
             textoWhatsApp = encodeURIComponent(
                 `¡Hola! Me interesa la ruta "${rutaSeleccionadaCatalogo.nombre}" y voto para hacerla el: ${fechaVotoSeleccionada}.\n\nNombre: ${nombreUsuario}.`
             );
         } else {
-            const claveInteresadosGeneral = `interesados_general_${rutaSeleccionadaCatalogo.id}`;
-            const votosLocales = parseInt(localStorage.getItem(claveInteresadosGeneral) || "0");
-            localStorage.setItem(claveInteresadosGeneral, votosLocales + 1);
-
             textoWhatsApp = encodeURIComponent(
                 `¡Hola! Me interesa realizar la ruta "${rutaSeleccionadaCatalogo.nombre}". Por favor avísenme cuando la agenden.\n\nNombre: ${nombreUsuario}.`
             );
         }
 
-        localStorage.setItem(`usuario_voto_${rutaSeleccionadaCatalogo.id}`, fechaVotoSeleccionada || "interesado");
-
         const tel = typeof TELEFONO_WHATSAPP !== 'undefined' ? TELEFONO_WHATSAPP : '';
         const linkWhatsApp = `https://wa.me/${tel}?text=${textoWhatsApp}`;
+        
         window.open(linkWhatsApp, "_blank");
-
-        generarOpcionesFinesDeSemana();
     });
 }
+
 // ==============================================================================
 // 8. CIERRE DE MODALES AL HACER CLIC FUERA
 // ==============================================================================
@@ -527,6 +568,7 @@ window.addEventListener("click", (e) => {
         cerrarModalCatalogoDetalle();
     }
 });
+
 
 // ==============================================================================
 // 9. HERRAMIENTAS ADMINISTRADOR

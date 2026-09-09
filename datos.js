@@ -114,14 +114,13 @@ const catalogoGeneral = [
         nombre: "Teleferico Fantasma - Estacion El Lyron",
         dificultad: "Baja",
         duracion: "3-5h",                                  // Clave estandarizada
-        interesados: 4,          // (Opcional) número base de interesados para rutas SIN fecha
-        metaInteresados: 8,     // (Opcional) meta para confirmar (si no pones nada, tomará 10 por defecto)
         duracionTexto: "3-4 horas de Caminata", // Opcional: Para mostrarlo amigable en la tarjeta
         tipo: ["patrimonio"],                              // Coincide con 'patrimonio' en el HTML
         descripcion: "Clásica caminata de iniciación con excelente sombra y miradores hacia Caracas.",
         imagen: "assets/ImagenTelefericoFantasma.png",
-        fechasPropuestas: [
-            "Sábado 05 de Septiembre", "Domingo 13 de Septiembre"
+       fechasPropuestas: [
+        { fecha: "Sábado 03 de Octubre", interesados: 5 },
+        { fecha: "Domingo 4 de Octubre", interesados: 0 }
         ],
         imagenes: [
             "assets/naiguata10.jpg",
@@ -129,25 +128,23 @@ const catalogoGeneral = [
             "assets/naiguata13.jpg"
         ]
     },
-    {
-        id: "c2",
-        nombre: "Pico Oriental",
-        dificultad: "Alta",
-        duracion: "6-9h", // Estandarizado para el filtro
-        duracionTexto: "7 - 8 horas", // Opcional: Para mostrarlo amigable en la tarjeta
-        descripcion: "Ruta exigente hacia una de las cumbres más emblemáticas, pasando por la Fila del Corozo.",
-        imagen: "assets/ImagenPicoOriental.png",
-        tipo: ["cumbres"], // Propiedad nueva para los filtros
-        /* OPCIONES DE FECHA ESPECÍFICAS PARA ESTA RUTA */
-        fechasPropuestas: [
-            
-        ],
-        imagenes: [
-            "assets/naiguata20.jpg",
-            "assets/naiguata22.jpg",
-            "assets/naiguata21.jpg"
-        ]
-    },
+ {
+    id: "c2",
+    nombre: "Pico Oriental",
+    dificultad: "Alta",
+    duracion: "6-9h",
+    duracionTexto: "7 - 8 horas",
+    descripcion: "Ruta exigente hacia una de las cumbres más emblemáticas, pasando por la Fila del Corozo.",
+    imagen: "assets/ImagenPicoOriental.png",
+    tipo: ["cumbres"],
+    interesados: 0,       
+    fechasPropuestas: [], // <--- SIN COMAS ADENTRO
+    imagenes: [
+        "assets/naiguata20.jpg",
+        "assets/naiguata22.jpg",
+        "assets/naiguata21.jpg"
+    ]
+},
 {
     id: "c3",
     nombre: "Pico Occidental",
@@ -158,8 +155,8 @@ const catalogoGeneral = [
     imagen: "assets/ImagenPicoOccidental.png",
     tipo: ["cumbres"], // Propiedad nueva para los filtros
     fechasPropuestas: [
-        "Sábado 05 de Septiembre",
-        "Domingo 13 de Septiembre"
+        { fecha: "Sábado 03 de Octubre", interesados: 0 },
+        { fecha: "Domingo 4 de Octubre", interesados: 0 }
     ],
     imagenes: [
             "assets/naiguata30.jpg",
@@ -177,9 +174,9 @@ const catalogoGeneral = [
         descripcion: "Hermosa meseta ubicada en las alturas de la fila principal con clima fresco de montaña.",
         imagen: "assets/ImagenMAG.png",
         /* OPCIONES DE FECHA ESPECÍFICAS PARA ESTA RUTA */
-        fechasPropuestas: [
-            "Sábado 05 de Septiembre",
-            "Domingo 13 de Septiembre"
+       fechasPropuestas: [
+        { fecha: "Sábado 03 de Octubre", interesados: 0 },
+        { fecha: "Domingo 04 de Octubre", interesados: 0 }
         ],
         imagenes: [
             "assets/naiguata40.jpg",
@@ -197,9 +194,9 @@ const catalogoGeneral = [
         descripcion: "Ruta de vegetación frondosa que conecta varios puestos icónicos de la montaña.",
         imagen: "assets/ImagenCascadaNorte.png",
         /* OPCIONES DE FECHA ESPECÍFICAS PARA ESTA RUTA */
-        fechasPropuestas: [
-            "Sábado 05 de Septiembre",
-            "Domingo 13 de Septiembre"
+   fechasPropuestas: [
+        { fecha: "Sábado 03 de Octubre", interesados: 0 },
+        { fecha: "Domingo 04 de Octubre", interesados: 0 }
         ],
         imagenes: [
             "assets/naiguata100.jpg",
@@ -217,9 +214,10 @@ const catalogoGeneral = [
         descripcion: "Ruta de vegetación frondosa que conecta varios puestos icónicos de la montaña.",
         imagen: "assets/ImagenGrietasDeSanPedro.png",
         /* OPCIONES DE FECHA ESPECÍFICAS PARA ESTA RUTA */
-        fechasPropuestas: [
-            "Sábado 05 de Septiembre",
-            "Domingo 20 de Septiembre"
+        interesados: 0,
+   fechasPropuestas: [
+        {  },
+        { }
         ],
         imagenes: [
             "assets/naiguata60.jpg",
