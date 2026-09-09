@@ -935,11 +935,3 @@ button[id*="btnInteres"]:active,
     border-color: #2e7d32;
 }
 
-/* Forzar zoom alejado al 75% solo en dispositivos móviles */
-@media screen and (max-width: 768px) {
-    body {
-        zoom: 75%;
-        transform: scale(0.75);
-        transform-origin: top center;
-    }
-}
