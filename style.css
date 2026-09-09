@@ -356,21 +356,38 @@ body::before {
 .btn-catalog {
     width: 100%;
     max-width: 700px;
-    padding: 16px;
-    font-size: 1.1rem;
-    font-weight: bold;
+    padding: 12px 20px;
+    
+    /* Muestra la misma tipografía que el título principal */
+    font-family: 'Caveat Brush', cursive;
+    font-size: 1.4rem;                  /* Tamaño equilibrado para la versión Brush */
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;          /* Opcional: manténlo si quieres las letras en mayúsculas como el título */
+    
+    /* Mismo estilo de sombra e impacto visual */
+    color: #ffffff;
+    text-shadow: 
+        2px 2px 0px #000000,
+        -1px -1px 0px #000000,  
+        1px -1px 0px #000000,
+        -1px 1px 0px #000000,
+        0px 3px 6px rgba(0, 0, 0, 0.9);
+    
     background: var(--primary);
-    color: white;
     border: var(--border-width) solid var(--border-color);
     border-radius: 8px;
     cursor: pointer;
     box-shadow: var(--shadow-solid);
-    transition: transform 0.1s ease;
+    transition: transform 0.1s ease, background 0.2s ease;
 }
 
 .btn-catalog:hover {
     background: var(--primary-dark);
+    transform: scale(1.02);
 }
+
+
 
 /* Caja gris de los selectores de filtro */
 .filter-controls {
