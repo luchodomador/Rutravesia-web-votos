@@ -45,8 +45,28 @@ EJEMPLO COMPLETO DE UNA RUTA EN EL CATÁLOGO:
 
 // BASE DE DATOS LOCAL DE RUTAS CONFIRMADAS
 const rutasConfirmadas = [
-{
-        id: 1,
+    {
+        id: "anaucos-0926",
+        nombre: "Cascada Los Anaucos",
+        fecha: "Próximo Sábado 26 de Agosto",
+        dificultad: "Media",                             // Se ajustó a Extrema
+        duracion: "6-9h",                                  // Clave estandarizada
+        duracionTexto: "3 horas aproximadamente para llegar a la cascada", 
+        descripcion: "Cruces de rios, senderos muy bonitos , vegetacion frondoza , pozos espectaculares y una cascada doble como recompensa final",
+        incluye: "Guía certificado, kit de primeros auxilios, fotos digitales.",
+        imagen: "assets/ImagenAnaucos.png",
+        precio: "$15 por persona",
+        tipo: ["cascadas"] ,
+        imagenes: [
+            "assets/ImagenAnaucos1.png",
+            "assets/ImagenAnaucos2.png",
+            "assets/ImagenAnaucos3.png" , 
+            "assets/ImagenAnaucos4.png" , 
+        ]                                
+    },
+
+    {
+        id: "Naiguata-0815v2",
         nombre: "Pico Naiguatá",
         fecha: "Próximo Sábado 15 de Agosto",
         dificultad: "Extrema",                             // Se ajustó a Extrema
@@ -68,49 +88,13 @@ const rutasConfirmadas = [
             "assets/ImagenNaiguata8.png",
             "assets/ImagenNaiguata9.png", 
             "assets/ImagenNaiguata10.png"
-        ]                                 // Coincide con 'cumbres' en el HTML
+        ]                                
     },
-    {
-        id: 2,
-        nombre: "Camino de los Españoles",
-        fecha: "Próximo Domingo 16 de Agosto",
-        dificultad: "Media", // Se ajustó a Media
-        duracion: "6-9h",
-        duracionTexto: "5-7 horas", // Opcional: Para mostrarlo amigable en la tarjeta
-        descripcion: "Ruta histórica desde La Pastora hasta La Guaira, pasando por fortines coloniales.",
-        incluye: "Guía patrimonial, paramédico, hidratación de recarga.",
-        imagen: "assets/ImagenCDLE.png" /* ← RUTA DE LA FOTO 2 */,
-        precio: "$15 por persona",
-        tipo: ["patrimonio"], // Propiedad nueva para los filtros
-        imagenes: [
-            "assets/naiguata4.jpg",
-            "assets/naiguata5.jpg",
-            "assets/naiguata6.jpg"
-        ]
-    },
-    {
-        id: 3,
-        nombre: "Picacho de Galipán",
-        fecha: "Sábado 22 de Agosto",
-        dificultad: "Media",
-        duracion: "3-5h",
-        duracionTexto: "3-5 horas", // Opcional: Para mostrarlo amigable en la tarjeta
-        descripcion: "Excelente ruta de iniciación con vistas espectaculares al Mar Caribe y a Caracas.",
-        incluye: "Guía, logística de transporte opcional, fotos.",
-        imagen: "assets/ImagenPicacho.png" /* ← RUTA DE LA FOTO 3 */,
-        precio: "$20 por persona",
-        tipo: ["cumbre"], // Propiedad nueva para los filtros
-        imagenes: [
-            "assets/naiguata7.jpg",
-            "assets/naiguata8.jpg",
-            "assets/naiguata9.jpg"
-        ]
-    }
 ];
 // CATÁLOGO GENERAL DE RUTAS DISPONIBLES EN EL ÁVILA Y ALREDEDORES
 const catalogoGeneral = [
    {
-        id: "c1",
+        id: "teleferico_octubre",
         nombre: "Teleferico Fantasma - Estacion El Lyron",
         dificultad: "Baja",
         duracion: "3-5h",                                  // Clave estandarizada
@@ -119,7 +103,7 @@ const catalogoGeneral = [
         descripcion: "Clásica caminata de iniciación con excelente sombra y miradores hacia Caracas.",
         imagen: "assets/ImagenTelefericoFantasma.png",
        fechasPropuestas: [
-        { fecha: "Sábado 03 de Octubre", interesados: 5 },
+        { fecha: "Sábado 03 de Octubre", interesados: 0 },
         { fecha: "Domingo 4 de Octubre", interesados: 0 }
         ],
         imagenes: [
@@ -220,6 +204,22 @@ const catalogoGeneral = [
         "assets/naiguata61.jpg",
         "assets/naiguata62.jpg"
     ]
+},
+ {
+    id: "picacho-0926",
+    nombre: "Picacho de Galipan",
+    dificultad: "Media",
+    duracion: "3-5h",
+    duracionTexto: "3h aproximadamente para hacer Cumbre",
+    tipo: ["cumbres"],
+    descripcion: "Ruta de vegetación frondosa que conecta varios puestos icónicos de la montaña.",
+    imagen: "assets/ImagenPicacho.png",
+    interesados: 0,
+    fechasPropuestas: [], // <--- AHORA ESTÁ VACÍO Y NO ROMPERÁ
+    imagenes: [
+        "assets/naiguata60.jpg",
+        "assets/naiguata61.jpg",
+        "assets/naiguata62.jpg"
+    ]
 }
-    
 ];

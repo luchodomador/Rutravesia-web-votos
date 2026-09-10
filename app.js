@@ -42,6 +42,42 @@ let fechaVotoSeleccionada = null;
 function renderizarTarjetas() {
     if (!cardsContainer) return;
     cardsContainer.innerHTML = "";
+
+    const btnNext = document.getElementById("btnNextConfirmed");
+    const btnPrev = document.getElementById("btnPrevConfirmed");
+
+    // VALIDACIÓN: Si no hay rutas confirmadas
+    if (!rutasConfirmadas || rutasConfirmadas.length === 0) {
+        cardsContainer.innerHTML = `
+            <div style="
+                width: 100%; 
+                text-align: center; 
+                padding: 25px 15px; 
+                background: rgba(255, 255, 255, 0.9); 
+                border-radius: 12px; 
+                margin: 10px auto;
+                max-width: 500px;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            ">
+                <p style="font-size: 1.1rem; color: #2e7d32; font-weight: bold; margin-bottom: 6px;">
+                    🌿 ¡No hay rutas confirmadas por los momentos!
+                </p>
+                <p style="font-size: 0.95rem; color: #555; margin: 0;">
+                    Revisa nuestro catálogo abajo y vota por tu fecha preferida para agendar la próxima salida.
+                </p>
+            </div>
+        `;
+
+        // Ocultar flechas si no hay rutas que desplazar
+        if (btnNext) btnNext.style.display = "none";
+        if (btnPrev) btnPrev.style.display = "none";
+        return;
+    }
+
+    // Mostrar flechas si existen rutas
+    if (btnNext) btnNext.style.display = "block";
+    if (btnPrev) btnPrev.style.display = "block";
+
     rutasConfirmadas.forEach(ruta => {
         const cardHTML = `
             <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.20), rgba(0,0,0,0.40)), url('${ruta.imagen}'); background-size: cover; background-repeat: no-repeat; background-position: center;">
@@ -78,7 +114,7 @@ function activarFlechasCarrusel() {
     }
 }
 
-// ==============================================================================
+/// ==============================================================================
 // 4. GENERADOR Y ABRIR MODAL DEL CATÁLOGO GENERAL
 // ==============================================================================
 function renderizarCatalogo(listaAMostrar = null) {
@@ -86,13 +122,25 @@ function renderizarCatalogo(listaAMostrar = null) {
     if (!catalogCardsContainer) return;
     catalogCardsContainer.innerHTML = "";
     
-    const todasLasRutas = listaAMostrar || [...rutasConfirmadas, ...catalogoGeneral];
+    const confirmadas = Array.isArray(rutasConfirmadas) ? rutasConfirmadas : [];
+    const catalogo = Array.isArray(catalogoGeneral) ? catalogoGeneral : [];
+    
+    // 1. Obtener la lista combinada (o la filtrada)
+    let todasLasRutas = listaAMostrar || [...confirmadas, ...catalogo];
 
     if (todasLasRutas.length === 0) {
         catalogCardsContainer.innerHTML = `<p style="width: 100%; text-align: center; padding: 20px; color: #666;">No se encontraron rutas que coincidan con los filtros seleccionados.</p>`;
         return;
     }
 
+    // 2. Ordenar alfabéticamente de la A a la Z (maneja acentos y caracteres en español)
+    todasLasRutas.sort((a, b) => {
+        const nombreA = (a.nombre || "").toLowerCase();
+        const nombreB = (b.nombre || "").toLowerCase();
+        return nombreA.localeCompare(nombreB, 'es', { sensitivity: 'base' });
+    });
+
+    // 3. Renderizar las tarjetas ordenadas
     todasLasRutas.forEach(ruta => {
         const esConfirmada = ruta.fecha !== undefined;
         const funcionClick = esConfirmada ? `abrirModal('${ruta.id}')` : `abrirDetalleCatalogo('${ruta.id}')`;
@@ -158,7 +206,6 @@ if (btnNextCatalog) {
         }
     });
 }
-
 
 
 // ==============================================================================
@@ -366,7 +413,11 @@ function ocultarSeccionVoto() {
     if (votingContainer) votingContainer.classList.add("hidden");
     if (btnInterest) btnInterest.classList.remove("active");
     if (heartIcon) heartIcon.textContent = "🤍";
-    if (voterNameInput) voterNameInput.value = "";
+    if (voterNameInput) {
+        voterNameInput.value = "";
+        voterNameInput.style.display = "block"; // Asegurar que sea visible por defecto al resetear
+        voterNameInput.disabled = false;
+    }
     if (btnSubmitVote) {
         btnSubmitVote.disabled = true;
         btnSubmitVote.textContent = "📩 Enviar mi voto";
@@ -392,12 +443,13 @@ function generarOpcionesFinesDeSemana() {
     if (!weekendOptions || !rutaSeleccionadaCatalogo) return;
     weekendOptions.innerHTML = "";
 
+    const idRuta = rutaSeleccionadaCatalogo.id;
     const fechasValidas = Array.isArray(rutaSeleccionadaCatalogo.fechasPropuestas)
         ? rutaSeleccionadaCatalogo.fechasPropuestas.filter(f => f !== null && f !== undefined && f !== "")
         : [];
 
     const tieneFechas = fechasValidas.length > 0;
-    const votoPrevio = localStorage.getItem(`usuario_voto_${rutaSeleccionadaCatalogo.id}`);
+    const votoPrevio = localStorage.getItem(`usuario_voto_${idRuta}`);
     const tituloVotacion = document.querySelector(".voting-title");
 
     if (tieneFechas) {
@@ -406,7 +458,12 @@ function generarOpcionesFinesDeSemana() {
 
         fechasValidas.forEach((opcion) => {
             const fechaTexto = typeof opcion === 'object' ? opcion.fecha : opcion;
-            const numInteresados = typeof opcion === 'object' ? (opcion.interesados || 0) : 0;
+            let numInteresados = typeof opcion === 'object' ? (opcion.interesados || 0) : 0;
+
+            // Si el usuario guardó un voto previo para esta fecha en particular, sumamos 1 localmente
+            if (votoPrevio === fechaTexto) {
+                numInteresados += 1;
+            }
 
             const btn = document.createElement("div");
             btn.classList.add("weekend-btn");
@@ -441,14 +498,22 @@ function generarOpcionesFinesDeSemana() {
                 btnSubmitVote.classList.add("btn-disabled");
                 btnSubmitVote.textContent = "✓ Ya registraste tu voto";
             }
-            if (voterNameInput) voterNameInput.placeholder = "Ya votaste para esta ruta";
+            // OCULTAR LA CASILLA DE NOMBRE
+            if (voterNameInput) {
+                voterNameInput.style.display = "none";
+            }
         } else {
             if (btnSubmitVote) {
                 btnSubmitVote.disabled = true;
                 btnSubmitVote.classList.remove("btn-disabled");
                 btnSubmitVote.textContent = "📩 Enviar mi voto";
             }
-            if (voterNameInput) voterNameInput.placeholder = "Tu nombre (opcional)";
+            // MOSTRAR LA CASILLA DE NOMBRE
+            if (voterNameInput) {
+                voterNameInput.style.display = "block";
+                voterNameInput.disabled = false;
+                voterNameInput.placeholder = "Tu nombre / número de acompañantes (opcional)";
+            }
         }
 
     } else {
@@ -456,7 +521,11 @@ function generarOpcionesFinesDeSemana() {
         if (tituloVotacion) tituloVotacion.textContent = "🔥 Estado de interés:";
         fechaVotoSeleccionada = "Sin fecha fija";
 
-        const interesadosTotales = rutaSeleccionadaCatalogo.interesados || 0;
+        let interesadosTotales = rutaSeleccionadaCatalogo.interesados || 0;
+        
+        if (votoPrevio) {
+            interesadosTotales += 1;
+        }
 
         const infoBox = document.createElement("div");
         infoBox.className = "weekend-btn selected";
@@ -477,7 +546,10 @@ function generarOpcionesFinesDeSemana() {
                 btnSubmitVote.classList.add("btn-disabled");
                 btnSubmitVote.textContent = "✓ Ya registraste tu interés";
             }
-            if (voterNameInput) voterNameInput.placeholder = "Ya registraste tu interés";
+            // OCULTAR LA CASILLA DE NOMBRE
+            if (voterNameInput) {
+                voterNameInput.style.display = "none";
+            }
         } else {
             if (btnSubmitVote) {
                 btnSubmitVote.disabled = false;
@@ -485,7 +557,12 @@ function generarOpcionesFinesDeSemana() {
                 btnSubmitVote.style.cursor = "pointer";
                 btnSubmitVote.textContent = "📩 Registrar mi interés por WhatsApp";
             }
-            if (voterNameInput) voterNameInput.placeholder = "Tu nombre (opcional)";
+            // MOSTRAR LA CASILLA DE NOMBRE
+            if (voterNameInput) {
+                voterNameInput.style.display = "block";
+                voterNameInput.disabled = false;
+                voterNameInput.placeholder = "Tu nombre (opcional)";
+            }
         }
     }
 }
@@ -494,6 +571,7 @@ if (btnSubmitVote) {
     btnSubmitVote.addEventListener("click", () => {
         if (!rutaSeleccionadaCatalogo) return;
 
+        const idRuta = rutaSeleccionadaCatalogo.id;
         const fechasValidas = Array.isArray(rutaSeleccionadaCatalogo.fechasPropuestas)
             ? rutaSeleccionadaCatalogo.fechasPropuestas.filter(f => f !== null && f !== undefined && f !== "")
             : [];
@@ -501,38 +579,16 @@ if (btnSubmitVote) {
 
         if (tieneFechas && !fechaVotoSeleccionada) return;
 
-        // 1. SUMAR +1 INMEDIATAMENTE AL CONTADOR DE LA RUTA EN MEMORIA
-        if (tieneFechas) {
-            const index = rutaSeleccionadaCatalogo.fechasPropuestas.findIndex(f => {
-                const texto = typeof f === 'object' ? f.fecha : f;
-                return texto === fechaVotoSeleccionada;
-            });
+        // 1. GUARDAR REGISTRO DE VOTO EN LOCALSTORAGE
+        localStorage.setItem(`usuario_voto_${idRuta}`, fechaVotoSeleccionada || "interesado");
 
-            if (index !== -1) {
-                const opcion = rutaSeleccionadaCatalogo.fechasPropuestas[index];
-                if (typeof opcion === 'object') {
-                    opcion.interesados = (opcion.interesados || 0) + 1;
-                } else {
-                    rutaSeleccionadaCatalogo.fechasPropuestas[index] = {
-                        fecha: fechaVotoSeleccionada,
-                        interesados: 1
-                    };
-                }
-            }
-        } else {
-            rutaSeleccionadaCatalogo.interesados = (rutaSeleccionadaCatalogo.interesados || 0) + 1;
-        }
-
-        // 2. GUARDAR EN LOCALSTORAGE
-        localStorage.setItem(`usuario_voto_${rutaSeleccionadaCatalogo.id}`, fechaVotoSeleccionada || "interesado");
-
-        // 3. RE-RENDERIZAR EN EL ACTO PARA MOSTRAR EL +1
+        // 2. RE-RENDERIZAR EN EL ACTO (Esto actualizará la vista y ocultará el input automáticamente)
         generarOpcionesFinesDeSemana();
         if (typeof renderizarCatalogo === 'function') {
             renderizarCatalogo();
         }
 
-        // 4. ABRIR WHATSAPP
+        // 3. ABRIR WHATSAPP
         const nombreUsuario = voterNameInput.value.trim() || "Un senderista";
         let textoWhatsApp = "";
 
