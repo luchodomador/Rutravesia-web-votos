@@ -117,7 +117,7 @@ const catalogoGeneral = [
     nombre: "Pico Oriental",
     dificultad: "Alta",
     duracion: "6-9h",
-    duracionTexto: "7 - 8 horas",
+    duracionTexto: " Minimo 8 horas para completar la ruta",
     descripcion: "Ruta exigente hacia una de las cumbres más emblemáticas, pasando por la Fila del Corozo.",
     imagen: "assets/ImagenPicoOriental.png",
     tipo: ["cumbres"],

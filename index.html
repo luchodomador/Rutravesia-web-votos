@@ -172,18 +172,22 @@
         </div> <!-- Cierre correcto de modal-card -->
     </div> <!-- Cierre correcto de catalogDetailModal -->
 
-    <!-- MODAL LIGHTBOX FLOTANTE PARA VER FOTO VERTICAL AMPLIADA -->
-    <div class="lightbox-modal hidden" id="lightboxModal">
-        <div class="lightbox-overlay" onclick="cerrarLightbox()"></div>
-        <div class="lightbox-container">
-            <button class="lightbox-close" onclick="cerrarLightbox()">&times;</button>
+   <!-- MODAL LIGHTBOX FLOTANTE PARA VER FOTO VERTICAL AMPLIADA -->
+<div class="lightbox-modal hidden" id="lightboxModal">
+    <div class="lightbox-overlay" onclick="cerrarLightbox()"></div>
+    
+    <div class="lightbox-container">
+        <button class="lightbox-close" onclick="cerrarLightbox()">&times;</button>
+        
+        <div class="lightbox-img-wrapper">
             <button class="lightbox-arrow prev" onclick="cambiarFotoLightbox(-1)">◀</button>
-            <div class="lightbox-img-wrapper">
-                <img id="lightboxImg" src="" alt="Vista ampliada">
-            </div>
+            
+            <img id="lightboxImg" src="" alt="Vista ampliada">
+            
             <button class="lightbox-arrow next" onclick="cambiarFotoLightbox(1)">▶</button>
         </div>
     </div>
+</div>
     
     <!-- ENLACES A JAVASCRIPT (AL FINAL DEL BODY Y EN ESTE ORDEN) -->
     <script src="datos.js"></script>

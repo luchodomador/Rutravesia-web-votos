@@ -68,31 +68,31 @@ function renderizarTarjetas() {
             </div>
         `;
 
-        // Ocultar flechas si no hay rutas que desplazar
         if (btnNext) btnNext.style.display = "none";
         if (btnPrev) btnPrev.style.display = "none";
         return;
     }
 
-    // Mostrar flechas si existen rutas
     if (btnNext) btnNext.style.display = "block";
     if (btnPrev) btnPrev.style.display = "block";
 
     rutasConfirmadas.forEach(ruta => {
+        const duracionMostrar = ruta.duracion || ruta.duracionTexto || 'Por definir';
+
         const cardHTML = `
-            <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.20), rgba(0,0,0,0.40)), url('${ruta.imagen}'); background-size: cover; background-repeat: no-repeat; background-position: center;">
-                <div>
-                    <h3>${ruta.nombre}</h3>
+            <div class="card" style="background-image: linear-gradient(180deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.75) 100%), url('${ruta.imagen || ''}'); background-size: cover; background-repeat: no-repeat; background-position: center;">
+                <div class="card-info-header">
+                    <h3>${ruta.nombre || 'Sin nombre'}</h3>
+                    <p class="card-detail-item"><strong>💪 Dificultad:</strong> ${ruta.dificultad || 'Media'}</p>
+                    <p class="card-detail-item"><strong>⏱️ Duración:</strong> ${duracionMostrar}</p>
                     <p class="date">📅 ${ruta.fecha}</p>
-                    <p><strong>Dificultad:</strong> ${ruta.dificultad}</p>
                 </div>
-                <button class="btn-details" onclick="abrirModal('${ruta.id}')">Ver detalles</button>
+                <button class="btn-details" onclick="abrirModal('${ruta.id}')">Ver detalles / Reservar</button>
             </div>
         `;
         cardsContainer.innerHTML += cardHTML;
     });
 
-    // Activar el movimiento de las flechas
     activarFlechasCarrusel();
 }
 
@@ -114,7 +114,8 @@ function activarFlechasCarrusel() {
     }
 }
 
-/// ==============================================================================
+
+// ==============================================================================
 // 4. GENERADOR Y ABRIR MODAL DEL CATÁLOGO GENERAL
 // ==============================================================================
 function renderizarCatalogo(listaAMostrar = null) {
@@ -122,38 +123,80 @@ function renderizarCatalogo(listaAMostrar = null) {
     if (!catalogCardsContainer) return;
     catalogCardsContainer.innerHTML = "";
     
-    const confirmadas = Array.isArray(rutasConfirmadas) ? rutasConfirmadas : [];
-    const catalogo = Array.isArray(catalogoGeneral) ? catalogoGeneral : [];
+    const confirmadas = (typeof rutasConfirmadas !== 'undefined' && Array.isArray(rutasConfirmadas)) ? rutasConfirmadas : [];
+    const catalogo = (typeof catalogoGeneral !== 'undefined' && Array.isArray(catalogoGeneral)) ? catalogoGeneral : [];
     
-    // 1. Obtener la lista combinada (o la filtrada)
+    // Lista combinada
     let todasLasRutas = listaAMostrar || [...confirmadas, ...catalogo];
 
-    if (todasLasRutas.length === 0) {
+    if (!Array.isArray(todasLasRutas) || todasLasRutas.length === 0) {
         catalogCardsContainer.innerHTML = `<p style="width: 100%; text-align: center; padding: 20px; color: #666;">No se encontraron rutas que coincidan con los filtros seleccionados.</p>`;
         return;
     }
 
-    // 2. Ordenar alfabéticamente de la A a la Z (maneja acentos y caracteres en español)
+    // ORDENAMIENTO:
+    // 1º Rutas con fechas propuestas
+    // 2º Resto de rutas (Confirmadas o del catálogo regular)
+    // Dentro de cada grupo: A-Z por nombre
     todasLasRutas.sort((a, b) => {
+        if (!a || !b) return 0;
+        const tienePropuestaA = Array.isArray(a.fechasPropuestas) && a.fechasPropuestas.length > 0;
+        const tienePropuestaB = Array.isArray(b.fechasPropuestas) && b.fechasPropuestas.length > 0;
+
+        if (tienePropuestaA && !tienePropuestaB) return -1;
+        if (!tienePropuestaA && tienePropuestaB) return 1;
+
         const nombreA = (a.nombre || "").toLowerCase();
         const nombreB = (b.nombre || "").toLowerCase();
         return nombreA.localeCompare(nombreB, 'es', { sensitivity: 'base' });
     });
 
-    // 3. Renderizar las tarjetas ordenadas
+    // Renderizado de las 3 variantes de tarjetas
     todasLasRutas.forEach(ruta => {
-        const esConfirmada = ruta.fecha !== undefined;
-        const funcionClick = esConfirmada ? `abrirModal('${ruta.id}')` : `abrirDetalleCatalogo('${ruta.id}')`;
+        if (!ruta) return;
+
+        const esConfirmada = ruta.fecha !== undefined && ruta.fecha !== '';
+        const tieneFechasPropuestas = Array.isArray(ruta.fechasPropuestas) && ruta.fechasPropuestas.length > 0;
+
+        // Evaluación de tipo de botón y acción a ejecutar
+        let textoBoton = "";
+        let funcionClick = "";
+
+        if (esConfirmada) {
+            textoBoton = "Ver detalles / Reservar";
+            funcionClick = `abrirModal('${ruta.id}')`;
+        } else if (tieneFechasPropuestas) {
+            textoBoton = "Ver detalles / Votar";
+            funcionClick = `abrirDetalleCatalogo('${ruta.id}')`;
+        } else {
+            textoBoton = "Ver detalles / Mostrar interés";
+            funcionClick = `abrirDetalleCatalogo('${ruta.id}')`;
+        }
+
+        // Banner indicador solo para rutas con fechas propuestas que no estén confirmadas aún
+        const bannerFechaPropuesta = (tieneFechasPropuestas && !esConfirmada) ? `
+            <div class="banner-fecha-propuesta">
+                <span>FECHA PROPUESTA</span>
+                <span class="flecha-indicadora">⬇</span>
+            </div>
+        ` : '';
+
+        // Formato para mostrar duración
+        const duracionMostrar = ruta.duracion || ruta.duracionTexto || 'Por definir';
 
         const cardHTML = `
-            <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.20), rgba(0,0,0,0.40)), url('${ruta.imagen}'); background-size: cover; background-position: center;">
-                <div>
-                    <h3>${ruta.nombre}</h3>
-                    <p><strong>Nivel:</strong> ${ruta.dificultad}</p>
+            <div class="card" style="background-image: linear-gradient(180deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.75) 100%), url('${ruta.imagen || ''}'); background-size: cover; background-position: center;">
+                <div class="card-info-header">
+                    <h3>${ruta.nombre || 'Sin nombre'}</h3>
+                    <p class="card-detail-item"><strong>💪 Dificultad:</strong> ${ruta.dificultad || 'Media'}</p>
+                    <p class="card-detail-item"><strong>⏱️ Duración:</strong> ${duracionMostrar}</p>
                     ${esConfirmada ? `<p class="date">📅 ${ruta.fecha}</p>` : ''}
                 </div>
-                <button class="btn-details" onclick="${funcionClick}">
-                    ${esConfirmada ? 'Ver detalles' : 'Votar Fecha / Ver Detalles'}
+                
+                ${bannerFechaPropuesta}
+
+                <button class="btn-details ${tieneFechasPropuestas && !esConfirmada ? 'btn-details-propuesta' : ''}" onclick="${funcionClick}">
+                    ${textoBoton}
                 </button>
             </div>
         `;
@@ -162,24 +205,33 @@ function renderizarCatalogo(listaAMostrar = null) {
 }
 
 // Abrir modal del catálogo y resetear filtros
-if (btnCatalog) {
+if (typeof btnCatalog !== 'undefined' && btnCatalog) {
     btnCatalog.addEventListener("click", () => {
-        if (catalogModal) catalogModal.classList.remove("hidden");
+        if (typeof catalogModal !== 'undefined' && catalogModal) {
+            catalogModal.classList.remove("hidden");
+        }
         
-        if (document.getElementById("filterEstado")) document.getElementById("filterEstado").value = "todos";
-        if (document.getElementById("filterDificultad")) document.getElementById("filterDificultad").value = "todos";
-        if (document.getElementById("filterDuracion")) document.getElementById("filterDuracion").value = "todos";
-        if (document.getElementById("filterAtractivo")) document.getElementById("filterAtractivo").value = "todos";
+        const fEstado = document.getElementById("filterEstado");
+        const fDif = document.getElementById("filterDificultad");
+        const fDur = document.getElementById("filterDuracion");
+        const fAtr = document.getElementById("filterAtractivo");
+
+        if (fEstado) fEstado.value = "todos";
+        if (fDif) fDif.value = "todos";
+        if (fDur) fDur.value = "todos";
+        if (fAtr) fAtr.value = "todos";
         
         renderizarCatalogo(); 
     });
 }
 
 // Evento para cerrar el modal del Catálogo
-if (closeCatalogModal && catalogModal) {
+if (typeof closeCatalogModal !== 'undefined' && closeCatalogModal && typeof catalogModal !== 'undefined' && catalogModal) {
     closeCatalogModal.addEventListener("click", () => {
         catalogModal.classList.add("hidden");
-        abiertoDesdeCatalogo = false;
+        if (typeof abiertoDesdeCatalogo !== 'undefined') {
+            abiertoDesdeCatalogo = false;
+        }
     });
 }
 
@@ -307,7 +359,7 @@ function abrirModal(idRuta) {
         <p style="margin-bottom: 12px;"><strong>Costo:</strong> ${ruta.precio || 'Consultar'}</p>
         
         <a href="${linkWhatsApp}" target="_blank" class="btn-whatsapp">
-            📲 Consultar / Reservar vía WhatsApp
+            📲 Consultar / Reservar 
         </a>
     `;
 
@@ -422,6 +474,8 @@ function ocultarSeccionVoto() {
         btnSubmitVote.disabled = true;
         btnSubmitVote.textContent = "📩 Enviar mi voto";
     }
+    const disclaimer = document.getElementById("votingDisclaimerNote");
+    if (disclaimer) disclaimer.style.display = "none";
 }
 
 if (btnInterest) {
@@ -454,13 +508,12 @@ function generarOpcionesFinesDeSemana() {
 
     if (tieneFechas) {
         // CASO 1: RUTA CON FECHAS PROPUESTAS
-        if (tituloVotacion) tituloVotacion.textContent = "📅 Selecciona una fecha:";
+        if (tituloVotacion) tituloVotacion.innerHTML = "📅 Selecciona una fecha: 👇";
 
         fechasValidas.forEach((opcion) => {
             const fechaTexto = typeof opcion === 'object' ? opcion.fecha : opcion;
             let numInteresados = typeof opcion === 'object' ? (opcion.interesados || 0) : 0;
 
-            // Si el usuario guardó un voto previo para esta fecha en particular, sumamos 1 localmente
             if (votoPrevio === fechaTexto) {
                 numInteresados += 1;
             }
@@ -498,7 +551,6 @@ function generarOpcionesFinesDeSemana() {
                 btnSubmitVote.classList.add("btn-disabled");
                 btnSubmitVote.textContent = "✓ Ya registraste tu voto";
             }
-            // OCULTAR LA CASILLA DE NOMBRE
             if (voterNameInput) {
                 voterNameInput.style.display = "none";
             }
@@ -508,7 +560,6 @@ function generarOpcionesFinesDeSemana() {
                 btnSubmitVote.classList.remove("btn-disabled");
                 btnSubmitVote.textContent = "📩 Enviar mi voto";
             }
-            // MOSTRAR LA CASILLA DE NOMBRE
             if (voterNameInput) {
                 voterNameInput.style.display = "block";
                 voterNameInput.disabled = false;
@@ -518,7 +569,7 @@ function generarOpcionesFinesDeSemana() {
 
     } else {
         // CASO 2: CATÁLOGO ABIERTO (SIN FECHAS PROPUESTAS)
-        if (tituloVotacion) tituloVotacion.textContent = "🔥 Estado de interés:";
+        if (tituloVotacion) tituloVotacion.innerHTML = "🔥 Estado de interés: 👇";
         fechaVotoSeleccionada = "Sin fecha fija";
 
         let interesadosTotales = rutaSeleccionadaCatalogo.interesados || 0;
@@ -546,7 +597,6 @@ function generarOpcionesFinesDeSemana() {
                 btnSubmitVote.classList.add("btn-disabled");
                 btnSubmitVote.textContent = "✓ Ya registraste tu interés";
             }
-            // OCULTAR LA CASILLA DE NOMBRE
             if (voterNameInput) {
                 voterNameInput.style.display = "none";
             }
@@ -555,15 +605,32 @@ function generarOpcionesFinesDeSemana() {
                 btnSubmitVote.disabled = false;
                 btnSubmitVote.classList.remove("btn-disabled");
                 btnSubmitVote.style.cursor = "pointer";
-                btnSubmitVote.textContent = "📩 Registrar mi interés por WhatsApp";
+                btnSubmitVote.textContent = "📩 Registrar mi interés ";
             }
-            // MOSTRAR LA CASILLA DE NOMBRE
             if (voterNameInput) {
                 voterNameInput.style.display = "block";
                 voterNameInput.disabled = false;
                 voterNameInput.placeholder = "Tu nombre (opcional)";
             }
         }
+    }
+
+    // --- MINI NOTA ACLARATORIA ---
+    let disclaimer = document.getElementById("votingDisclaimerNote");
+    if (!disclaimer) {
+        disclaimer = document.createElement("p");
+        disclaimer.id = "votingDisclaimerNote";
+        disclaimer.className = "voting-disclaimer";
+        if (btnSubmitVote && btnSubmitVote.parentNode) {
+            btnSubmitVote.parentNode.insertBefore(disclaimer, btnSubmitVote.nextSibling);
+        }
+    }
+
+    if (votoPrevio) {
+        disclaimer.style.display = "none";
+    } else {
+        disclaimer.style.display = "block";
+        disclaimer.innerHTML = "💡 <i>Nota: Tu interés o voto se registrará formalmente al enviar el mensaje por WhatsApp.</i>";
     }
 }
 
@@ -582,7 +649,7 @@ if (btnSubmitVote) {
         // 1. GUARDAR REGISTRO DE VOTO EN LOCALSTORAGE
         localStorage.setItem(`usuario_voto_${idRuta}`, fechaVotoSeleccionada || "interesado");
 
-        // 2. RE-RENDERIZAR EN EL ACTO (Esto actualizará la vista y ocultará el input automáticamente)
+        // 2. RE-RENDERIZAR EN EL ACTO
         generarOpcionesFinesDeSemana();
         if (typeof renderizarCatalogo === 'function') {
             renderizarCatalogo();
