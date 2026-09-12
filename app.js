@@ -489,7 +489,7 @@ function ocultarSeccionVoto() {
     }
     if (btnSubmitVote) {
         btnSubmitVote.disabled = true;
-        btnSubmitVote.textContent = "📩 Enviar mi voto";
+        btnSubmitVote.textContent = "📩 Registrar mi elección";
     }
     const disclaimer = document.getElementById("votingDisclaimerNote");
     if (disclaimer) disclaimer.style.display = "none";
@@ -565,7 +565,7 @@ function generarOpcionesFinesDeSemana() {
             if (btnSubmitVote) {
                 btnSubmitVote.disabled = true;
                 btnSubmitVote.classList.add("btn-disabled");
-                btnSubmitVote.textContent = "✓ Ya registraste tu voto";
+                btnSubmitVote.textContent = "✓ Ya registraste tu elección";
             }
             if (voterNameInput) {
                 voterNameInput.style.display = "none";
@@ -574,7 +574,7 @@ function generarOpcionesFinesDeSemana() {
             if (btnSubmitVote) {
                 btnSubmitVote.disabled = true;
                 btnSubmitVote.classList.remove("btn-disabled");
-                btnSubmitVote.textContent = "📩 Enviar mi voto";
+                btnSubmitVote.textContent = "📩 Registrar mi elección";
             }
             if (voterNameInput) {
                 voterNameInput.style.display = "block";
