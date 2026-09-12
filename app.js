@@ -122,10 +122,10 @@ function renderizarCatalogo(listaAMostrar = null) {
     const catalogCardsContainer = document.getElementById("catalogCardsContainer");
     if (!catalogCardsContainer) return;
     catalogCardsContainer.innerHTML = "";
-    
+
     const confirmadas = (typeof rutasConfirmadas !== 'undefined' && Array.isArray(rutasConfirmadas)) ? rutasConfirmadas : [];
     const catalogo = (typeof catalogoGeneral !== 'undefined' && Array.isArray(catalogoGeneral)) ? catalogoGeneral : [];
-    
+
     // Lista combinada
     let todasLasRutas = listaAMostrar || [...confirmadas, ...catalogo];
 
@@ -166,7 +166,7 @@ function renderizarCatalogo(listaAMostrar = null) {
             textoBoton = "Ver detalles / Reservar";
             funcionClick = `abrirModal('${ruta.id}')`;
         } else if (tieneFechasPropuestas) {
-            textoBoton = "Ver detalles / Votar";
+            textoBoton = "Ver detalles / Elegir fecha";
             funcionClick = `abrirDetalleCatalogo('${ruta.id}')`;
         } else {
             textoBoton = "Ver detalles / Mostrar interés";
@@ -210,7 +210,7 @@ if (typeof btnCatalog !== 'undefined' && btnCatalog) {
         if (typeof catalogModal !== 'undefined' && catalogModal) {
             catalogModal.classList.remove("hidden");
         }
-        
+
         const fEstado = document.getElementById("filterEstado");
         const fDif = document.getElementById("filterDificultad");
         const fDur = document.getElementById("filterDuracion");
@@ -220,8 +220,8 @@ if (typeof btnCatalog !== 'undefined' && btnCatalog) {
         if (fDif) fDif.value = "todos";
         if (fDur) fDur.value = "todos";
         if (fAtr) fAtr.value = "todos";
-        
-        renderizarCatalogo(); 
+
+        renderizarCatalogo();
     });
 }
 
@@ -285,11 +285,11 @@ if (searchInput) {
 
         if (coincidencias.length > 0) {
             searchResults.innerHTML = coincidencias.map(ruta => `
-                <div class="search-item" onclick="abrirModalDesdeBuscador('${ruta.id}')">
-                    <strong>${ruta.nombre}</strong>
-                    <small>Dificultad: ${ruta.dificultad || 'N/A'} | ${ruta.fecha ? '📅 Confirmada' : '📁 Catálogo'}</small>
-                </div>
-            `).join("");
+                                                                                                                                                                                                                                                                                <div class="search-item" onclick="abrirModalDesdeBuscador('${ruta.id}')">
+                                                                                                                                                                                                                                                                                    <strong>${ruta.nombre}</strong>
+                                                                                                                                                                                                                                                                                    <small>Dificultad: ${ruta.dificultad || 'N/A'} | ${ruta.fecha ? '📅 Confirmada' : '📁 Catálogo'}</small>
+                                                                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                                                                            `).join("");
             searchResults.classList.remove("hidden");
         } else {
             searchResults.innerHTML = `<div class="search-item">No encontramos rutas relacionadas con "${query}"</div>`;
@@ -298,12 +298,12 @@ if (searchInput) {
     });
 }
 
-window.abrirModalDesdeBuscador = function(idRuta) {
+window.abrirModalDesdeBuscador = function (idRuta) {
     if (searchResults) searchResults.classList.add("hidden");
     if (searchInput) searchInput.value = "";
 
     let ruta = rutasConfirmadas.find(r => String(r.id) === String(idRuta));
-    
+
     if (ruta) {
         abrirModal(ruta.id);
     } else {
@@ -318,9 +318,9 @@ window.abrirModalDesdeBuscador = function(idRuta) {
 // 6. VENTANA MODAL DETALLES (RUTAS CONFIRMADAS / VER DETALLES)
 // ==============================================================================
 function abrirModal(idRuta) {
-    let ruta = rutasConfirmadas.find(r => String(r.id) === String(idRuta)) || 
-               catalogoGeneral.find(r => String(r.id) === String(idRuta));
-    
+    let ruta = rutasConfirmadas.find(r => String(r.id) === String(idRuta)) ||
+        catalogoGeneral.find(r => String(r.id) === String(idRuta));
+
     if (!ruta) return;
 
     if (catalogModal && !catalogModal.classList.contains("hidden")) {
@@ -339,29 +339,29 @@ function abrirModal(idRuta) {
     const linkWhatsApp = `https://wa.me/${typeof TELEFONO_WHATSAPP !== 'undefined' ? TELEFONO_WHATSAPP : ''}?text=${textoWhatsApp}`;
 
     modalContent.innerHTML = `
-        <h2 style="margin-bottom: 10px;">${ruta.nombre}</h2>
-       
-        <p style="margin-bottom: 8px;"><strong>Dificultad:</strong> ${ruta.dificultad || 'Media'}</p>
-        <p style="margin-bottom: 8px;"><strong>Duración estimada:</strong> ${ruta.duracionTexto || ruta.duracion || 'Por definir'}</p>
-        
-        ${galeriaHTML}
+     <h2 style="margin-bottom: 10px;">${ruta.nombre}</h2>
+ 
+     <p style="margin-bottom: 8px;"><strong>Dificultad:</strong> ${ruta.dificultad || 'Media'}</p>
+     <p style="margin-bottom: 8px;"><strong>Duración estimada:</strong> ${ruta.duracionTexto || ruta.duracion || 'Por definir'}</p>
+     
+     ${galeriaHTML}
 
-        <div class="descripcion-wrapper" style="margin: 12px 0;">
-            <p id="textoDescripcion" class="texto-colapsado">
-                ${ruta.descripcion || 'Sin descripción disponible.'}
-            </p>
-            <button type="button" id="btnExpandirTexto" class="btn-expandir">
-                Ver más detalles ▼
-            </button>
-        </div>
+     <div class="descripcion-wrapper" style="margin: 12px 0;">
+         <p id="textoDescripcion" class="texto-colapsado">
+             ${ruta.descripcion || 'Sin descripción disponible.'}
+         </p>
+         <button type="button" id="btnExpandirTexto" class="btn-expandir">
+             Ver más detalles ▼
+         </button>
+     </div>
 
-        <p style="margin-bottom: 4px; margin-top: 10px;"><strong>Incluye:</strong> ${ruta.incluye || 'Guiatura profesional'}</p>
-        <p style="margin-bottom: 12px;"><strong>Costo:</strong> ${ruta.precio || 'Consultar'}</p>
-        
-        <a href="${linkWhatsApp}" target="_blank" class="btn-whatsapp">
-            📲 Consultar / Reservar 
-        </a>
-    `;
+     <p style="margin-bottom: 4px; margin-top: 10px;"><strong>Incluye:</strong> ${ruta.incluye || 'Guiatura profesional'}</p>
+     <p style="margin-bottom: 12px;"><strong>Costo:</strong> ${ruta.precio || 'Consultar'}</p>
+     
+     <a href="${linkWhatsApp}" target="_blank" class="btn-whatsapp">
+         📲 Consultar / Reservar 
+     </a>
+ `;
 
     const btnExpandir = document.getElementById("btnExpandirTexto");
     const textoDesc = document.getElementById("textoDescripcion");
@@ -406,8 +406,6 @@ function abrirDetalleCatalogo(idRuta) {
     rutaSeleccionadaCatalogo = ruta;
     fechaVotoSeleccionada = null;
 
-    ocultarSeccionVoto();
-
     imagenesGaleriaActual = (Array.isArray(ruta.imagenes) && ruta.imagenes.length > 0)
         ? ruta.imagenes
         : [ruta.imagen || 'assets/placeholder.jpg'];
@@ -446,6 +444,9 @@ function abrirDetalleCatalogo(idRuta) {
         });
     }
 
+    // Resetear el estado de la sección de votos y ajustar el texto inicial del botón
+    ocultarSeccionVoto();
+
     if (catalogDetailModal) catalogDetailModal.classList.remove("hidden");
 }
 
@@ -464,7 +465,23 @@ if (closeCatalogDetailModal) {
 function ocultarSeccionVoto() {
     if (votingContainer) votingContainer.classList.add("hidden");
     if (btnInterest) btnInterest.classList.remove("active");
-    if (heartIcon) heartIcon.textContent = "🤍";
+
+    // Actualización dinámica del texto/icono del botón según si hay fechas propuestas
+    if (rutaSeleccionadaCatalogo) {
+        const fechasValidas = Array.isArray(rutaSeleccionadaCatalogo.fechasPropuestas)
+            ? rutaSeleccionadaCatalogo.fechasPropuestas.filter(f => f !== null && f !== undefined && f !== "")
+            : [];
+        const tieneFechas = fechasValidas.length > 0;
+
+        if (btnInterest) {
+            if (tieneFechas) {
+                btnInterest.innerHTML = `<span id="heartIcon">📅</span> Ver Fechas`;
+            } else {
+                btnInterest.innerHTML = `<span id="heartIcon">💚</span> Me interesa realizarla`;
+            }
+        }
+    }
+
     if (voterNameInput) {
         voterNameInput.value = "";
         voterNameInput.style.display = "block"; // Asegurar que sea visible por defecto al resetear
@@ -485,7 +502,6 @@ if (btnInterest) {
         if (estaOculto) {
             votingContainer.classList.remove("hidden");
             btnInterest.classList.add("active");
-            heartIcon.textContent = "❤️";
             generarOpcionesFinesDeSemana();
         } else {
             ocultarSeccionVoto();
@@ -573,7 +589,7 @@ function generarOpcionesFinesDeSemana() {
         fechaVotoSeleccionada = "Sin fecha fija";
 
         let interesadosTotales = rutaSeleccionadaCatalogo.interesados || 0;
-        
+
         if (votoPrevio) {
             interesadosTotales += 1;
         }
@@ -605,7 +621,7 @@ function generarOpcionesFinesDeSemana() {
                 btnSubmitVote.disabled = false;
                 btnSubmitVote.classList.remove("btn-disabled");
                 btnSubmitVote.style.cursor = "pointer";
-                btnSubmitVote.textContent = "📩 Registrar mi interés ";
+                btnSubmitVote.textContent = "📩 Registrar mi interés";
             }
             if (voterNameInput) {
                 voterNameInput.style.display = "block";
@@ -671,7 +687,7 @@ if (btnSubmitVote) {
 
         const tel = typeof TELEFONO_WHATSAPP !== 'undefined' ? TELEFONO_WHATSAPP : '';
         const linkWhatsApp = `https://wa.me/${tel}?text=${textoWhatsApp}`;
-        
+
         window.open(linkWhatsApp, "_blank");
     });
 }
@@ -696,13 +712,13 @@ window.addEventListener("click", (e) => {
 // ==============================================================================
 // 9. HERRAMIENTAS ADMINISTRADOR
 // ==============================================================================
-window.resetearTodosLosVotos = function() {
+window.resetearTodosLosVotos = function () {
     localStorage.clear();
     alert("¡Todos los votos han sido reseteados con éxito!");
     location.reload();
 };
 
-window.resetearVotosRuta = function(idRuta) {
+window.resetearVotosRuta = function (idRuta) {
     if (!idRuta) {
         console.warn("⚠️ Debes indicar el ID de la ruta. Ejemplo: resetearVotosRuta('c3')");
         return;
@@ -812,14 +828,14 @@ function construirFilmstripHTML(ruta) {
     `;
 }
 
-window.deslizarTira = function(distancia) {
+window.deslizarTira = function (distancia) {
     const track = document.getElementById("thumbsTrack");
     if (track) {
         track.scrollBy({ left: distancia, behavior: 'smooth' });
     }
 };
 
-window.abrirLightbox = function(index) {
+window.abrirLightbox = function (index) {
     indiceImagenActual = index;
     const modal = document.getElementById("lightboxModal");
     const imgVisor = document.getElementById("lightboxImg");
@@ -832,12 +848,12 @@ window.abrirLightbox = function(index) {
     }
 };
 
-window.cerrarLightbox = function() {
+window.cerrarLightbox = function () {
     const modal = document.getElementById("lightboxModal");
     if (modal) modal.classList.add("hidden");
 };
 
-window.cambiarFotoLightbox = function(direccion) {
+window.cambiarFotoLightbox = function (direccion) {
     if (imagenesGaleriaActual.length === 0) return;
 
     indiceImagenActual += direccion;

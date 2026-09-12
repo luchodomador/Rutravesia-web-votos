@@ -193,50 +193,55 @@ body::before {
 }
 
 /* ==============================================================================
-   4. TARJETAS DE RUTAS PRINCIPALES
+   4. TARJETAS DE RUTAS PRINCIPALES (SECCIÓN ENGLOBADA Y TÍTULO INTEGRADO)
    ============================================================================== */
+
+/* CONTENEDOR ENGLOBADO (Recuadro sutil con fondo transparente) */
 .upcoming-section {
     position: relative;
-    margin: 35px 0 20px 0;
+    margin: 35px auto 25px auto;
     text-align: center;
+    max-width: 1020px;
+    padding: 25px 20px 20px 20px;
+    
+    /* Fondo claro y transparente estilo vidrio esmerilado */
+    background: rgba(255, 255, 255, 0.15) !important;   /* Blanco sutil */
+    backdrop-filter: blur(1px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    
+    /* Borde blanco brillante sutil */
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
 }
 
+/* TÍTULO DESTACADO CON DELINEADO Y BORDE OSCURO */
 .upcoming-section .section-title {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
-    background: var(--primary-dark);
+    background: transparent !important;   /* Quita el fondo de píldora/botón */
+    padding: 0 !important;
+    border-radius: 0 !important;
+    border: none !important;              /* Elimina el borde verde de cápsula */
+    box-shadow: none !important;          /* Quita la sombra de botón */
+    
+    /* Estilo del texto tipográfico */
+    font-family: 'Caveat Brush', cursive;
+    font-size: 2.3rem;
     color: #ffffff;
-    padding: 8px 24px;
-    border-radius: 50px;             /* Borde completamente redondeado para esta insignia */
-    font-size: 1.5rem;
-    border: 2px solid var(--accent-green);
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);
-}
-
-.cards-grid {
-    display: flex !important;            /* Fuerza a que las tarjetas vayan de izquierda a derecha */
-    flex-direction: row !important;      /* Asegura la fila horizontal */
-    justify-content: flex-start;         /* Alinea desde la izquierda */
-    align-items: center;
-    gap: 20px;                           /* Espacio horizontal entre tarjetas */
-    overflow-x: auto;                    /* Permite el scroll horizontal */
-    overflow-y: hidden;                  /* Evita que se estire hacia abajo */
-    scroll-behavior: smooth;
-    width: 100%;
-    max-width: 900px;                    /* Ancho visible del carrusel */
-    margin: 20px auto;
-    padding: 10px 5px;
-    scrollbar-width: thin;               /* Barra sutil */
-}
-
-/* Ocultar/estilizar scrollbar en Navegadores Webkit */
-.cards-grid::-webkit-scrollbar {
-    height: 6px;
-}
-.cards-grid::-webkit-scrollbar-thumb {
-    background: #2e7d32;
-    border-radius: 10px;
+    margin: 0 0 15px 0;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    
+    /* --- DELINEADO Y BORDE OSCURO POTENTE --- */
+    text-shadow: 
+        -2px -2px 0 #000000,  
+         2px -2px 0 #000000,
+        -2px  2px 0 #000000,
+         2px  2px 0 #000000,
+         0px  4px 10px rgba(0, 0, 0, 0.85) !important;
 }
 
 /* ENVOLTORIO PARA LAS FLECHAS Y LAS TARJETAS */
@@ -250,15 +255,40 @@ body::before {
     justify-content: center;
 }
 
-/* ASEGURA EL TAMAÑO INDIVIDUAL DE CADA TARJETA EN LA FILA */
-.cards-grid .card {
-    min-width: 220px !important;         /* Ancho fijo para cada tarjeta */
-    max-width: 220px !important;
-    height: 320px !important;            /* Altura fija */
-    flex-shrink: 0 !important;           /* EVITA que se pongan una debajo de otra */
+.cards-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    width: 100%;
+    max-width: 900px;
+    margin: 10px auto;
+    padding: 10px 5px;
+    scrollbar-width: thin;
 }
 
-/* ESTILO DE LAS FLECHAS LATERALE S (< y >) */
+/* Ocultar/estilizar scrollbar en Navegadores Webkit */
+.cards-grid::-webkit-scrollbar {
+    height: 6px;
+}
+.cards-grid::-webkit-scrollbar-thumb {
+    background: #2e7d32;
+    border-radius: 10px;
+}
+
+/* ASEGURA EL TAMAÑO INDIVIDUAL DE CADA TARJETA EN LA FILA */
+.cards-grid .card {
+    min-width: 220px !important;
+    max-width: 220px !important;
+    height: 320px !important;
+    flex-shrink: 0 !important;
+}
+
+/* ESTILO DE LAS FLECHAS LATERALES (< y >) */
 .carousel-arrow {
     position: absolute;
     top: 50%;
@@ -298,7 +328,7 @@ body::before {
     justify-content: space-between;
     box-shadow: var(--shadow-solid);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    height: 295px;                   /* Altura de las tarjetas de ruta */
+    height: 295px;
     background-size: cover !important;
     background-position: center !important;
     position: relative;
@@ -314,7 +344,7 @@ body::before {
 .card h3 {
     color: #ffffff;
     font-size: 1.15rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9); /* Ocuridad detrás del texto para fotos claras */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
 }
 
 .card p {
@@ -324,7 +354,7 @@ body::before {
 }
 
 .card .date {
-    color: #a5d6a7;                  /* Verde claro legible sobre fotos */
+    color: #a5d6a7;
     font-weight: bold;
     font-size: 0.85rem;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
@@ -344,6 +374,8 @@ body::before {
 .btn-details:hover {
     background: #ffffff;
 }
+
+
 
 /* ==============================================================================
    5. FILTROS Y CATÁLOGO COMPLETO
@@ -1297,4 +1329,53 @@ button[id*="btnInteres"]:active,
 }
 
 
+/* Estilo Metálico Ajustado (Más pequeño, borde biselado y texto compacto) */
+.btn-details {
+    width: 85%;
+    margin: 8px auto 12px auto;
+    padding: 6px 10px;                  /* Relleno más compacto */
+    font-size: 0.72rem;                 /* Fuente un pelín más pequeña */
+    font-weight: 800;
+    color: #111111;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    border-radius: 6px;
+    cursor: pointer;
+    
+    /* Degradado metálico de acero/aluminio */
+    background: linear-gradient(180deg, #ffffff 0%, #dedede 40%, #c2c2c2 60%, #9e9e9e 100%);
+    
+    /* Textura en bordes: Bisel biselado metálico de doble marco */
+    border: 1px solid #555555;
+    border-top: 1.5px solid #ffffff;     /* Brillo superior en borde */
+    border-bottom: 1.5px solid #333333;  /* Sombra inferior en borde */
+    
+    /* Sombras para marcar volumen 3D y relieve */
+    box-shadow: 
+        0 3px 5px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9),
+        inset 0 -1px 2px rgba(0, 0, 0, 0.35);
+        
+    transition: all 0.15s ease-in-out;
+    display: block;
+}
 
+/* Hover suave manteniendo la escala */
+.btn-details:hover {
+    background: linear-gradient(180deg, #ffffff 0%, #ebebeb 40%, #d1d1d1 60%, #b0b0b0 100%);
+    border-color: #444444;
+    box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.5),
+        0 0 6px rgba(255, 255, 255, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 1);
+    transform: translateY(-1px);
+}
+
+/* Efecto presionado */
+.btn-details:active {
+    background: linear-gradient(180deg, #9e9e9e 0%, #c2c2c2 50%, #dedede 100%);
+    box-shadow: 
+        0 1px 2px rgba(0, 0, 0, 0.4),
+        inset 0 2px 3px rgba(0, 0, 0, 0.5);
+    transform: translateY(1px);
+}
