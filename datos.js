@@ -207,7 +207,7 @@ const catalogoGeneral = [
     nombre: "Grietas de San Pedro - Camino de los Libertadores",
     dificultad: "Media",
     duracion: "6-9h",
-    duracionTexto: "4-6 horas",
+    duracionTexto: "7-8 horas de caminata aproximadamente para completar la ruta",
     tipo: ["patrimonio", "cumbres"],
     descripcion: "Iniciamos la caminata en el sector Los Mujicas en Caracas. El recorrido destaca por sus paisajes de montaña sacados de un cuadro, caminos perfectamente caminables y tramos de vegetación boscosa que brindan frescura al trayecto. A lo largo de la ruta disfrutaremos de vistas increíbles, para finalmente atravesar las imponentes e impresionantes Grietas de San Pedro y culminar nuestro recorrido en San Pedro de Los Teques.",
     incluye: "Guiatura y soporte durante toda la ruta, cafe recien colado, snack.",
@@ -263,7 +263,7 @@ const catalogoGeneral = [
         nombre: "Pico Naiguatá",
         dificultad: "Extrema",                             // Se ajustó a Extrema
         duracion: "6-9h",                                  // Clave estandarizada
-        duracionTexto: "12 - 14 horas", 
+        duracionTexto: "12 - 14 horas para completar la ruta, ida y vuelta", // Opcional: Para mostrarlo amigable en la tarjeta
         tipo: ["cumbres"],
         descripcion: "Ascenso a la cumbre más alta de la Cordillera de la Costa 2.765 msnm, El Pico Naiguata. Pasando por el mirador Dos Banderas, el tramo Las Toyotas , El topo Goering , los Platos del Diablo y el Anfiteatro la zona camping antes de hacer cumbre en la Cruz del Pico Naiguata.",
         imagen: "assets/ImagenNaiguata14.png",
@@ -283,6 +283,29 @@ const catalogoGeneral = [
             "assets/ImagenNaiguata13.png",
             "assets/ImagenNaiguata14.png" 
         ]                                
+    },
+
+    {
+        id: "camping-lagunazo-cat",
+        nombre: "Camping Lagunazo",
+        dificultad: "Media",
+        duracion: "multidia", // Estandarizado para el filtro
+        duracionTexto: "1 noche de camping",    
+        tipo: ["camping"],
+        descripcion: "Asceendemos hasta el sector Lagunazo, donde acamparemos y disfrutaremos de la naturaleza, el atardecer y el amanecer. Para luego descender al dia siguiente. La ruta es de dificultad media y requiere una condicion fisica aceptable.",
+        interesados: 0,
+        incluye: "Guiatura y soporte durante toda la ruta",
+        precio: "Consultar via WhatsApp",
+        imagen: "assets/ImagenCampingLagunazo.png",
+        interesados: 0,
+        fechasPropuestas: [],
+        imagenes: [
+            "assets/ImagenCampingLagunazo.png",
+            "assets/ImagenCampingLagunazo2.png",
+            "assets/ImagenCampingLagunazo3.png",
+            "assets/ImagenCampingLagunazo4.png", 
+            "assets/ImagenCampingLagunazo5.png",               
+        ]
     }
 
 ];
