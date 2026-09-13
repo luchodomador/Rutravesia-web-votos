@@ -44,182 +44,245 @@ EJEMPLO COMPLETO DE UNA RUTA EN EL CATÁLOGO:
 
 
 // BASE DE DATOS LOCAL DE RUTAS CONFIRMADAS
-const rutasConfirmadas = [
-    {
-        id: "anaucos-0926",
-        nombre: "Cascada Los Anaucos",
-        fecha: "Próximo Sábado 26 de Agosto",
-        dificultad: "Media",                             // Se ajustó a Extrema
-        duracion: "6-9h",                                  // Clave estandarizada
-        duracionTexto: "3 horas aproximadamente para llegar a la cascada", 
-        descripcion: "Cruces de rios, senderos muy bonitos , vegetacion frondoza , pozos espectaculares y una cascada doble como recompensa final",
-        incluye: "Guía certificado, kit de primeros auxilios, fotos digitales.",
-        imagen: "assets/ImagenAnaucos.png",
-        precio: "$15 por persona",
-        tipo: ["cascadas"] ,
-        imagenes: [
-            "assets/ImagenAnaucos1.png",
-            "assets/ImagenAnaucos2.png",
-            "assets/ImagenAnaucos3.png" , 
-            "assets/ImagenAnaucos4.png" , 
-        ]                                
-    },
-
-    {
-        id: "Naiguata-0815v2",
-        nombre: "Pico Naiguatá",
-        fecha: "Próximo Sábado 15 de Agosto",
-        dificultad: "Extrema",                             // Se ajustó a Extrema
-        duracion: "6-9h",                                  // Clave estandarizada
-        duracionTexto: "12 - 14 horas", 
-        descripcion: "Ascenso a la cumbre más alta de la Cordillera de la Costa (2.765 msnm). Requiere una excelente condición física ya que el desnivel es continuo. Durante el recorrido atravesaremos diferentes pisos térmicos, desde la selva nublada hasta el subpáramo del anfiteatro. Es una expedición exigente que premia con vistas panorámicas únicas de Caracas y el Mar Caribe. Se recomienda llevar al menos 3 litros de agua, frutos secos, abrigo para la cumbre y calzado de montaña con buen agarre.",
-        incluye: "Guía certificado, kit de primeros auxilios, fotos digitales.",
-        imagen: "assets/ImagenNaiguata.png",
-        precio: "$25 por persona",
-        tipo: ["cumbres"] ,
-        imagenes: [
-            "assets/ImagenNaiguata1.png",
-            "assets/ImagenNaiguata2.png",
-            "assets/ImagenNaiguata3.png" , 
-            "assets/ImagenNaiguata4.png" , 
-            "assets/ImagenNaiguata5.png" ,
-            "assets/ImagenNaiguata6.png",
-            "assets/ImagenNaiguata7.png ",
-            "assets/ImagenNaiguata8.png",
-            "assets/ImagenNaiguata9.png", 
-            "assets/ImagenNaiguata10.png"
-        ]                                
-    },
-];
+const rutasConfirmadas = [];
 // CATÁLOGO GENERAL DE RUTAS DISPONIBLES EN EL ÁVILA Y ALREDEDORES
 const catalogoGeneral = [
-   {
-        id: "teleferico_octubre",
-        nombre: "Teleferico Fantasma - Estacion El Lyron",
-        dificultad: "Baja",
+
+ {
+        id: "Anaucos-v1",
+        nombre: "Cascada Los Anaucos",
+        dificultad: "Media",
         duracion: "3-5h",                                  // Clave estandarizada
-        duracionTexto: "3-4 horas de Caminata", // Opcional: Para mostrarlo amigable en la tarjeta
-        tipo: ["patrimonio"],                              // Coincide con 'patrimonio' en el HTML
-        descripcion: "Clásica caminata de iniciación con excelente sombra y miradores hacia Caracas.",
-        imagen: "assets/ImagenTelefericoFantasma.png",
+        duracionTexto: "2h :30 min a 3h horas de caminata para llegar a la Cascada", // Opcional: Para mostrarlo amigable en la tarjeta
+        tipo: ["cascadas"],                              // Coincide con 'patrimonio' en el HTML
+        descripcion: "El PN Waraira Repano por el sector Curupao , nos presenta esta ruta muy bonita con cruces de rios, senderos perfectamente caminables , vegetacion frondoza , pozos espectaculares y una cascada doble como recompensa final. El lugar y hora de encuentro se proporcionan via WhatsApp. Es necesario tomar transporte para iniciar la caminata , el costo de la publicado no incluye el pago de transporte.",
+        incluye: "Guiatura y soporte durante toda la ruta, cafe recien colado, snack.",
+        precio: "10$ por persona ",
+        imagen: "assets/ImagenAnaucos.png",
        fechasPropuestas: [
-        { fecha: "Sábado 03 de Octubre", interesados: 0 },
+        { fecha: "Domingo 27 de Octubre", interesados: 0 },
         { fecha: "Domingo 4 de Octubre", interesados: 0 }
         ],
         imagenes: [
-            "assets/naiguata10.jpg",
-            "assets/naiguata12.jpg",
-            "assets/naiguata13.jpg"
+            "assets/ImagenAnaucos.png",
+            "assets/ImagenAnaucos2.png",
+            "assets/ImagenAnaucos3.png",
+            "assets/ImagenAnaucos4.png",
+            "assets/ImagenAnaucos5.png",
+            "assets/ImagenAnaucos6.png",
+            "assets/ImagenAnaucos7.png",
+            "assets/ImagenAnaucos8.png",
+            "assets/ImagenAnaucos10.png",
+            "assets/ImagenAnaucos11.png"
+        ]
+    },
+
+   {
+        id: "teleferico_cat",
+        nombre: "Teleferico Fantasma - Estacion El Lyron",
+        dificultad: "Media",
+        duracion: "3-5h",                                  // Clave estandarizada
+        duracionTexto: "3-4 horas de Caminata", // Opcional: Para mostrarlo amigable en la tarjeta
+        tipo: ["patrimonio"],                              // Coincide con 'patrimonio' en el HTML
+        descripcion: "El PN Waraira Repano esconde una estructura historica correspondiente a la estacion  El Lyron. Empezamos el ascenso desde el sector Gamboa pasando por el pueblo de Galipan hasta llegar a la estructura",
+        imagen: "assets/ImagenTelefericoFantasma.png",
+        interesados: 0,
+        incluye: "Guiatura y soporte durante toda la ruta, cafe recien colado, snack.",
+        precio: "Coonsultar via WhatsApp",
+       fechasPropuestas: [],
+        imagenes: [
+            "assets/ImagenTelefericoFantasma.png",
+            "assets/ImagenTelefericoFantasma2.png",
+            "assets/ImagenTelefericoFantasma7.png",
+            "assets/ImagenTelefericoFantasma4.png",
+            "assets/ImagenTelefericoFantasma8.png",
+            "assets/ImagenTelefericoFantasma6.png",
+            "assets/ImagenTelefericoFantasma3.png",
+            "assets/ImagenTelefericoFantasma5.png",
+            "assets/ImagenTelefericoFantasma9.png",
+            "assets/ImagenTelefericoFantasma10.png"
         ]
     },
  {
-    id: "c2",
+    id: "pico-orientalcat",
     nombre: "Pico Oriental",
     dificultad: "Alta",
     duracion: "6-9h",
     duracionTexto: " Minimo 8 horas para completar la ruta",
-    descripcion: "Ruta exigente hacia una de las cumbres más emblemáticas, pasando por la Fila del Corozo.",
-    imagen: "assets/ImagenPicoOriental.png",
     tipo: ["cumbres"],
+    descripcion: "Ascendo a la segunda cumbre mas alta de toda la cordillera de la costa, el Pico Oriental a unos 2640 msnm, pasando por los miradores Piedra el Inidio, Cabeza de Elefante, el emblematico Pino Solitario y la Cruz de los Palmeros , de las rutas con las vistas mas impactantes y especatulares hacia Caracas. La ruta es exigente y requiere de buena condición física, ya que el desnivel es continuo durante todo el recorrido. El descenso se hace por la misma ruta, por lo que se recomienda llevar al menos 3 litros de agua, frutos secos, abrigo para la cumbre y calzado de montaña con buen agarre.",
+    incluye: "Guiatura y soporte durante toda la ruta, cafe recien colado, snack.",
+    precio: "Consultar via WhatsApp",
+    imagen: "assets/ImagenPicoOriental.png",
     interesados: 0,       
     fechasPropuestas: [], // <--- SIN COMAS ADENTRO
     imagenes: [
-        "assets/naiguata20.jpg",
-        "assets/naiguata22.jpg",
-        "assets/naiguata21.jpg"
+        "assets/ImagenPicoOriental.png",
+        "assets/ImagenPicoOriental1.png",
+        "assets/ImagenPicoOriental2.png",
+        "assets/ImagenPicoOriental10.png",
+        "assets/ImagenPicoOriental4.png",
+        "assets/ImagenPicoOriental5.png",
+        "assets/ImagenPicoOriental6.png",
+        "assets/ImagenPicoOriental7.png",
+        "assets/ImagenPicoOriental8.png",
+        "assets/ImagenPicoOriental9.png",
+        "assets/ImagenPicoOriental3.png"
     ]
 },
 {
-    id: "c3",
+    id: "pico-occidentalcat",
     nombre: "Pico Occidental",
     dificultad: "Media-Alta",
     duracion: "6-9h", // Estandarizado para el filtro
-    duracionTexto: "2 horas", // Opcional: Para mostrarlo amigable en la tarjeta
-    descripcion: "Paseo suave e ideal para familias, bordeando el río hasta llegar al pozo.",
-    imagen: "assets/ImagenPicoOccidental.png",
+    duracionTexto: "Unas 3h-4h de ascenso aproximadamente", // 
     tipo: ["cumbres"], // Propiedad nueva para los filtros
-    fechasPropuestas: [
-        { fecha: "Sábado 03 de Octubre", interesados: 0 },
-        { fecha: "Domingo 4 de Octubre", interesados: 0 }
-    ],
+    descripcion: "Ascenso al Pico Occidental 2480 msnm , una de las cumbres mas altas de la cordillera de la costa. Partiendo desde Sabas Nieves, el trayecto pasa por El Banquito, se adentra en un frondoso camino boscoso lleno de vegetación y encarara el exigente tramo de No Te Apures y las piedras flotantes para despues hacer cumbre en la cruz del Pico Occidental. Es una ruta exigente que requiere buena condición física por su desnivel continuo. El descenso es por la misma vía, por lo que se recomienda llevar al menos 2 litros de agua, frutos secos, abrigo para la cumbre y calzado comodo para caminar.",
+    incluye: "Guiatura y soporte durante toda la ruta, cafe recien colado, snack.",
+    precio: "Consultar via WhatsApp",
+    imagen: "assets/ImagenPicoOccidental.png",
+    interesados: 0,
+    fechasPropuestas: [],
     imagenes: [
-            "assets/naiguata30.jpg",
-            "assets/naiguata31.jpg",
-            "assets/naiguata32.jpg"
+            "assets/ImagenPicoOccidental.png",
+            "assets/ImagenPicoOccidental1.png",
+            "assets/ImagenPicoOccidental2.png",
+            "assets/ImagenPicoOccidental3.png",
+            "assets/ImagenPicoOccidental4.png",
+            "assets/ImagenPicoOccidental5.png"
         ]
 },
     {
-        id: "c4",
+        id: "salto-manuel-angel-gonzalezcat",
         nombre: "Salto Manuel Angel Gonzalez",
         dificultad: "Media",
         duracion: "6-9h", // Estandarizado para el filtro
-        duracionTexto: "4-6 horas de caminata", // Opcional: Para mostrarlo amigable en la tarjeta
+        duracionTexto: "2 horas a 2 horas 30 min horas de caminata hasta la cascada", // Opcional: Para mostrarlo amigable en la tarjeta
         tipo: ["cascadas"], // Propiedad nueva para los filtros
-        descripcion: "Hermosa meseta ubicada en las alturas de la fila principal con clima fresco de montaña.",
+        descripcion: "Ruta que inicia por el Sector La Churca del Parque Nacional, una ruta de exigencia media por senderos amigables y algunos ascensos de media exigencia hasta llegar a la imponente y ruidosa cascada, apta para bañarse sin necesidad de saber nadar",
+        incluye: "Guiatura y soporte durante toda la ruta, cafe recien colado, snack.",
+        precio: "Consultar via WhatsApp",
         imagen: "assets/ImagenMAG.png",
+        interesados: 0,
         /* OPCIONES DE FECHA ESPECÍFICAS PARA ESTA RUTA */
-       fechasPropuestas: [
-        { fecha: "Sábado 03 de Octubre", interesados: 0 },
-        { fecha: "Domingo 04 de Octubre", interesados: 0 }
-        ],
+       fechasPropuestas: [],
         imagenes: [
-            "assets/naiguata40.jpg",
-            "assets/naiguata41.jpg",
-            "assets/naiguata42.jpg"         
+            "assets/ImagenMAG.png",
+            "assets/ImagenMAG1.png",
+            "assets/ImagenMAG2.png",
+            "assets/ImagenMAG3.png",
+            "assets/ImagenMAG4.png",
+            "assets/ImagenMAG5.png",
+            "assets/ImagenMAG6.png",         
         ]
     },
     {
-        id: "c5",
+        id: "cascada-nortecat",
         nombre: "Cascada Norte",
         dificultad: "Alta",
         duracion: "6-9h", // Estandarizado para el filtro
-        duracionTexto: "7-9h de caminata", // Opcional: Para mostrarlo amigable en la tarjeta
+        duracionTexto: "4-5h de caminata para llegar a la Cascada", // Opcional: Para mostrarlo amigable en la tarjeta
         tipo: ["cascadas"], // Propiedad nueva para los filtros
-        descripcion: "Ruta de vegetación frondosa que conecta varios puestos icónicos de la montaña.",
+        descripcion: "Ruta que inicia por el Sector La Churca del Parque Nacional, una ruta de alta exigencia debido al tiempo de caminata y algunos tramos con ascensos fuertes al principio de la ruta, pasando por varios pozos muy bonitos antes de la gran recompensa, la impactante Cascada Norte, ideal para bañarse en su base  ",
+        incluye: "Guiatura y soporte durante toda la ruta, cafe recien colado, snack.",
+        precio: "Consultar via WhatsApp",
         imagen: "assets/ImagenCascadaNorte.png",
+        interesados: 0,
         /* OPCIONES DE FECHA ESPECÍFICAS PARA ESTA RUTA */
-   fechasPropuestas: [
-        { fecha: "Sábado 03 de Octubre", interesados: 0 },
-        { fecha: "Domingo 04 de Octubre", interesados: 0 }
-        ],
+   fechasPropuestas: [],
         imagenes: [
-            "assets/naiguata100.jpg",
-            "assets/naiguata002.jpg",
-            "assets/naiguata003.jpg"
+            "assets/ImagenCascadaNorte.png",
+            "assets/ImagenCascadaNorte1.png",
+            "assets/ImagenCascadaNorte3.png",
+            "assets/ImagenCascadaNorte4.png",
+            "assets/ImagenCascadaNorte5.png",
+            "assets/ImagenCascadaNorte6.png",
+            "assets/ImagenCascadaNorte7.png",
+            "assets/ImagenCascadaNorte8.png",
+            "assets/ImagenCascadaNorte9.png"
         ]
     },
   {
-    id: "c6",
+    id: "grietas-san-pedrov1",
     nombre: "Grietas de San Pedro - Camino de los Libertadores",
     dificultad: "Media",
     duracion: "6-9h",
     duracionTexto: "4-6 horas",
     tipo: ["patrimonio", "cumbres"],
-    descripcion: "Ruta de vegetación frondosa que conecta varios puestos icónicos de la montaña.",
+    descripcion: "Iniciamos la caminata en el sector Los Mujicas en Caracas. El recorrido destaca por sus paisajes de montaña sacados de un cuadro, caminos perfectamente caminables y tramos de vegetación boscosa que brindan frescura al trayecto. A lo largo de la ruta disfrutaremos de vistas increíbles, para finalmente atravesar las imponentes e impresionantes Grietas de San Pedro y culminar nuestro recorrido en San Pedro de Los Teques.",
+    incluye: "Guiatura y soporte durante toda la ruta, cafe recien colado, snack.",
+    precio: "Consultar via WhatsApp",
     imagen: "assets/ImagenGrietasDeSanPedro.png",
-    interesados: 0,
-    fechasPropuestas: [], // <--- AHORA ESTÁ VACÍO Y NO ROMPERÁ
+    fechasPropuestas: [
+        { fecha: "Sábado 26 de Septiembre", interesados: 0 },
+        { fecha: "Sábado 3 de Octubre", interesados: 0 }
+    ], // <--- AHORA ESTÁ VACÍO Y NO ROMPERÁ
     imagenes: [
-        "assets/naiguata60.jpg",
-        "assets/naiguata61.jpg",
-        "assets/naiguata62.jpg"
+        "assets/ImagenGrietasDeSanPedro.png",
+        "assets/ImagenGrietasDeSanPedro2.png",
+        "assets/ImagenGrietasDeSanPedro3.png",
+        "assets/ImagenGrietasDeSanPedro4.png",
+        "assets/ImagenGrietasDeSanPedro5.png",
+        "assets/ImagenGrietasDeSanPedro6.png",
+        "assets/ImagenGrietasDeSanPedro7.png",
+        "assets/ImagenGrietasDeSanPedro8.png",
+        "assets/ImagenGrietasDeSanPedro9.png",
+        "assets/ImagenGrietasDeSanPedro10.png",
+        "assets/ImagenGrietasDeSanPedro11.png"
     ]
 },
  {
-    id: "picacho-0926",
+    id: "picacho-cat",
     nombre: "Picacho de Galipan",
     dificultad: "Media",
     duracion: "3-5h",
     duracionTexto: "3h aproximadamente para hacer Cumbre",
     tipo: ["cumbres"],
-    descripcion: "Ruta de vegetación frondosa que conecta varios puestos icónicos de la montaña.",
+    descripcion: "La ruta hacia el Picacho de Galipan es una ruta de inicio un poco fuerte los primeros 30 minutos, despues el camino se hace muy amigable con senderos comodos para caminar, las vistas hacia La Guaira desde el picacho son simplemente de las mas alucinantes ",
+    incluye: "Guiatura y soporte durante toda la ruta, cafe recien colado, snack.",
+    precio: "Consultar via WhatsApp",
     imagen: "assets/ImagenPicacho.png",
     interesados: 0,
     fechasPropuestas: [], // <--- AHORA ESTÁ VACÍO Y NO ROMPERÁ
     imagenes: [
-        "assets/naiguata60.jpg",
-        "assets/naiguata61.jpg",
-        "assets/naiguata62.jpg"
+        "assets/ImagenPicacho.png",
+        "assets/ImagenPicacho3.png",
+        "assets/ImagenPicacho2.png",
+        "assets/ImagenPicacho1.png",
+        "assets/ImagenPicacho4.png",
+        "assets/ImagenPicacho5.png",
+        "assets/ImagenPicacho6.png",
+        "assets/ImagenPicacho8.png",
+        "assets/ImagenPicacho10.png",   
+        "assets/ImagenPicacho14.png",
     ]
-}
+},
+
+ {
+        id: "Naiguata-cat",
+        nombre: "Pico Naiguatá",
+        dificultad: "Extrema",                             // Se ajustó a Extrema
+        duracion: "6-9h",                                  // Clave estandarizada
+        duracionTexto: "12 - 14 horas", 
+        tipo: ["cumbres"],
+        descripcion: "Ascenso a la cumbre más alta de la Cordillera de la Costa 2.765 msnm, El Pico Naiguata. Pasando por el mirador Dos Banderas, el tramo Las Toyotas , El topo Goering , los Platos del Diablo y el Anfiteatro la zona camping antes de hacer cumbre en la Cruz del Pico Naiguata.",
+        imagen: "assets/ImagenNaiguata14.png",
+        interesados: 0,
+        fechasPropuestas: [],
+        imagenes: [
+            "assets/ImagenNaiguata8.png",
+            "assets/ImagenNaiguata17.png",
+            "assets/ImagenNaiguata3.png" , 
+            "assets/ImagenNaiguata4.png" , 
+            "assets/ImagenNaiguata5.png" ,
+            "assets/ImagenNaiguata7.png ",
+            "assets/ImagenNaiguata1.png",
+            "assets/ImagenNaiguata9.png",
+            "assets/ImagenNaiguata11.png",
+            "assets/ImagenNaiguata12.png",
+            "assets/ImagenNaiguata13.png",
+            "assets/ImagenNaiguata14.png" 
+        ]                                
+    }
+
 ];

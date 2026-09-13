@@ -1,9 +1,9 @@
 /* ==============================================================================
-   1. VARIABLES DE DISEÑO (Cambia estos valores para ajustar colores y bordes)
+   1. VARIABLES DE DISEÑO Y CONFIGURACIÓN BASE
    ============================================================================== */
 :root {
-    --primary: #2e7d32;            /* Verde principal (Botones del catálogo y selecciones) */
-    --primary-dark: #1b5e20;       /* Verde oscuro para sombras o estados "hover" */
+    --primary: #2e7d32;            /* Verde principal */
+    --primary-dark: #1b5e20;       /* Verde oscuro */
     --accent-green: #4caf50;       /* Verde claro de acento */
     --bg-dark: #0d1b10;            /* Fondo oscuro mientras carga la imagen */
     --card-bg: #ffffff;            /* Fondo de las tarjetas de ruta */
@@ -11,9 +11,9 @@
     --border-color: #000000;       /* Color del borde estilo sticker/brutalista */
     --border-width: 2px;           /* Grosor general de los bordes */
     
-    /* Sombras sólidas negras estilo Neo-brutalismo */
-    --shadow-solid: 4px 4px 0px #000000; /* Sombra gruesa para tarjetas y cajas */
-    --shadow-sm: 2px 2px 0px #000000;    /* Sombra fina para botones e inputs */
+    /* Sombras sólidas estilo Neo-brutalismo */
+    --shadow-solid: 4px 4px 0px #000000;
+    --shadow-sm: 2px 2px 0px #000000;
 }
 
 * {
@@ -44,8 +44,8 @@ body::before {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    opacity: 0.40;                  /* Ajusta entre 0.10 y 0.50 qué tan visible es el paisaje */
-    filter: brightness(0.7);        /* Oscurece el brillo del fondo */
+    opacity: 0.40;
+    filter: brightness(0.7);
     z-index: -1;
     pointer-events: none;
 }
@@ -70,7 +70,7 @@ body::before {
 }
 
 .fixed-logo {
-    width: 150px;                   /* Ajusta el tamaño del logo flotante superior */
+    width: 150px;
     height: auto;
     filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
 }
@@ -107,7 +107,7 @@ body::before {
 
 .logo-badge span {
     font-family: 'Caveat Brush', cursive;
-    font-size: 2.6rem;               /* Ajusta el tamaño del texto del título principal */
+    font-size: 2.6rem;
     font-weight: 800;
     letter-spacing: 2px;
     color: var(--primary-dark);
@@ -135,14 +135,14 @@ body::before {
 }
 
 /* ==============================================================================
-   3. BUSCADOR Y TÍTULOS
+   3. BUSCADOR Y TÍTULOS GENERALES
    ============================================================================== */
 .section-title {
     font-family: 'Caveat Brush', cursive;
     text-align: center;
     font-size: 2.2rem;
     color: #ffffff;
-    text-shadow: 2px 2px 0px #000000; /* Sombra nítida estilo cómic */
+    text-shadow: 2px 2px 0px #000000;
     margin: 15px 0;
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -193,49 +193,38 @@ body::before {
 }
 
 /* ==============================================================================
-   4. TARJETAS DE RUTAS PRINCIPALES (SECCIÓN ENGLOBADA Y TÍTULO INTEGRADO)
+   4. SECCIÓN ENGLOBADA Y CARRUSEL DE RUTAS (CORREGIDO)
    ============================================================================== */
-
-/* CONTENEDOR ENGLOBADO (Recuadro sutil con fondo transparente) */
 .upcoming-section {
     position: relative;
     margin: 35px auto 25px auto;
     text-align: center;
     max-width: 1020px;
     padding: 25px 20px 20px 20px;
-    
-    /* Fondo claro y transparente estilo vidrio esmerilado */
-    background: rgba(255, 255, 255, 0.15) !important;   /* Blanco sutil */
+    background: rgba(255, 255, 255, 0.15) !important;
     backdrop-filter: blur(1px) !important;
     -webkit-backdrop-filter: blur(10px) !important;
-    
-    /* Borde blanco brillante sutil */
     border: 1px solid rgba(255, 255, 255, 0.3) !important;
     border-radius: 16px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
 }
 
-/* TÍTULO DESTACADO CON DELINEADO Y BORDE OSCURO */
 .upcoming-section .section-title {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    background: transparent !important;   /* Quita el fondo de píldora/botón */
+    background: transparent !important;
     padding: 0 !important;
     border-radius: 0 !important;
-    border: none !important;              /* Elimina el borde verde de cápsula */
-    box-shadow: none !important;          /* Quita la sombra de botón */
-    
-    /* Estilo del texto tipográfico */
+    border: none !important;
+    box-shadow: none !important;
     font-family: 'Caveat Brush', cursive;
     font-size: 2.3rem;
     color: #ffffff;
     margin: 0 0 15px 0;
     letter-spacing: 1.2px;
     text-transform: uppercase;
-    
-    /* --- DELINEADO Y BORDE OSCURO POTENTE --- */
     text-shadow: 
         -2px -2px 0 #000000,  
          2px -2px 0 #000000,
@@ -244,81 +233,93 @@ body::before {
          0px  4px 10px rgba(0, 0, 0, 0.85) !important;
 }
 
-/* ENVOLTORIO PARA LAS FLECHAS Y LAS TARJETAS */
 .carousel-wrapper {
-    position: relative;
+    position: relative !important;
     width: 100%;
     max-width: 960px;
-    margin: 0 auto;
+    margin: 15px auto 0 auto;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.cards-grid {
+/* Sube la compatibilidad con .cards-grid y .cards-carousel */
+.cards-grid,
+.cards-carousel {
     display: flex !important;
     flex-direction: row !important;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 20px;
+    flex-wrap: nowrap !important;
+    gap: 16px;
     overflow-x: auto;
-    overflow-y: hidden;
     scroll-behavior: smooth;
-    width: 100%;
-    max-width: 900px;
-    margin: 10px auto;
     padding: 10px 5px;
-    scrollbar-width: thin;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
 }
 
-/* Ocultar/estilizar scrollbar en Navegadores Webkit */
-.cards-grid::-webkit-scrollbar {
+.cards-grid::-webkit-scrollbar,
+.cards-carousel::-webkit-scrollbar {
     height: 6px;
 }
-.cards-grid::-webkit-scrollbar-thumb {
-    background: #2e7d32;
+
+.cards-grid::-webkit-scrollbar-thumb,
+.cards-carousel::-webkit-scrollbar-thumb {
+    background: #ccc;
     border-radius: 10px;
 }
 
-/* ASEGURA EL TAMAÑO INDIVIDUAL DE CADA TARJETA EN LA FILA */
-.cards-grid .card {
-    min-width: 220px !important;
-    max-width: 220px !important;
-    height: 320px !important;
-    flex-shrink: 0 !important;
+/* Botones circulares flotantes del carrusel (compatibilidad total de clases) */
+/* Botones de navegación circulares (Estilo Modal) */
+.carousel-arrow,
+.carousel-btn {
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 36px !important;
+    height: 36px !important;
+    background: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.2) !important;
+    border-radius: 50% !important;
+    color: #222222 !important;
+    font-size: 1rem !important;
+    font-weight: 900 !important;
+    cursor: pointer !important;
+    z-index: 30 !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.2s ease !important;
+    padding: 0 !important;
+    line-height: 1 !important;
 }
 
-/* ESTILO DE LAS FLECHAS LATERALES (< y >) */
-.carousel-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.95);
-    border: 1px solid #ccc;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #333;
-    cursor: pointer;
-    z-index: 10;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.2s, transform 0.2s;
+/* Efecto Hover idéntico */
+.carousel-arrow:hover,
+.carousel-btn:hover {
+    background: #f0f0f0 !important;
+    transform: translateY(-50%) scale(1.08) !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4) !important;
 }
 
-.carousel-arrow:hover {
-    background-color: #ffffff;
-    transform: translateY(-50%) scale(1.08);
+/* Posicionamiento en los bordes idéntico al modal */
+.carousel-arrow.prev,
+.btn-prev { 
+    left: -18px !important; 
 }
 
-.carousel-arrow.prev { left: -15px; }
-.carousel-arrow.next { right: -15px; }
+.carousel-arrow.next,
+.btn-next { 
+    right: -18px !important; 
+}
 
-.card {
+
+/* ==============================================================================
+   5. TARJETAS DE RUTAS (CARDS) Y BOTÓN METÁLICO
+   ============================================================================== */
+.card,
+.cards-grid .card,
+.cards-carousel .card {
     background: var(--card-bg);
     border: var(--border-width) solid var(--border-color);
     border-radius: 10px;
@@ -328,57 +329,147 @@ body::before {
     justify-content: space-between;
     box-shadow: var(--shadow-solid);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    height: 295px;
     background-size: cover !important;
     background-position: center !important;
     position: relative;
     overflow: hidden;
+    flex: 0 0 240px !important;
+    width: 240px !important;
+    min-width: 240px !important;
+    height: 320px !important;
+    box-sizing: border-box;
 }
 
-/* Efecto al pasar el cursor sobre las tarjetas */
 .card:hover {
     transform: translateY(-4px);
     box-shadow: 6px 6px 0px var(--border-color);
 }
 
-.card h3 {
+.card-info-header {
+    width: 100%;
+    text-align: left;
+    flex-grow: 1;
+}
+
+.card-info-header h3 {
     color: #ffffff;
-    font-size: 1.15rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+    font-size: 1.28rem;
+    font-weight: 700;
+    line-height: 1.35;
+    margin-top: 2px;
+    margin-bottom: 8px;
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.9);
+    word-wrap: break-word;
 }
 
-.card p {
-    color: #f0f0f0;
-    font-size: 0.9rem;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
+.card-detail-item {
+    color: #f1f5f9;
+    font-size: 0.82rem;
+    margin: 2px 0;
+    font-weight: 600;
+    text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.95);
 }
 
-.card .date {
-    color: #a5d6a7;
-    font-weight: bold;
+.card-info-header .date {
+    color: #fde047;
+    font-weight: 700;
     font-size: 0.85rem;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
+    margin-top: 4px;
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.95);
 }
 
+/* Llamado de atención: FECHA PROPUESTA */
+.banner-fecha-propuesta {
+    margin-top: auto;
+    margin-bottom: 8px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.banner-fecha-propuesta span:first-child {
+    background: linear-gradient(180deg, #ffffff 0%, #a3ffb8 35%, #22e565 70%, #10b981 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 1.55rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    line-height: 1.1;
+    filter: 
+        drop-shadow(0px 2px 0px #000000)
+        drop-shadow(0px -1px 0px #000000)
+        drop-shadow(1px 0px 0px #000000)
+        drop-shadow(-1px 0px 0px #000000)
+        drop-shadow(0px 3px 5px rgba(0, 0, 0, 0.9));
+}
+
+.banner-fecha-propuesta .flecha-indicadora {
+    background: linear-gradient(180deg, #ffffff 0%, #22e565 60%, #10b981 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 2.3rem;
+    font-weight: 900;
+    margin-top: -1px;
+    animation: apuntarAbajo 1s infinite alternate;
+    filter: 
+        drop-shadow(0px 2px 0px #000000)
+        drop-shadow(0px 3px 4px rgba(0, 0, 0, 0.9));
+}
+
+@keyframes apuntarAbajo {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(4px); }
+}
+
+/* Botón Metálico "VER DETALLES" (Alineado abajo) */
 .btn-details {
-    background: rgba(255, 255, 255, 0.95);
-    border: var(--border-width) solid var(--border-color);
-    padding: 8px 12px;
-    font-weight: bold;
-    cursor: pointer;
+    width: 85%;
+    margin: auto auto 12px auto;
+    padding: 6px 10px;
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: #111111;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
     border-radius: 6px;
-    transition: background 0.2s;
-    box-shadow: var(--shadow-sm);
+    cursor: pointer;
+    background: linear-gradient(180deg, #ffffff 0%, #dedede 40%, #c2c2c2 60%, #9e9e9e 100%);
+    border: 1px solid #555555;
+    border-top: 1.5px solid #ffffff;
+    border-bottom: 1.5px solid #333333;
+    box-shadow: 
+        0 3px 5px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9),
+        inset 0 -1px 2px rgba(0, 0, 0, 0.35);
+    transition: all 0.15s ease-in-out;
+    display: block;
 }
 
 .btn-details:hover {
-    background: #ffffff;
+    background: linear-gradient(180deg, #ffffff 0%, #ebebeb 40%, #d1d1d1 60%, #b0b0b0 100%);
+    border-color: #444444;
+    box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.5),
+        0 0 6px rgba(255, 255, 255, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 1);
+    transform: translateY(-1px);
 }
 
-
-
+.btn-details:active {
+    background: linear-gradient(180deg, #9e9e9e 0%, #c2c2c2 50%, #dedede 100%);
+    box-shadow: 
+        0 1px 2px rgba(0, 0, 0, 0.4),
+        inset 0 2px 3px rgba(0, 0, 0, 0.5);
+    transform: translateY(1px);
+}
 /* ==============================================================================
-   5. FILTROS Y CATÁLOGO COMPLETO
+   6. FILTROS Y CATÁLOGO COMPLETO
    ============================================================================== */
 .catalog-section {
     text-align: center;
@@ -389,15 +480,11 @@ body::before {
     width: 100%;
     max-width: 700px;
     padding: 12px 20px;
-    
-    /* Muestra la misma tipografía que el título principal */
     font-family: 'Caveat Brush', cursive;
-    font-size: 1.4rem;                  /* Tamaño equilibrado para la versión Brush */
+    font-size: 1.4rem;
     font-weight: 700;
     letter-spacing: 1px;
-    text-transform: uppercase;          /* Opcional: manténlo si quieres las letras en mayúsculas como el título */
-    
-    /* Mismo estilo de sombra e impacto visual */
+    text-transform: uppercase;
     color: #ffffff;
     text-shadow: 
         2px 2px 0px #000000,
@@ -405,7 +492,6 @@ body::before {
         1px -1px 0px #000000,
         -1px 1px 0px #000000,
         0px 3px 6px rgba(0, 0, 0, 0.9);
-    
     background: var(--primary);
     border: var(--border-width) solid var(--border-color);
     border-radius: 8px;
@@ -419,9 +505,6 @@ body::before {
     transform: scale(1.02);
 }
 
-
-
-/* Caja gris de los selectores de filtro */
 .filter-controls {
     display: flex;
     flex-wrap: wrap;
@@ -435,7 +518,7 @@ body::before {
 }
 
 .filter-select {
-    flex: 1 1 calc(50% - 8px);       /* En celulares organiza 2 campos por fila */
+    flex: 1 1 calc(50% - 8px);
     min-width: 120px;
     padding: 8px;
     border: 1.5px solid var(--border-color);
@@ -472,7 +555,6 @@ body::before {
     box-shadow: var(--shadow-sm);
 }
 
-/* Grilla del catálogo: Configurada en 3 columnas en computadoras */
 #catalogCardsContainer {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -480,7 +562,7 @@ body::before {
 }
 
 /* ==============================================================================
-   6. VENTANAS MODALES Y VOTACIÓN INTERACTIVA
+   7. VENTANAS MODALES Y FORMULARIO DE VOTACIÓN
    ============================================================================== */
 .modal-overlay {
     position: fixed;
@@ -492,11 +574,9 @@ body::before {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* Nivel base alto para modales estándar */
     z-index: 10000 !important; 
 }
 
-/* Si un modal se abre sobre otro (ej. detalle sobre catálogo) */
 .modal-overlay.top-modal,
 #modalDetalleRuta,
 #modalDetalles,
@@ -507,7 +587,7 @@ body::before {
 .modal-card, 
 .modal-content {
     background: #ffffff !important;
-    border: 1px solid #e0e0e0 !important; /* Borde muy fino y claro en lugar del grueso negro */
+    border: 1px solid #e0e0e0 !important;
     border-radius: 12px;
     width: 90%;
     max-width: 500px;
@@ -516,7 +596,7 @@ body::before {
     -webkit-overflow-scrolling: touch;
     padding: 20px;
     position: relative;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important; /* Sombra suave de difuminado plano */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
     margin: auto;
 }
 
@@ -536,26 +616,15 @@ body::before {
     z-index: 10;
 }
 
-.modal-large {
-    max-width: 800px;               /* Ancho amplio para el catálogo */
-}
-
-.modal-close {
-    position: absolute;
-    top: 12px;
-    right: 15px;
-    background: none;
-    border: none;
-    font-size: 1.8rem;
-    cursor: pointer;
-}
-
-/* Opciones de los botones de fechas para votar */
 .weekend-options {
     display: flex;
     flex-direction: column;
     gap: 8px;
     margin: 15px 0;
+}
+
+#weekendOptions > div:not(.weekend-btn) {
+    display: none !important;
 }
 
 .weekend-btn {
@@ -597,26 +666,197 @@ body::before {
     color: var(--primary);
 }
 
-.btn-submit-vote, 
-.btn-whatsapp {
+/* Campos e Inputs del votante */
+#voterName, 
+input[id*="voterName"],
+.vote-input-name {
+    width: 100% !important;
+    padding: 12px 16px !important;
+    margin-top: 10px !important;
+    font-size: 0.95rem !important;
+    font-family: inherit !important;
+    color: #212529 !important;
+    background-color: #f8f9fa !important;
+    border: 2px solid #ced4da !important;
+    border-radius: 8px !important;
+    outline: none !important;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+    transition: all 0.25s ease-in-out !important;
+}
+
+#voterName:focus, 
+input[id*="voterName"]:focus,
+.vote-input-name:focus {
+    background-color: #ffffff !important;
+    border-color: var(--primary, #2e7d32) !important;
+    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.2) !important;
+}
+
+#voterName:disabled, 
+input[id*="voterName"]:disabled,
+.vote-input-name:disabled {
+    background-color: #e9ecef !important;
+    border-color: #adb5bd !important;
+    color: #495057 !important;
+    font-weight: 600 !important;
+    text-align: center !important;
+    cursor: not-allowed !important;
+    box-shadow: none !important;
+    opacity: 0.9 !important;
+}
+
+.voting-title {
+    color: #0f172a !important;
+    font-weight: 700 !important;
+    font-size: 0.98rem !important;
+    text-align: center !important;
+    margin-top: 14px !important;
+    margin-bottom: 10px !important;
+    display: block !important;
+}
+
+.voting-disclaimer {
+    font-size: 0.78rem !important;
+    color: #64748b !important;
+    text-align: center !important;
+    margin-top: 10px !important;
+    margin-bottom: 5px !important;
+    line-height: 1.3 !important;
+}
+
+/* Botón "Me interesa realizarla" */
+.btn-interest, 
+button[id*="btnInteres"], 
+.btn-votar {
     width: 100%;
-    background-color: #25d366;       /* Verde oficial WhatsApp */
-    color: white;
-    border: 2px solid var(--border-color);
-    padding: 12px;
-    border-radius: 8px;
-    font-weight: bold;
+    padding: 12px 18px;
+    margin-top: 15px;
+    background-color: var(--primary, #2e7d32);
+    color: #ffffff;
     font-size: 1rem;
+    font-weight: 700;
+    font-family: inherit;
+    border: 2px solid #1b5e20;
+    border-radius: 8px;
     cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    display: block;
-    margin-top: 12px;
-    box-shadow: var(--shadow-sm);
+    box-shadow: 0 4px 10px rgba(46, 125, 50, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-interest:hover, 
+button[id*="btnInteres"]:hover, 
+.btn-votar:hover {
+    background-color: #379412;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(17, 19, 18, 0.35);
+}
+
+.btn-interest:active, 
+button[id*="btnInteres"]:active, 
+.btn-votar:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 5px rgba(27, 94, 32, 0.2);
+}
+
+.btn-interest.voted, 
+.btn-interest.active {
+    background-color: #098313;
+    color: #f6f8f6;
+    border-color: #2e7d32;
+}
+
+/* Botones de acción unificados (WhatsApp y Enviar Voto) */
+.btn-whatsapp,
+#btnSubmitVote,
+.btn-submit-vote {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    padding: 12px 16px !important;
+    margin-top: 15px !important;
+    background-color: #117a38 !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    font-size: 1.15rem !important;
+    text-transform: none !important;
+    letter-spacing: normal !important;
+    text-shadow: 
+        -1px -1px 0 #0f5228,  
+         1px -1px 0 #0f5228,
+        -1px  1px 0 #0f5228,
+         1px  1px 0 #0f5228,
+         0px  4px 6px rgba(0, 0, 0, 1.5) !important;
+    border: 2.5px solid #0d5c2c !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    text-decoration: none !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.18) !important;
+    transition: all 0.2s ease-in-out !important;
+}
+
+.btn-whatsapp:hover,
+#btnSubmitVote:hover:not(:disabled),
+.btn-submit-vote:hover:not(:disabled) {
+    background-color: #1ebd56 !important;
+    border-color: #08421f !important;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.28) !important;
+    transform: translateY(-1px);
+}
+
+/* Estado Deshabilitado Unificado */
+.btn-disabled,
+#btnSubmitVote:disabled {
+    background-color: #cbd5e1 !important;
+    border: 2px solid #94a3b8 !important;
+    color: #475569 !important;
+    text-shadow: none !important;
+    cursor: not-allowed !important;
+    box-shadow: none !important;
+    transform: none !important;
+}
+
+/* Texto desplegable del modal */
+.texto-colapsado {
+    max-height: 60px !important;
+    overflow: hidden !important;
+    position: relative;
+    line-height: 1.5;
+    color: #444;
+    transition: max-height 0.3s ease;
+}
+
+.texto-colapsado::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 25px;
+    background: linear-gradient(transparent, #ffffff);
+}
+
+.btn-expandir {
+    background: none;
+    border: none;
+    color: #2e7d32;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    padding: 4px 0 0 0;
+    display: inline-block;
+}
+
+.btn-expandir:hover {
+    text-decoration: underline;
 }
 
 /* ==============================================================================
-   7. GALERÍA DE MINIATURAS Y VISOR LIGHTBOX
+   8. GALERÍA FILMSTRIP Y VISOR LIGHTBOX
    ============================================================================== */
 .filmstrip-carousel-wrapper {
     display: flex;
@@ -654,8 +894,6 @@ body::before {
     transform: scale(1.05);
     border-color: var(--accent-green);
 }
-
-/* --- LIGHTBOX MODAL Y ESTILOS DE FOTO Y FLECHAS --- */
 
 .lightbox-modal {
     position: fixed;
@@ -707,13 +945,12 @@ body::before {
     color: #ff5252;
 }
 
-/* Envoltorio de la foto para limitar el tamaño vertical y horizontal */
 .lightbox-img-wrapper {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    max-height: 65vh; /* Ajuste para que la imagen se vea en tamaño cómodo y reducido */
+    max-height: 65vh;
     max-width: 80vw;
 }
 
@@ -728,7 +965,6 @@ body::before {
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
 }
 
-/* Flechas rojas redondeadas flotando a los lados */
 .lightbox-arrow {
     position: absolute;
     top: 50%;
@@ -741,32 +977,83 @@ body::before {
     height: 48px;
     border-radius: 50%;
     cursor: pointer;
-    
-    /* Centrado óptico perfecto */
     display: flex;
     align-items: center;
     justify-content: center;
     line-height: 0;
     padding: 0;
-    
     z-index: 1000001;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
     transition: transform 0.2s, background-color 0.2s;
     user-select: none;
 }
 
-/* Compensación óptica para corregir el desfase del símbolo */
 .lightbox-arrow.prev {
     left: -24px;
-    padding-right: 2px; /* Empuja el triángulo ligeramente a la izquierda */
+    padding-right: 2px;
 }
 
 .lightbox-arrow.next {
     right: -24px;
-    padding-left: 2px;  /* Empuja el triángulo ligeramente a la derecha */
+    padding-left: 2px;
 }
 
-/* Ajustes para móviles */
+/* ==============================================================================
+   9. ADAPTACIONES RESPONSIVE Y MEDIA QUERIES (UNIFICADOS)
+   ============================================================================== */
+@media (min-width: 600px) {
+    .logo-badge .header-logo {
+        width: 85px;
+    }
+    .logo-badge span {
+        font-size: 3.2rem;
+    }
+    .slogan-badge p {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .fixed-logo-container {
+        position: static;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .fixed-logo {
+        width: 75px;
+    }
+
+    #catalogCardsContainer {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+
+    .filter-controls {
+        flex-direction: row;
+    }
+
+    .filter-select {
+        flex: 1 1 calc(50% - 8px) !important;
+        font-size: 0.85rem !important;
+        padding: 6px 4px !important;
+        text-overflow: ellipsis;
+    }
+
+    .modal-card.modal-large {
+        width: 95% !important;
+        max-width: 95% !important;
+        padding: 15px 8px !important;
+    }
+
+    .btn-prev {
+        left: -8px !important;
+    }
+
+    .btn-next {
+        right: -8px !important;
+    }
+}
+
 @media (max-width: 600px) {
     .lightbox-img-wrapper {
         max-height: 55vh;
@@ -780,602 +1067,4 @@ body::before {
     
     .lightbox-arrow.prev { left: -14px; }
     .lightbox-arrow.next { right: -14px; }
-}
-
-
-/* ==============================================================================
-   8. ADAPTACIONES PARA TELÉFONOS (RESPONSIVE)
-   ============================================================================== */
-@media (max-width: 768px) {
-    .fixed-logo-container {
-        position: static;
-        text-align: center;
-        margin-bottom: 10px;
-    }
-
-    .fixed-logo {
-        width: 75px;
-    }
-
-    /* En celulares cambia el catálogo a 1 o 2 columnas según el ancho disponible */
-    #catalogCardsContainer {
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    }
-
-    .filter-controls {
-        flex-direction: row;
-    }
-
-    .filter-select {
-        flex: 1 1 calc(50% - 8px);
-    }
-}
-
-@media (min-width: 600px) {
-    .logo-badge .header-logo {
-        width: 85px;
-    }
-    .logo-badge span {
-        font-size: 3.2rem;
-    }
-    .slogan-badge p {
-        font-size: 1.5rem;
-    }
-}
-/* Fuerza el botón a color gris y quita la manito de clic cuando tiene la clase btn-disabled o está deshabilitado */
-.btn-disabled,
-#btnSubmitVote:disabled {
-    background-color: #cccccc !important;
-    background-image: none !important;
-    color: #666666 !important;
-    border-color: #bbbbbb !important;
-    cursor: not-allowed !important;
-    box-shadow: none !important;
-    transform: none !important;
-    }
-    /* Oculta los bloques de texto con el mínimo de interesados */
-#weekendOptions > div:not(.weekend-btn) {
-    display: none !important;
-}
-
-/* Pon el botón gris y con cursor de "no permitido" únicamente cuando esté deshabilitado */
-#btnSubmitVote:disabled {
-    background-color: #cccccc !important;
-    background-image: none !important;
-    color: #666666 !important;
-    border-color: #bbbbbb !important;
-    cursor: not-allowed !important;
-    box-shadow: none !important;
-    transform: none !important;
-}
-/* Recorte de texto para la descripción del modal */
-.texto-colapsado {
-    max-height: 60px !important;
-    overflow: hidden !important;
-    position: relative;
-    line-height: 1.5;
-    color: #444;
-    transition: max-height 0.3s ease;
-}
-
-/* Efecto de difuminado blanco en la última línea visible */
-.texto-colapsado::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 25px;
-    background: linear-gradient(transparent, #ffffff);
-}
-
-/* Estilo para el botón de despliegue */
-.btn-expandir {
-    background: none;
-    border: none;
-    color: #2e7d32;
-    font-weight: 600;
-    font-size: 0.85rem;
-    cursor: pointer;
-    padding: 4px 0 0 0;
-    display: inline-block;
-}
-
-.btn-expandir:hover {
-    text-decoration: underline;
-}
-
-
-/* Wrapper contenedor relativo */
-.carousel-wrapper {
-    position: relative;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    margin-top: 15px;
-}
-
-/* Fila horizontal deslizable para las tarjetas */
-.cards-carousel {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: nowrap !important; /* Fuerza una sola fila sin saltos */
-    gap: 16px;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    padding: 10px 5px;
-    width: 100%;
-    -webkit-overflow-scrolling: touch;
-}
-
-/* Ocultar la barra de scroll por estética */
-.cards-carousel::-webkit-scrollbar {
-    height: 6px;
-}
-.cards-carousel::-webkit-scrollbar-thumb {
-    background: #ccc;
-    border-radius: 10px;
-}
-
-/* Dimensiones fijas para que las tarjetas no se aplasten ni cambien de tamaño */
-.cards-carousel .card {
-    flex: 0 0 240px !important; /* Forzar ancho exacto de 240px */
-    width: 240px !important;
-    min-width: 240px !important;
-    height: 320px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    box-sizing: border-box;
-}
-
-/* Botones circulares flotantes estilo MercadoLibre */
-.carousel-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 44px;
-    height: 44px;
-    background: rgba(255, 255, 255, 0.75);
-    backdrop-filter: blur(8px); /* Efecto vidrio esmerilado */
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    border-radius: 50%;
-    color: #111;
-    font-size: 1.2rem;
-    font-weight: bold;
-    cursor: pointer;
-    z-index: 10;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.25s ease;
-}
-
-.carousel-btn:hover {
-    background: rgba(255, 255, 255, 0.95);
-    color: #2e7d32;
-    transform: translateY(-50%) scale(1.1);
-}
-
-.btn-prev { left: -10px; }
-.btn-next { right: -10px; }
-
-
-
-/* ==============================================================================
-   AJUSTES RESPONSIVE PARA MÓVILES (Pantallas de 768px o menos)
-   ============================================================================== */
-@media (max-width: 768px) {
-    /* Modal adaptable */
-    .modal-card.modal-large {
-        width: 95% !important;
-        max-width: 95% !important;
-        padding: 15px 8px !important;
-    }
-
-    /* Selects con tamaño de fuente adecuado para móvil */
-    .filter-select {
-        font-size: 0.85rem !important;
-        padding: 6px 4px !important;
-        text-overflow: ellipsis;
-    }
-
-    /* Flechas ligeramente ajustadas para no montar sobre la primera tarjeta */
-    .btn-prev {
-        left: -8px !important;
-    }
-
-    .btn-next {
-        right: -8px !important;
-    }
-}
-
-
-/* ==============================================================================
-   ESTILOS MEJORADOS PARA EL INPUT DE NOMBRE / ESTADO DE VOTO
-   ============================================================================== */
-
-/* Estilo base del input cuando está activo */
-#voterName, 
-input[id*="voterName"],
-.vote-input-name {
-    width: 100% !important;
-    padding: 12px 16px !important;
-    margin-top: 10px !important;
-    font-size: 0.95rem !important;
-    font-family: inherit !important;
-    color: #212529 !important;
-    background-color: #f8f9fa !important;
-    border: 2px solid #ced4da !important;
-    border-radius: 8px !important;
-    outline: none !important;
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05) !important;
-    transition: all 0.25s ease-in-out !important;
-}
-
-/* Efecto al hacer clic / enfocar el campo */
-#voterName:focus, 
-input[id*="voterName"]:focus,
-.vote-input-name:focus {
-    background-color: #ffffff !important;
-    border-color: var(--primary, #2e7d32) !important;
-    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.2) !important;
-}
-
-/* Estilo cuando el usuario ya votó (Input Deshabilitado) */
-#voterName:disabled, 
-input[id*="voterName"]:disabled,
-.vote-input-name:disabled {
-    background-color: #e9ecef !important;
-    border-color: #adb5bd !important;
-    color: #495057 !important;
-    font-weight: 600 !important;
-    text-align: center !important;
-    cursor: not-allowed !important;
-    box-shadow: none !important;
-    opacity: 0.9 !important;
-}
-
-
-
-
-
-
-
-
-
-
-
-/* BOTÓN "ME INTERESA REALIZARLA" DENTRO DEL MODAL */
-.btn-interest, 
-button[id*="btnInteres"], 
-.btn-votar {
-    width: 100%;
-    padding: 12px 18px;
-    margin-top: 15px;
-    
-    /* Colores: Verde marca amigable con texto claro */
-    background-color: var(--primary, #2e7d32);
-    color: #ffffff;
-    
-    /* Tipografía e Icono */
-    font-size: 1rem;
-    font-weight: 700;
-    font-family: inherit;
-    
-    /* Bordes y Sombra suave */
-    border: 2px solid #1b5e20;
-    border-radius: 8px;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(46, 125, 50, 0.25);
-    
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    
-    transition: all 0.2s ease-in-out;
-}
-
-/* EFECTO HOVER (AL PASAR EL MOUSE) */
-.btn-interest:hover, 
-button[id*="btnInteres"]:hover, 
-.btn-votar:hover {
-    background-color: #379412;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 14px rgba(17, 19, 18, 0.35);
-}
-
-/* EFECTO CLICK / PRESIONADO */
-.btn-interest:active, 
-button[id*="btnInteres"]:active, 
-.btn-votar:active {
-    transform: translateY(1px);
-    box-shadow: 0 2px 5px rgba(27, 94, 32, 0.2);
-}
-
-/* SI EL USUARIO YA LE DIO CLIC / REGISTRÓ INTERÉS (ESTADO ACTIVO) */
-.btn-interest.voted, 
-.btn-interest.active {
-    background-color: #098313;
-    color: #f6f8f6;
-    border-color: #2e7d32;
-}
-
-/* ==============================================================================
-   LLAMADO DE ATENCIÓN: FECHA PROPUESTA (ESTILO ORIGINAL MEJORADO)
-   ============================================================================== */
-
-/* Contenedor del aviso ubicado arriba del botón */
-.banner-fecha-propuesta {
-    margin-top: auto;
-    margin-bottom: 8px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 2;
-}
-
-/* Texto verde metálico con alto contraste sobre cualquier foto */
-.banner-fecha-propuesta span:first-child {
-    /* Eliminamos tonos oscuros: Blanco plata arriba -> Verde neón centro -> Verde esmeralda vivo abajo */
-    background: linear-gradient(180deg, #ffffff 0%, #a3ffb8 35%, #22e565 70%, #10b981 100%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    
-    font-size: 1.55rem;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    line-height: 1.1;
-    
-    /* Delineado posterior profundo para desfasar el texto del fondo */
-    filter: 
-        drop-shadow(0px 2px 0px #000000)
-        drop-shadow(0px -1px 0px #000000)
-        drop-shadow(1px 0px 0px #000000)
-        drop-shadow(-1px 0px 0px #000000)
-        drop-shadow(0px 3px 5px rgba(0, 0, 0, 0.9));
-}
-
-/* Flecha apuntando al botón */
-.banner-fecha-propuesta .flecha-indicadora {
-    background: linear-gradient(180deg, #ffffff 0%, #22e565 60%, #10b981 100%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    
-    font-size: 2.3rem;
-    font-weight: 900;
-    margin-top: -1px;
-    animation: apuntarAbajo 1s infinite alternate;
-    
-    filter: 
-        drop-shadow(0px 2px 0px #000000)
-        drop-shadow(0px 3px 4px rgba(0, 0, 0, 0.9));
-}
-
-@keyframes apuntarAbajo {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(4px); }
-}
-
-/* ==============================================================================
-   TEXTO Y SOMBRAS SUPERIORES EN TARJETAS DEL CATÁLOGO
-   ============================================================================== */
-
-.card-info-header {
-    width: 100%;
-    text-align: left;
-}
-
-/* ==============================================================================
-   TÍTULOS DE TARJETAS PULIDOS Y LEGIBLES
-   ============================================================================== */
-
-.card-info-header h3 {
-    color: #ffffff;
-    font-size: 1.28rem;             /* Tamaño ligeramente ajustado para no saturar */
-    font-weight: 700;                /* Peso semi-bold (menos pesado que 800/900) */
-    line-height: 1.35;               /* Mayor separación entre líneas */
-    margin-top: 2px;
-    margin-bottom: 8px;              /* Separación clara con la Dificultad */
-    
-    /* Sombra de texto limpia en lugar de trazo grueso */
-    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.9);
-    
-    /* Evita que palabras muy largas se rompan feo */
-    word-wrap: break-word;
-}
-
-.card-detail-item {
-    color: #f1f5f9;
-    font-size: 0.82rem;
-    margin: 2px 0;
-    font-weight: 600;
-    text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.95);
-}
-
-.card-info-header .date {
-    color: #fde047;
-    font-weight: 700;
-    font-size: 0.85rem;
-    margin-top: 4px;
-    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.95);
-}
-
-
-
-/* ==============================================================================
-   OPCIÓN 3: ESMERALDA CRISTAL / SOFT-3D (Limpio y de textura suave)
-   ============================================================================== */
-.btn-action-metal,
-#btnSubmitVote {
-    width: 100%;
-    padding: 12px 18px;
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: #ffffff !important;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    border-radius: 8px;
-    cursor: pointer;
-    background: #528674;
-    border-top: 1px solid #6ee7b7;
-    border-left: 1px solid #34d399;
-    border-right: 1px solid #059669;
-    border-bottom: 2px solid #047857;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-}
-
-.btn-action-metal:hover:not(:disabled),
-#btnSubmitVote:hover:not(:disabled) {
-    background: #19af3a;
-    transform: translateY(-1px);
-}
-
-/* Título de Votación / Estado de Interés centrado y destacado */
-.voting-title {
-    color: #0f172a !important;       /* Gris muy oscuro / Casi negro */
-    font-weight: 700 !important;     /* Negrita */
-    font-size: 0.98rem !important;   /* Tamaño cómodo */
-    text-align: center !important;   /* Centrado */
-    margin-top: 14px !important;
-    margin-bottom: 10px !important;
-    display: block !important;
-}
-
-/* Nota aclaratoria de WhatsApp centrada */
-.voting-disclaimer {
-    font-size: 0.78rem !important;
-    color: #64748b !important;
-    text-align: center !important;
-    margin-top: 10px !important;
-    margin-bottom: 5px !important;
-    line-height: 1.3 !important;
-}
-
-/* ==============================================================================
-   ESTILO UNIFICADO PARA BOTONES DE ACCIÓN (WHATSAPP Y REGISTRO DE VOTO)
-   ============================================================================== */
-
-.btn-whatsapp,
-#btnSubmitVote,
-.btn-submit-vote {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 100% !important;
-    padding: 12px 16px !important;
-    margin-top: 15px !important;
-    
-    /* Fuente y Colores Base (Originales) */
-    background-color: #117a38 !important;  /* Verde oficial WhatsApp */
-    color: #ffffff !important;             /* Texto blanco */
-    font-weight: 700 !important;           /* Negrita estándar */
-    font-size: 1.15rem !important;
-    text-transform: none !important;       /* Mantiene el texto como lo escribes */
-    letter-spacing: normal !important;
-    
-    /* --- DELINEADO DEL TEXTO (Contorno oscuro para que no se pierda) --- */
-    text-shadow: 
-        -1px -1px 0 #0f5228,  
-         1px -1px 0 #0f5228,
-        -1px  1px 0 #0f5228,
-         1px  1px 0 #0f5228,
-         0px  4px 6px rgba(0, 0, 0, 1.5) !important;
-    
-    /* --- BORDE DEL BOTÓN GRUESO Y DEFINIDO --- */
-    border: 2.5px solid #0d5c2c !important;  /* Borde grueso verde oscuro */
-    border-radius: 8px !important;
-    
-    /* Interacción y sombra estructural */
-    cursor: pointer !important;
-    text-decoration: none !important;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.18) !important;
-    transition: all 0.2s ease-in-out !important;
-}
-
-/* Efecto Hover */
-.btn-whatsapp:hover,
-#btnSubmitVote:hover:not(:disabled),
-.btn-submit-vote:hover:not(:disabled) {
-    background-color: #1ebd56 !important;
-    border-color: #08421f !important;
-    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.28) !important;
-    transform: translateY(-1px);
-}
-
-/* Estado deshabilitado (cuando ya votó) */
-.btn-disabled,
-#btnSubmitVote:disabled {
-    background-color: #cbd5e1 !important;
-    border: 2px solid #94a3b8 !important;
-    color: #475569 !important;
-    text-shadow: none !important;
-    cursor: not-allowed !important;
-    box-shadow: none !important;
-    transform: none !important;
-}
-
-
-/* Estilo Metálico Ajustado (Más pequeño, borde biselado y texto compacto) */
-.btn-details {
-    width: 85%;
-    margin: 8px auto 12px auto;
-    padding: 6px 10px;                  /* Relleno más compacto */
-    font-size: 0.72rem;                 /* Fuente un pelín más pequeña */
-    font-weight: 800;
-    color: #111111;
-    text-transform: uppercase;
-    letter-spacing: 0.4px;
-    border-radius: 6px;
-    cursor: pointer;
-    
-    /* Degradado metálico de acero/aluminio */
-    background: linear-gradient(180deg, #ffffff 0%, #dedede 40%, #c2c2c2 60%, #9e9e9e 100%);
-    
-    /* Textura en bordes: Bisel biselado metálico de doble marco */
-    border: 1px solid #555555;
-    border-top: 1.5px solid #ffffff;     /* Brillo superior en borde */
-    border-bottom: 1.5px solid #333333;  /* Sombra inferior en borde */
-    
-    /* Sombras para marcar volumen 3D y relieve */
-    box-shadow: 
-        0 3px 5px rgba(0, 0, 0, 0.45),
-        inset 0 1px 0 rgba(255, 255, 255, 0.9),
-        inset 0 -1px 2px rgba(0, 0, 0, 0.35);
-        
-    transition: all 0.15s ease-in-out;
-    display: block;
-}
-
-/* Hover suave manteniendo la escala */
-.btn-details:hover {
-    background: linear-gradient(180deg, #ffffff 0%, #ebebeb 40%, #d1d1d1 60%, #b0b0b0 100%);
-    border-color: #444444;
-    box-shadow: 
-        0 4px 8px rgba(0, 0, 0, 0.5),
-        0 0 6px rgba(255, 255, 255, 0.4),
-        inset 0 1px 0 rgba(255, 255, 255, 1);
-    transform: translateY(-1px);
-}
-
-/* Efecto presionado */
-.btn-details:active {
-    background: linear-gradient(180deg, #9e9e9e 0%, #c2c2c2 50%, #dedede 100%);
-    box-shadow: 
-        0 1px 2px rgba(0, 0, 0, 0.4),
-        inset 0 2px 3px rgba(0, 0, 0, 0.5);
-    transform: translateY(1px);
 }

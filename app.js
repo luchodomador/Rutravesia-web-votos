@@ -59,22 +59,24 @@ function renderizarTarjetas() {
                 max-width: 500px;
                 box-shadow: 0 4px 10px rgba(0,0,0,0.15);
             ">
-                <p style="font-size: 1.1rem; color: #2e7d32; font-weight: bold; margin-bottom: 6px;">
+                <p style="font-size: 1.1rem; color: #1e7422; font-weight: bold; margin-bottom: 6px;">
                     🌿 ¡No hay rutas confirmadas por los momentos!
                 </p>
-                <p style="font-size: 0.95rem; color: #555; margin: 0;">
-                    Revisa nuestro catálogo abajo y vota por tu fecha preferida para agendar la próxima salida.
+                <p style="font-size: 0.95rem; color: #080808; margin: 0;">
+                    Revisa nuestro catálogo abajo y elige una fecha propuesta o muestra interes por la ruta de tu preferencia para agendar la próxima salida.
                 </p>
             </div>
         `;
 
-        if (btnNext) btnNext.style.display = "none";
-        if (btnPrev) btnPrev.style.display = "none";
+        // OCULTAR FLECHAS
+        if (btnNext) btnNext.style.setProperty('display', 'none', 'important');
+        if (btnPrev) btnPrev.style.setProperty('display', 'none', 'important');
         return;
     }
 
-    if (btnNext) btnNext.style.display = "block";
-    if (btnPrev) btnPrev.style.display = "block";
+    // MOSTRAR FLECHAS (Uso de 'flex' para mantener la alineación del icono centrado)
+    if (btnNext) btnNext.style.setProperty('display', 'flex', 'important');
+    if (btnPrev) btnPrev.style.setProperty('display', 'flex', 'important');
 
     rutasConfirmadas.forEach(ruta => {
         const duracionMostrar = ruta.duracion || ruta.duracionTexto || 'Por definir';
@@ -94,24 +96,6 @@ function renderizarTarjetas() {
     });
 
     activarFlechasCarrusel();
-}
-
-// Lógica para desplazar horizontalmente
-function activarFlechasCarrusel() {
-    const btnNext = document.getElementById("btnNextConfirmed");
-    const btnPrev = document.getElementById("btnPrevConfirmed");
-
-    if (btnNext && cardsContainer) {
-        btnNext.onclick = () => {
-            cardsContainer.scrollBy({ left: 240, behavior: 'smooth' });
-        };
-    }
-
-    if (btnPrev && cardsContainer) {
-        btnPrev.onclick = () => {
-            cardsContainer.scrollBy({ left: -240, behavior: 'smooth' });
-        };
-    }
 }
 
 
@@ -415,7 +399,7 @@ function abrirDetalleCatalogo(idRuta) {
     catalogDetailContent.innerHTML = `
         <h2 style="margin-bottom: 10px;">${ruta.nombre}</h2>
         <p style="margin-bottom: 8px;"><strong>Dificultad:</strong> ${ruta.dificultad || 'Media'}</p>
-        <p style="margin-bottom: 8px;"><strong>Duración estimada:</strong> ${ruta.duracion || ruta.duracionTexto || 'Por definir'}</p>
+        <p style="margin-bottom: 8px;"><strong>Duración estimada:</strong> ${ruta.duracionTexto || ruta.duracionTexto || 'Por definir'}</p>
         
         ${galeriaHTML}
 
@@ -428,7 +412,7 @@ function abrirDetalleCatalogo(idRuta) {
             </button>
         </div>
 
-        <p style="margin-bottom: 4px; margin-top: 10px;"><strong>Incluye:</strong> ${ruta.incluye || 'Guiatura profesional'}</p>
+        <p style="margin-bottom: 4px; margin-top: 10px;"><strong>Incluye:</strong> ${ruta.incluye || 'Guiatura y acompañamiento durante toda la ruta, Cafe recien colado, snack.'}</p>
         <p style="margin-bottom: 12px;"><strong>Costo:</strong> ${ruta.precio || 'Consultar'}</p>
     `;
 
