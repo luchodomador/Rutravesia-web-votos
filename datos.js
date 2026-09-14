@@ -52,15 +52,15 @@ const catalogoGeneral = [
         id: "Anaucos-v1",
         nombre: "Cascada Los Anaucos",
         dificultad: "Media",
-        duracion: "3-5h",                                  // Clave estandarizada
-        duracionTexto: "2h :30 min a 3h horas de caminata para llegar a la Cascada", // Opcional: Para mostrarlo amigable en la tarjeta
+        duracion: "3-5h",   
+        duracionTexto: "3 horas aproxidamente para llegar a la Cascada"    ,                           
+        descripcion: "El P. N. Waraira Repano, por el sector Curupao, nos presenta esta ruta muy bonita con cruces de ríos, senderos perfectamente caminables, vegetación frondosa, pozos espectaculares y una cascada doble como recompensa final. El lugar y la hora de encuentro se proporcionan vía WhatsApp. Es necesario tomar transporte para iniciar la caminata; el costo publicado no incluye el pago del transporte.",
         tipo: ["cascadas"],                              // Coincide con 'patrimonio' en el HTML
-        descripcion: "El PN Waraira Repano por el sector Curupao , nos presenta esta ruta muy bonita con cruces de rios, senderos perfectamente caminables , vegetacion frondoza , pozos espectaculares y una cascada doble como recompensa final. El lugar y hora de encuentro se proporcionan via WhatsApp. Es necesario tomar transporte para iniciar la caminata , el costo de la publicado no incluye el pago de transporte.",
         incluye: "Guiatura y soporte durante toda la ruta, cafe recien colado, snack.",
         precio: "10$ por persona ",
         imagen: "assets/ImagenAnaucos.png",
        fechasPropuestas: [
-        { fecha: "Domingo 27 de Septiembre", interesados: 6 },
+        { fecha: "Domingo 27 de Septiembre", interesados: 7 },
         { fecha: "Domingo 4 de Octubre", interesados: 0 }
         ],
         imagenes: [
@@ -81,10 +81,10 @@ const catalogoGeneral = [
         id: "teleferico_cat",
         nombre: "Teleferico Fantasma - Estacion El Lyron",
         dificultad: "Media",
-        duracion: "3-5h",                                  // Clave estandarizada
-        duracionTexto: "3-4 horas de Caminata", // Opcional: Para mostrarlo amigable en la tarjeta
-        tipo: ["patrimonio"],                              // Coincide con 'patrimonio' en el HTML
-        descripcion: "El PN Waraira Repano esconde una estructura historica correspondiente a la estacion  El Lyron. Empezamos el ascenso desde el sector Gamboa pasando por el pueblo de Galipan hasta llegar a la estructura",
+        duracion: "3-5h",  
+        duracionTexto: "3-4h de caminata para llegar a la vieja estrcutura",                                // Clave estandarizada
+        tipo: ["patrimonio"],
+        descripcion: "El P. N. Waraira Repano esconde una estructura histórica correspondiente a la estación El Lyrón. Empezamos el ascenso desde el sector Gamboa, pasando por el pueblo de Galipán hasta llegar a la estructura.",                                  
         imagen: "assets/ImagenTelefericoFantasma.png",
         interesados: 0,
         incluye: "Guiatura y soporte durante toda la ruta, cafe recien colado, snack.",
@@ -110,7 +110,7 @@ const catalogoGeneral = [
     duracion: "6-9h",
     duracionTexto: " Minimo 8 horas para completar la ruta",
     tipo: ["cumbres"],
-    descripcion: "Ascendo a la segunda cumbre mas alta de toda la cordillera de la costa, el Pico Oriental a unos 2640 msnm, pasando por los miradores Piedra el Inidio, Cabeza de Elefante, el emblematico Pino Solitario y la Cruz de los Palmeros , de las rutas con las vistas mas impactantes y especatulares hacia Caracas. La ruta es exigente y requiere de buena condición física, ya que el desnivel es continuo durante todo el recorrido. El descenso se hace por la misma ruta, por lo que se recomienda llevar al menos 3 litros de agua, frutos secos, abrigo para la cumbre y calzado de montaña con buen agarre.",
+    descripcion: "Ascenso a la segunda cumbre más alta de toda la cordillera de la Costa: el Pico Oriental, a unos 2640 m s. n. m. Pasando por los miradores Piedra del Indio, Cabeza de Elefante, el emblemático Pino Solitario y la Cruz de los Palmeros, es una de las rutas con las vistas más impactantes y espectaculares hacia Caracas. La ruta es exigente y requiere de buena condición física, ya que el desnivel es continuo durante todo el recorrido. El descenso se hace por la misma ruta, por lo que se recomienda llevar al menos 3 litros de agua, frutos secos, abrigo para la cumbre y calzado de montaña con buen agarre.",    
     incluye: "Guiatura y soporte durante toda la ruta, cafe recien colado, snack.",
     precio: "Consultar via WhatsApp",
     imagen: "assets/ImagenPicoOriental.png",
@@ -137,7 +137,7 @@ const catalogoGeneral = [
     duracion: "6-9h", // Estandarizado para el filtro
     duracionTexto: "Unas 3h-4h de ascenso aproximadamente", // 
     tipo: ["cumbres"], // Propiedad nueva para los filtros
-    descripcion: "Ascenso al Pico Occidental 2480 msnm , una de las cumbres mas altas de la cordillera de la costa. Partiendo desde Sabas Nieves, el trayecto pasa por El Banquito, se adentra en un frondoso camino boscoso lleno de vegetación y encarara el exigente tramo de No Te Apures y las piedras flotantes para despues hacer cumbre en la cruz del Pico Occidental. Es una ruta exigente que requiere buena condición física por su desnivel continuo. El descenso es por la misma vía, por lo que se recomienda llevar al menos 2 litros de agua, frutos secos, abrigo para la cumbre y calzado comodo para caminar.",
+    descripcion: "Ascenso al Pico Occidental (2480 m s. n. m.), una de las cumbres más altas de la cordillera de la Costa. Partiendo desde Sabas Nieves, el trayecto pasa por El Banquito, se adentra en un frondoso camino boscoso lleno de vegetación y encarará el exigente tramo de No Te Apures y las piedras flotantes para después hacer cumbre en la cruz del Pico Occidental. Es una ruta exigente que requiere buena condición física por su desnivel continuo. El descenso es por la misma vía, por lo que se recomienda llevar al menos 2 litros de agua, frutos secos, abrigo para la cumbre y calzado cómodo para caminar.",    
     incluye: "Guiatura y soporte durante toda la ruta, cafe recien colado, snack.",
     precio: "Consultar via WhatsApp",
     imagen: "assets/ImagenPicoOccidental.png",
@@ -159,7 +159,7 @@ const catalogoGeneral = [
         duracion: "6-9h", // Estandarizado para el filtro
         duracionTexto: "2 horas a 2 horas 30 min horas de caminata hasta la cascada", // Opcional: Para mostrarlo amigable en la tarjeta
         tipo: ["cascadas"], // Propiedad nueva para los filtros
-        descripcion: "Ruta que inicia por el Sector La Churca del Parque Nacional, una ruta de exigencia media por senderos amigables y algunos ascensos de media exigencia hasta llegar a la imponente y ruidosa cascada, apta para bañarse sin necesidad de saber nadar",
+        descripcion: "Ruta que inicia por el sector La Churca del Parque Nacional: una ruta de exigencia media por senderos amigables y algunos ascensos de media exigencia hasta llegar a la imponente y ruidosa cascada, apta para bañarse sin necesidad de saber nadar.",        
         incluye: "Guiatura y soporte durante toda la ruta, cafe recien colado, snack.",
         precio: "Consultar via WhatsApp",
         imagen: "assets/ImagenMAG.png",
@@ -183,7 +183,7 @@ const catalogoGeneral = [
         duracion: "6-9h", // Estandarizado para el filtro
         duracionTexto: "4-5h de caminata para llegar a la Cascada", // Opcional: Para mostrarlo amigable en la tarjeta
         tipo: ["cascadas"], // Propiedad nueva para los filtros
-        descripcion: "Ruta que inicia por el Sector La Churca del Parque Nacional, una ruta de alta exigencia debido al tiempo de caminata y algunos tramos con ascensos fuertes al principio de la ruta, pasando por varios pozos muy bonitos antes de la gran recompensa, la impactante Cascada Norte, ideal para bañarse en su base  ",
+        descripcion: "Ruta que inicia por el sector La Churca del Parque Nacional: una ruta de alta exigencia debido al tiempo de caminata y a algunos tramos con ascensos fuertes al principio. Pasa por varios pozos muy bonitos antes de la gran recompensa: la impactante Cascada Norte, ideal para bañarse en su base.",        
         incluye: "Guiatura y soporte durante toda la ruta, cafe recien colado, snack.",
         precio: "Consultar via WhatsApp",
         imagen: "assets/ImagenCascadaNorte.png",
@@ -209,7 +209,7 @@ const catalogoGeneral = [
     duracion: "6-9h",
     duracionTexto: "7-8 horas de caminata aproximadamente para completar la ruta",
     tipo: ["patrimonio", "cumbres"],
-    descripcion: "Iniciamos la caminata en el sector Los Mujicas en Caracas. El recorrido destaca por sus paisajes de montaña sacados de un cuadro, caminos perfectamente caminables y tramos de vegetación boscosa que brindan frescura al trayecto. A lo largo de la ruta disfrutaremos de vistas increíbles, para finalmente atravesar las imponentes e impresionantes Grietas de San Pedro y culminar nuestro recorrido en San Pedro de Los Teques.",
+    descripcion: "Iniciamos la caminata en el sector Los Mujicas, en Caracas. El recorrido destaca por sus paisajes de montaña sacados de un cuadro, caminos perfectamente caminables y tramos de vegetación boscosa que brindan frescura al trayecto. A lo largo de la ruta disfrutaremos de vistas increíbles, para finalmente atravesar las imponentes e impresionantes Grietas de San Pedro y culminar nuestro recorrido en San Pedro de Los Teques.",    
     incluye: "Guiatura y soporte durante toda la ruta, cafe recien colado, snack.",
     precio: "Consultar via WhatsApp",
     imagen: "assets/ImagenGrietasDeSanPedro.png",
@@ -238,7 +238,7 @@ const catalogoGeneral = [
     duracion: "3-5h",
     duracionTexto: "3h aproximadamente para hacer Cumbre",
     tipo: ["cumbres"],
-    descripcion: "La ruta hacia el Picacho de Galipan es una ruta de inicio un poco fuerte los primeros 30 minutos, despues el camino se hace muy amigable con senderos comodos para caminar, las vistas hacia La Guaira desde el picacho son simplemente de las mas alucinantes ",
+    descripcion: "La ruta hacia el Picacho de Galipán tiene un inicio un poco fuerte durante los primeros 30 minutos; después, el camino se hace muy amigable, con senderos cómodos para caminar. Las vistas hacia La Guaira desde el picacho son simplemente de las más alucinantes.",    
     incluye: "Guiatura y soporte durante toda la ruta, cafe recien colado, snack.",
     precio: "Consultar via WhatsApp",
     imagen: "assets/ImagenPicacho.png",
@@ -265,9 +265,10 @@ const catalogoGeneral = [
         duracion: "6-9h",                                  // Clave estandarizada
         duracionTexto: "12 - 14 horas para completar la ruta, ida y vuelta", // Opcional: Para mostrarlo amigable en la tarjeta
         tipo: ["cumbres"],
-        descripcion: "Ascenso a la cumbre más alta de la Cordillera de la Costa 2.765 msnm, El Pico Naiguata. Pasando por el mirador Dos Banderas, el tramo Las Toyotas , El topo Goering , los Platos del Diablo y el Anfiteatro la zona camping antes de hacer cumbre en la Cruz del Pico Naiguata.",
-        imagen: "assets/ImagenNaiguata14.png",
+        descripcion: "Ascenso a la cumbre más alta de la cordillera de la Costa (2765 m s. n. m.): el Pico Naiguatá. Pasando por el mirador Dos Banderas, el tramo Las Toyotas, el Topo Goering, Los Platos del Diablo y el Anfiteatro (la zona de camping), antes de hacer cumbre en la Cruz del Pico Naiguatá.",        imagen: "assets/ImagenNaiguata14.png",
         interesados: 0,
+        incluye: "Guiatura y soporte durante toda la ruta, cafe recien colado, snack.",
+        precio: "Consultar via WhatsApp",
         fechasPropuestas: [],
         imagenes: [
             "assets/ImagenNaiguata8.png",
@@ -292,7 +293,7 @@ const catalogoGeneral = [
         duracion: "multidia", // Estandarizado para el filtro
         duracionTexto: "1 noche de camping",    
         tipo: ["camping"],
-        descripcion: "Asceendemos hasta el sector Lagunazo, donde acamparemos y disfrutaremos de la naturaleza, el atardecer y el amanecer. Para luego descender al dia siguiente. La ruta es de dificultad media y requiere una condicion fisica aceptable.",
+        descripcion: "Ascendemos hasta el sector Lagunazo, donde acamparemos y disfrutaremos de la naturaleza, el atardecer y el amanecer, para luego descender al día siguiente. La ruta es de dificultad media y requiere una condición física aceptable.",        
         interesados: 0,
         incluye: "Guiatura y soporte durante toda la ruta",
         precio: "Consultar via WhatsApp",
