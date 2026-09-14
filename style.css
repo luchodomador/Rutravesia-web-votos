@@ -323,7 +323,7 @@ body::before {
     background: var(--card-bg);
     border: var(--border-width) solid var(--border-color);
     border-radius: 10px;
-    padding: 14px;
+    padding: 12px 14px 10px 14px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -348,23 +348,29 @@ body::before {
 .card-info-header {
     width: 100%;
     text-align: left;
-    flex-grow: 1;
+    flex: 1 1 auto;
+    overflow: hidden;
 }
 
 .card-info-header h3 {
     color: #ffffff;
-    font-size: 1.28rem;
+    font-size: 1.15rem; /* Ajustado ligeramente para acomodar 3 líneas sin empujar */
     font-weight: 700;
-    line-height: 1.35;
+    line-height: 1.25;
     margin-top: 2px;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.9);
     word-wrap: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .card-detail-item {
     color: #f1f5f9;
-    font-size: 0.82rem;
+    font-size: 0.80rem;
     margin: 2px 0;
     font-weight: 600;
     text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.95);
@@ -378,16 +384,17 @@ body::before {
     text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.95);
 }
 
-/* Llamado de atención: FECHA PROPUESTA */
+/* Llamado de atención: FECHA PROPUESTA (Optimizado de tamaño) */
 .banner-fecha-propuesta {
-    margin-top: auto;
-    margin-bottom: 8px;
+    margin-top: 2px;
+    margin-bottom: 4px;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     z-index: 2;
+    height: 52px; /* Altura fija para que no desplace la tarjeta */
 }
 
 .banner-fecha-propuesta span:first-child {
@@ -395,11 +402,11 @@ body::before {
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-size: 1.55rem;
+    font-size: 1.20rem; /* Reducido para encajar limpio */
     font-weight: 900;
     text-transform: uppercase;
-    letter-spacing: 0.8px;
-    line-height: 1.1;
+    letter-spacing: 0.5px;
+    line-height: 1;
     filter: 
         drop-shadow(0px 2px 0px #000000)
         drop-shadow(0px -1px 0px #000000)
@@ -413,9 +420,9 @@ body::before {
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-size: 2.3rem;
+    font-size: 1.5rem; /* Flecha ajustada para mantener proporción */
     font-weight: 900;
-    margin-top: -1px;
+    margin-top: -2px;
     animation: apuntarAbajo 1s infinite alternate;
     filter: 
         drop-shadow(0px 2px 0px #000000)
@@ -424,14 +431,14 @@ body::before {
 
 @keyframes apuntarAbajo {
     0% { transform: translateY(0); }
-    100% { transform: translateY(4px); }
+    100% { transform: translateY(3px); }
 }
 
-/* Botón Metálico "VER DETALLES" (Alineado abajo) */
+/* Botón Metálico "VER DETALLES" (Anclado 100% al fondo) */
 .btn-details {
-    width: 85%;
-    margin: auto auto 12px auto;
-    padding: 6px 10px;
+    width: 90%;
+    margin: auto auto 0 auto !important; /* Fuerza el anclaje exactamente al borde inferior */
+    padding: 7px 10px;
     font-size: 0.72rem;
     font-weight: 800;
     color: #111111;
@@ -449,6 +456,7 @@ body::before {
         inset 0 -1px 2px rgba(0, 0, 0, 0.35);
     transition: all 0.15s ease-in-out;
     display: block;
+    flex-shrink: 0; /* Impide que el botón se reduzca si hay poco espacio */
 }
 
 .btn-details:hover {
@@ -468,6 +476,7 @@ body::before {
         inset 0 2px 3px rgba(0, 0, 0, 0.5);
     transform: translateY(1px);
 }
+
 /* ==============================================================================
    6. FILTROS Y CATÁLOGO COMPLETO
    ============================================================================== */
