@@ -60,7 +60,7 @@ const catalogoGeneral = [
         precio: "10$ por persona ",
         imagen: "assets/ImagenAnaucos.png",
        fechasPropuestas: [
-        { fecha: "Domingo 27 de Septiembre", interesados: 7 },
+        { fecha: "Domingo 27 de Septiembre", interesados: 9 },
         { fecha: "Domingo 4 de Octubre", interesados: 0 }
         ],
         imagenes: [
