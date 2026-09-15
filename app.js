@@ -63,7 +63,7 @@ function renderizarTarjetas() {
                     🌿 ¡No hay rutas confirmadas por los momentos!
                 </p>
                 <p style="font-size: 0.95rem; color: #080808; margin: 0;">
-                    Revisa nuestro catálogo abajo y elige una fecha propuesta o muestra interes por la ruta de tu preferencia para agendar la próxima salida.
+                    Revisa nuestro catálogo abajo y elige una fecha propuesta o muestra interés por la ruta de tu preferencia para agendar la próxima salida.
                 </p>
             </div>
         `;
@@ -323,7 +323,12 @@ function abrirModal(idRuta) {
     const linkWhatsApp = `https://wa.me/${typeof TELEFONO_WHATSAPP !== 'undefined' ? TELEFONO_WHATSAPP : ''}?text=${textoWhatsApp}`;
 
     modalContent.innerHTML = `
-     <h2 style="margin-bottom: 10px;">${ruta.nombre}</h2>
+     <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 10px; padding-right: 25px;">
+         <h2 style="margin: 0; font-size: 1.3rem;">${ruta.nombre}</h2>
+         <button type="button" class="btn-compartir-icon" onclick="compartirRuta('${ruta.id}', '${ruta.nombre}')" title="Compartir ruta" style="background: #f4f4f4; border: 1px solid #ddd; border-radius: 6px; padding: 5px 10px; cursor: pointer; font-size: 0.8rem; color: #444; white-space: nowrap; display: flex; align-items: center; gap: 4px;">
+             🔗 Compartir
+         </button>
+     </div>
  
      <p style="margin-bottom: 8px;"><strong>Dificultad:</strong> ${ruta.dificultad || 'Media'}</p>
      <p style="margin-bottom: 8px;"><strong>Duración estimada:</strong> ${ruta.duracionTexto || ruta.duracion || 'Por definir'}</p>
@@ -361,6 +366,8 @@ function abrirModal(idRuta) {
 
     if (routeModal) routeModal.classList.remove("hidden");
     if (searchResults) searchResults.classList.add("hidden");
+
+    window.history.pushState({}, '', `?ruta=${idRuta}`);
 }
 
 function cerrarModalDetalles() {
@@ -368,6 +375,7 @@ function cerrarModalDetalles() {
     if (abiertoDesdeCatalogo && catalogModal) {
         catalogModal.classList.remove("hidden");
     }
+    window.history.pushState({}, '', window.location.pathname);
 }
 
 if (closeModal) {
@@ -397,9 +405,15 @@ function abrirDetalleCatalogo(idRuta) {
     const galeriaHTML = construirFilmstripHTML(ruta);
 
     catalogDetailContent.innerHTML = `
-        <h2 style="margin-bottom: 10px;">${ruta.nombre}</h2>
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 10px; padding-right: 25px;">
+            <h2 style="margin: 0; font-size: 1.3rem;">${ruta.nombre}</h2>
+            <button type="button" class="btn-compartir-icon" onclick="compartirRuta('${ruta.id}', '${ruta.nombre}')" title="Compartir ruta" style="background: #f4f4f4; border: 1px solid #ddd; border-radius: 6px; padding: 5px 10px; cursor: pointer; font-size: 0.8rem; color: #444; white-space: nowrap; display: flex; align-items: center; gap: 4px;">
+                🔗 Compartir
+            </button>
+        </div>
+
         <p style="margin-bottom: 8px;"><strong>Dificultad:</strong> ${ruta.dificultad || 'Media'}</p>
-        <p style="margin-bottom: 8px;"><strong>Duración estimada:</strong> ${ruta.duracionTexto || ruta.duracionTexto || 'Por definir'}</p>
+        <p style="margin-bottom: 8px;"><strong>Duración estimada:</strong> ${ruta.duracionTexto || 'Por definir'}</p>
         
         ${galeriaHTML}
 
@@ -428,10 +442,11 @@ function abrirDetalleCatalogo(idRuta) {
         });
     }
 
-    // Resetear el estado de la sección de votos y ajustar el texto inicial del botón
     ocultarSeccionVoto();
 
     if (catalogDetailModal) catalogDetailModal.classList.remove("hidden");
+
+    window.history.pushState({}, '', `?ruta=${idRuta}`);
 }
 
 function cerrarModalCatalogoDetalle() {
@@ -440,6 +455,7 @@ function cerrarModalCatalogoDetalle() {
     if (abiertoDesdeCatalogo && catalogModal) {
         catalogModal.classList.remove("hidden");
     }
+    window.history.pushState({}, '', window.location.pathname);
 }
 
 if (closeCatalogDetailModal) {
@@ -450,7 +466,6 @@ function ocultarSeccionVoto() {
     if (votingContainer) votingContainer.classList.add("hidden");
     if (btnInterest) btnInterest.classList.remove("active");
 
-    // Actualización dinámica del texto/icono del botón según si hay fechas propuestas
     if (rutaSeleccionadaCatalogo) {
         const fechasValidas = Array.isArray(rutaSeleccionadaCatalogo.fechasPropuestas)
             ? rutaSeleccionadaCatalogo.fechasPropuestas.filter(f => f !== null && f !== undefined && f !== "")
@@ -468,7 +483,7 @@ function ocultarSeccionVoto() {
 
     if (voterNameInput) {
         voterNameInput.value = "";
-        voterNameInput.style.display = "block"; // Asegurar que sea visible por defecto al resetear
+        voterNameInput.style.display = "block";
         voterNameInput.disabled = false;
     }
     if (btnSubmitVote) {
@@ -507,7 +522,6 @@ function generarOpcionesFinesDeSemana() {
     const tituloVotacion = document.querySelector(".voting-title");
 
     if (tieneFechas) {
-        // CASO 1: RUTA CON FECHAS PROPUESTAS
         if (tituloVotacion) tituloVotacion.innerHTML = "📅 Selecciona una fecha: 👇";
 
         fechasValidas.forEach((opcion) => {
@@ -563,12 +577,11 @@ function generarOpcionesFinesDeSemana() {
             if (voterNameInput) {
                 voterNameInput.style.display = "block";
                 voterNameInput.disabled = false;
-                voterNameInput.placeholder = "Tu nombre / número de acompañantes (opcional)";
+                voterNameInput.placeholder = "Tu nombre / N° de acompañantes (opcional)";
             }
         }
 
     } else {
-        // CASO 2: CATÁLOGO ABIERTO (SIN FECHAS PROPUESTAS)
         if (tituloVotacion) tituloVotacion.innerHTML = "🔥 Estado de interés: 👇";
         fechaVotoSeleccionada = "Sin fecha fija";
 
@@ -615,14 +628,23 @@ function generarOpcionesFinesDeSemana() {
         }
     }
 
-    // --- MINI NOTA ACLARATORIA ---
+    // Asegurar estructura contenedora unificada (.input-con-boton)
+    let contenedorAccion = document.querySelector(".input-con-boton");
+    if (!contenedorAccion && btnSubmitVote && btnSubmitVote.parentNode) {
+        contenedorAccion = document.createElement("div");
+        contenedorAccion.className = "input-con-boton";
+        btnSubmitVote.parentNode.insertBefore(contenedorAccion, btnSubmitVote);
+        if (voterNameInput) contenedorAccion.appendChild(voterNameInput);
+        contenedorAccion.appendChild(btnSubmitVote);
+    }
+
     let disclaimer = document.getElementById("votingDisclaimerNote");
     if (!disclaimer) {
         disclaimer = document.createElement("p");
         disclaimer.id = "votingDisclaimerNote";
         disclaimer.className = "voting-disclaimer";
-        if (btnSubmitVote && btnSubmitVote.parentNode) {
-            btnSubmitVote.parentNode.insertBefore(disclaimer, btnSubmitVote.nextSibling);
+        if (contenedorAccion) {
+            contenedorAccion.appendChild(disclaimer);
         }
     }
 
@@ -646,16 +668,13 @@ if (btnSubmitVote) {
 
         if (tieneFechas && !fechaVotoSeleccionada) return;
 
-        // 1. GUARDAR REGISTRO DE VOTO EN LOCALSTORAGE
         localStorage.setItem(`usuario_voto_${idRuta}`, fechaVotoSeleccionada || "interesado");
 
-        // 2. RE-RENDERIZAR EN EL ACTO
         generarOpcionesFinesDeSemana();
         if (typeof renderizarCatalogo === 'function') {
             renderizarCatalogo();
         }
 
-        // 3. ABRIR WHATSAPP
         const nombreUsuario = voterNameInput.value.trim() || "Un senderista";
         let textoWhatsApp = "";
 
@@ -676,6 +695,7 @@ if (btnSubmitVote) {
     });
 }
 
+
 // ==============================================================================
 // 8. CIERRE DE MODALES AL HACER CLIC FUERA
 // ==============================================================================
@@ -686,9 +706,47 @@ window.addEventListener("click", (e) => {
     if (typeof catalogModal !== 'undefined' && e.target === catalogModal) {
         catalogModal.classList.add("hidden");
         abiertoDesdeCatalogo = false;
+        window.history.pushState({}, '', window.location.pathname);
     }
     if (typeof catalogDetailModal !== 'undefined' && e.target === catalogDetailModal) {
         cerrarModalCatalogoDetalle();
+    }
+});
+
+
+// ==============================================================================
+// 9. FUNCIÓN COMPARTIR Y DETECCIÓN AUTOMÁTICA DE URL
+// ==============================================================================
+function compartirRuta(idRuta, nombreRuta) {
+    const urlDirecta = `${window.location.origin}${window.location.pathname}?ruta=${idRuta}`;
+    const textoCompartir = `¡Mira esta ruta en Rutravesia: ${nombreRuta}!`;
+
+    if (navigator.share) {
+        navigator.share({
+            title: nombreRuta,
+            text: textoCompartir,
+            url: urlDirecta
+        }).catch(err => console.log('Acción cancelada:', err));
+    } else {
+        navigator.clipboard.writeText(urlDirecta);
+        alert('¡Enlace de la ruta copiado al portapapeles!');
+    }
+}
+
+// Abrir la ruta automáticamente al cargar con parámetro ?ruta=
+document.addEventListener("DOMContentLoaded", () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const rutaParam = urlParams.get('ruta');
+
+    if (rutaParam) {
+        setTimeout(() => {
+            const esConfirmada = rutasConfirmadas.some(r => String(r.id) === String(rutaParam));
+            if (esConfirmada && typeof abrirModal === 'function') {
+                abrirModal(rutaParam);
+            } else if (typeof abrirDetalleCatalogo === 'function') {
+                abrirDetalleCatalogo(rutaParam);
+            }
+        }, 300);
     }
 });
 
