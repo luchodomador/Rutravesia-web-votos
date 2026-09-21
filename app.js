@@ -88,6 +88,7 @@ function renderizarTarjetas() {
                     <p class="card-detail-item"><strong>💪 Dificultad:</strong> ${ruta.dificultad || 'Media'}</p>
                     <p class="card-detail-item"><strong>⏱️ Duración:</strong> ${duracionMostrar}</p>
                     <p class="date">📅 ${ruta.fecha}</p>
+                    <p class="price">💵 ${ruta.precio}</p>
                 </div>
                 <button class="btn-details" onclick="abrirModal('${ruta.id}')">Ver detalles / Reservar</button>
             </div>
@@ -175,6 +176,7 @@ function renderizarCatalogo(listaAMostrar = null) {
                     <p class="card-detail-item"><strong>💪 Dificultad:</strong> ${ruta.dificultad || 'Media'}</p>
                     <p class="card-detail-item"><strong>⏱️ Duración:</strong> ${duracionMostrar}</p>
                     ${esConfirmada ? `<p class="date">📅 ${ruta.fecha}</p>` : ''}
+                    ${esConfirmada ? `<p class="price">📅 ${ruta.precio}</p>` : ''}
                 </div>
                 
                 ${bannerFechaPropuesta}

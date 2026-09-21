@@ -383,6 +383,14 @@ body::before {
     margin-top: 4px;
     text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.95);
 }
+.card-info-header .price {
+    color: #3efd18;
+    font-weight: 700;
+    font-size: 0.85rem;
+    margin-top: 4px;
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.95);
+}
+
 
 /* Llamado de atención: FECHA PROPUESTA (Optimizado de tamaño) */
 .banner-fecha-propuesta {

@@ -44,27 +44,20 @@ EJEMPLO COMPLETO DE UNA RUTA EN EL CATÁLOGO:
 
 
 // BASE DE DATOS LOCAL DE RUTAS CONFIRMADAS
-const rutasConfirmadas = [];
-// CATÁLOGO GENERAL DE RUTAS DISPONIBLES EN EL ÁVILA Y ALREDEDORES
-const catalogoGeneral = [
-
- {
-        id: "Anaucos-v1",
-        nombre: "Cascada Los Anaucos",
-        dificultad: "Media",
-        duracion: "3-5h",   
-        duracionTexto: "3 horas aproxidamente para llegar a la Cascada"    ,                           
-        descripcion: "El P. N. Waraira Repano, por el sector Curupao, nos presenta esta ruta muy bonita con cruces de ríos, senderos perfectamente caminables, vegetación frondosa, pozos espectaculares y una cascada doble como recompensa final. El lugar y la hora de encuentro se proporcionan vía WhatsApp. Es necesario tomar transporte para iniciar la caminata; el costo publicado no incluye el pago del transporte.",
-        tipo: ["cascadas"],                              // Coincide con 'patrimonio' en el HTML
-        incluye: "Guiatura y soporte durante toda la ruta, cafe recien colado, snack.",
-        precio: "10$ por persona ",
-        imagen: "assets/ImagenAnaucos.png",
-       fechasPropuestas: [
-        { fecha: "Domingo 27 de Septiembre", interesados: 9 },
-        { fecha: "Domingo 4 de Octubre", interesados: 0 }
-        ],
-        imagenes: [
-            "assets/ImagenAnaucos.png",
+const rutasConfirmadas = [{
+id: "anaucos-0926",
+nombre: "Cascada Los Anaucos",
+fecha: "Próximo Domingo 27 de Septiembre",
+dificultad: "Media", // Clave estandarizada
+duracion: "3-5h", // Clave estandarizada
+duracionTexto: "3 horas aproximadamente para llegar a la cascada",
+descripcion: "El P. N. Waraira Repano, por el sector Curupao, nos presenta esta ruta muy bonita con cruces de ríos, senderos perfectamente caminables, vegetación frondosa, pozos espectaculares y una cascada doble como recompensa final. El lugar y la hora de encuentro se proporcionan vía WhatsApp. Es necesario tomar transporte para iniciar la caminata; el costo publicado no incluye el pago del transporte.",
+incluye: "Guiatura y acompañmiento en todo momento de la ruta, cafe recien colado al llegar a la Cascada mas un snack, registro fotogrico de la ruta personal y grupal",
+imagen: "assets/ImagenAnaucos.png",
+precio: "$10 por persona",
+tipo: ["cascadas"] ,
+imagenes: [
+"assets/ImagenAnaucos.png",
             "assets/ImagenAnaucos2.png",
             "assets/ImagenAnaucos3.png",
             "assets/ImagenAnaucos4.png",
@@ -73,10 +66,13 @@ const catalogoGeneral = [
             "assets/ImagenAnaucos7.png",
             "assets/ImagenAnaucos8.png",
             "assets/ImagenAnaucos10.png",
-            "assets/ImagenAnaucos11.png"
-        ]
-    },
+            "assets/ImagenAnaucos11.png" ,
+]
+},];
+// CATÁLOGO GENERAL DE RUTAS DISPONIBLES EN EL ÁVILA Y ALREDEDORES
+const catalogoGeneral = [
 
+ 
    {
         id: "teleferico_cat",
         nombre: "Teleferico Fantasma - Estacion El Lyron",
@@ -88,7 +84,7 @@ const catalogoGeneral = [
         imagen: "assets/ImagenTelefericoFantasma.png",
         interesados: 0,
         incluye: "Guiatura y soporte durante toda la ruta, cafe recien colado, snack.",
-        precio: "Coonsultar via WhatsApp",
+        precio: "Consultar via WhatsApp",
        fechasPropuestas: [],
         imagenes: [
             "assets/ImagenTelefericoFantasma.png",
@@ -269,6 +265,7 @@ const catalogoGeneral = [
         interesados: 0,
         incluye: "Guiatura y soporte durante toda la ruta, cafe recien colado, snack.",
         precio: "Consultar via WhatsApp",
+        imagen: "assets/ImagenNaiguata8.png",
         fechasPropuestas: [],
         imagenes: [
             "assets/ImagenNaiguata8.png",
