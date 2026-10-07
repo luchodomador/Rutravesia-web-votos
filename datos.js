@@ -49,6 +49,32 @@ const rutasConfirmadas = [];
 const catalogoGeneral = [
 
     {
+id: "cascada-arcoiris-1126",
+nombre: "Cascada Arcoiris",
+dificultad: "Media",
+duracion: "6-9h",
+duracionTexto: "3h aproximadamente para llegar a la cascada",
+descripcion: "Una Cascada espectacular situada en el sector La Churca de nuestro Parque Nacional Waraira Repano, una ruta exigencia media con cruces de rios y caminata por senderos boscosos.",
+imagen: "assets/ImagenArcoiris.jpg",
+precio: "Consultar via WhatsApp",
+tipo: ["cumbres", "cascadas"],
+interesados: 0,
+fechasPropuestas: [], // <--- SIN COMAS ADENTRO
+imagenes: [
+    "assets/ImagenArcoiris.jpg",
+"assets/ImagenArcoiris1.jpg",
+"assets/ImagenArcoiris2.jpg",
+"assets/ImagenArcoiris3.jpg",
+"assets/ImagenArcoiris4.jpg",
+"assets/ImagenArcoiris5.jpg",
+"assets/ImagenArcoiris6.jpg",
+]
+},
+
+
+
+
+    {
 id: "Cascada-Paraiso-1126",
 nombre: "Cascada Paraiso y Cañon del Norte",
 dificultad: "Media",
@@ -56,6 +82,7 @@ duracion: "3-5h",
 duracionTexto: "Unas 2h de caminata para llegar a la Cascada Paraiso",
 descripcion: "Una Cascada espectacular situada en el sector La Churca de nuestro Parque Nacional Waraira Repano, una ruta exigencia media con cruces de rios y caminata por senderos boscosos ",
 imagen: "assets/ImagenParaiso1.jpg",
+precio: "Consultar via WhatsApp",
 tipo: ["cumbres", "cascadas"],
 interesados: 0,
 fechasPropuestas: [], // <--- SIN COMAS ADENTRO
@@ -79,6 +106,7 @@ duracion: "6-9h",
 duracionTexto: " Minimo 6 horas para completar la ruta",
 descripcion: "Ruta que te regala una experiencia única , caminar desde la ciudad de Caracas hasta la costa de La Guaira atresavando la montaña, conociendo el poblado de Hoyo de la Cumbre, senderos perfectamente caminables, regalandonos vistas espectaculares de la montaña y hacia la costa, conoceremos el Fortin San Carlos, el fortin El Vigia y caeremos en La Ciudad Historica de La Guaira ",
 imagen: "assets/ImagenCDLE7.jpg",
+precio: "Consultar via WhatsApp",
 tipo: ["cumbres", "patrimonio"],
 interesados: 0,
 fechasPropuestas: [], // <--- SIN COMAS ADENTRO
