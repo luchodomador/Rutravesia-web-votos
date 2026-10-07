@@ -44,18 +44,70 @@ EJEMPLO COMPLETO DE UNA RUTA EN EL CATÁLOGO:
 
 
 // BASE DE DATOS LOCAL DE RUTAS CONFIRMADAS
-const rutasConfirmadas = [{
-id: "anaucos-0926",
+const rutasConfirmadas = [];
+// CATÁLOGO GENERAL DE RUTAS DISPONIBLES EN EL ÁVILA Y ALREDEDORES
+const catalogoGeneral = [
+
+    {
+id: "Cascada-Paraiso-1126",
+nombre: "Cascada Paraiso y Cañon del Norte",
+dificultad: "Media",
+duracion: "3-5h",
+duracionTexto: "Unas 2h de caminata para llegar a la Cascada Paraiso",
+descripcion: "Una Cascada espectacular situada en el sector La Churca de nuestro Parque Nacional Waraira Repano, una ruta exigencia media con cruces de rios y caminata por senderos boscosos ",
+imagen: "assets/ImagenParaiso1.jpg",
+tipo: ["cumbres", "cascadas"],
+interesados: 0,
+fechasPropuestas: [], // <--- SIN COMAS ADENTRO
+imagenes: [
+"assets/ImagenParaiso1.jpg",
+"assets/ImagenParaiso3.jpg",
+"assets/ImagenParaiso9.jpg",
+"assets/ImagenParaiso10.jpg",
+"assets/ImagenParaiso4.jpg",
+"assets/ImagenParaiso6.jpg",
+"assets/ImagenParaiso8.jpg",
+"assets/ImagenParaiso12.jpg",
+]
+},
+
+    {
+id: "CDLE-1126",
+nombre: "Camino de los Españoles - Dos Aguadas",
+dificultad: "Media",
+duracion: "6-9h",
+duracionTexto: " Minimo 6 horas para completar la ruta",
+descripcion: "Ruta que te regala una experiencia única , caminar desde la ciudad de Caracas hasta la costa de La Guaira atresavando la montaña, conociendo el poblado de Hoyo de la Cumbre, senderos perfectamente caminables, regalandonos vistas espectaculares de la montaña y hacia la costa, conoceremos el Fortin San Carlos, el fortin El Vigia y caeremos en La Ciudad Historica de La Guaira ",
+imagen: "assets/ImagenCDLE7.jpg",
+tipo: ["cumbres", "patrimonio"],
+interesados: 0,
+fechasPropuestas: [], // <--- SIN COMAS ADENTRO
+imagenes: [
+"assets/ImagenCDLE7.jpg",
+"assets/ImagenCDLE2.jpg",
+"assets/ImagenCDLE3.jpg",
+"assets/ImagenCDLE4.jpg",
+"assets/ImagenCDLE5.jpg",
+"assets/ImagenCDLE6.jpg",
+"assets/ImagenCDLE.jpg",
+"assets/ImagenCDLE8.jpg",
+]
+},
+
+
+    {
+id: "anaucos-1126",
 nombre: "Cascada Los Anaucos",
-fecha: "Próximo Domingo 27 de Septiembre",
 dificultad: "Media", // Clave estandarizada
 duracion: "3-5h", // Clave estandarizada
+interesados: 0,
 duracionTexto: "3 horas aproximadamente para llegar a la cascada",
 descripcion: "El P. N. Waraira Repano, por el sector Curupao, nos presenta esta ruta muy bonita con cruces de ríos, senderos perfectamente caminables, vegetación frondosa, pozos espectaculares y una cascada doble como recompensa final. El lugar y la hora de encuentro se proporcionan vía WhatsApp. Es necesario tomar transporte para iniciar la caminata; el costo publicado no incluye el pago del transporte.",
 incluye: "Guiatura y acompañmiento en todo momento de la ruta, cafe recien colado al llegar a la Cascada mas un snack, registro fotogrico de la ruta personal y grupal",
 imagen: "assets/ImagenAnaucos.png",
-precio: "$10 por persona",
+precio: "Consulta via WhatsApp",
 tipo: ["cascadas"] ,
+fechasPropuestas: [], // <--- AHORA ESTÁ VACÍO Y NO ROMPERÁ
 imagenes: [
 "assets/ImagenAnaucos.png",
             "assets/ImagenAnaucos2.png",
@@ -68,12 +120,10 @@ imagenes: [
             "assets/ImagenAnaucos10.png",
             "assets/ImagenAnaucos11.png" ,
 ]
-},];
-// CATÁLOGO GENERAL DE RUTAS DISPONIBLES EN EL ÁVILA Y ALREDEDORES
-const catalogoGeneral = [
+}
 
- 
-   {
+
+   ,{
         id: "teleferico_cat",
         nombre: "Teleferico Fantasma - Estacion El Lyron",
         dificultad: "Media",
@@ -199,7 +249,7 @@ const catalogoGeneral = [
         ]
     },
   {
-    id: "grietas-san-pedrov1",
+    id: "grietas-san-pedrov2",
     nombre: "Grietas de San Pedro - Camino de los Libertadores",
     dificultad: "Media",
     duracion: "6-9h",
@@ -210,8 +260,8 @@ const catalogoGeneral = [
     precio: "Consultar via WhatsApp",
     imagen: "assets/ImagenGrietasDeSanPedro.png",
     fechasPropuestas: [
-        { fecha: "Sábado 26 de Septiembre", interesados: 0 },
-        { fecha: "Sábado 3 de Octubre", interesados: 0 }
+        { fecha: "Domingo 1 de Noviembre", interesados: 0 },
+        { fecha: "Domingo 8 de Noviembre", interesados: 0 }
     ], // <--- AHORA ESTÁ VACÍO Y NO ROMPERÁ
     imagenes: [
         "assets/ImagenGrietasDeSanPedro.png",
