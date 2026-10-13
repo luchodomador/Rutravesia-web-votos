@@ -48,6 +48,78 @@ const rutasConfirmadas = [];
 // CATÁLOGO GENERAL DE RUTAS DISPONIBLES EN EL ÁVILA Y ALREDEDORES
 const catalogoGeneral = [
 
+        {
+id: "cascada-Velodenovia-1126",
+nombre: "Cascada Velo de Novia",
+dificultad: "Baja",
+duracion: "3-5H",
+duracionTexto: "1h y 30 minutos para llegar a la Cascada",
+descripcion: "En el sector Curupao del Parque Nacional Waraira Repano, encontramos esta muy hermosa cascada , ideal para bañarse debajo de ella debido al pozo bajito que se forma , una ruta de dificultad baja donde solo vamos a encontrar un tramo semi extremo que hay q usar las manos para avanzar y ascender, de resto cruces de rios muy sencillos y caminata amigable. El transporte esta incluido en el costo de publicado",
+imagen: "assets/ImagenVelojpg",
+precio: "Consultar via WhatsApp",
+tipo: ["cumbres", "cascadas"],
+interesados: 0,
+fechasPropuestas: [], // <--- SIN COMAS ADENTRO
+imagenes: [
+    "assets/ImagenVelojpg",
+"assets/ImagenVelo2.jpg",
+"assets/ImagenVelo3.jpg",
+"assets/ImagenVelo1.jpg",
+"assets/ImagenVelo4.jpg",
+"assets/ImagenVelo5.jpg",
+"assets/ImagenVelo6.jpg",
+"assets/ImagenVelo7.jpg",
+"assets/ImagenVelo8.jpg",
+]
+},  
+
+
+            {
+id: "cascada-Garate-1126",
+nombre: "Cascada Garate",
+dificultad: "Alta",
+duracion: "6-9h",
+duracionTexto: "4h aproximadamente para llegar a la cascada",
+descripcion: "Por el sector las Culebrillas, por la entrada de Caicaguita encontramos esta inmensa , hermosa y muy fria cascada, donde se crea un pozo ideal para bañarse. Es una ruta de alta exigencia donde el mayor de gaste de energia se lo lleva la primera hora de ruta por su ascenso constante, despues se vuelve una caminata muy continua por el poblado de montaña",
+imagen: "assets/ImagenGarate.jpg",
+precio: "Consultar via WhatsApp",
+tipo: ["cumbres", "cascadas"],
+interesados: 0,
+fechasPropuestas: [], // <--- SIN COMAS ADENTRO
+imagenes: [
+    "assets/ImagenGarate.jpg",
+"assets/ImagenGarate1.jpg",
+"assets/ImagenGarate2.jpg",
+"assets/ImagenGarate6.jpg",
+"assets/ImagenGarate4.jpg",
+"assets/ImagenGarate5.jpg",
+"assets/ImagenGarate3.jpg",
+"assets/ImagenGarate7.jpg",
+]
+},   
+
+
+        {
+id: "cascada-plantilla-1126",
+nombre: "Cascada La Plantilla",
+dificultad: "Media",
+duracion: "6-9h",
+duracionTexto: "3h y media aproximadamente para llegar a la cascada",
+descripcion: "Por el sector las Culebrillas, por la entrada de Caicaguita encontramos esta inmensa , hermosa y muy fria cascada, donde se crea un pozo ideal para bañarse. Es una ruta de exigencia media-alta donde el mayor de gaste de energia se lo lleva la primera hora de ruta por su ascenso constante, despues se vuelve una caminata muy continua por el poblado de montaña",
+imagen: "assets/ImagenPlantilla1.jpg",
+precio: "Consultar via WhatsApp",
+tipo: ["cumbres", "cascadas"],
+interesados: 0,
+fechasPropuestas: [], // <--- SIN COMAS ADENTRO
+imagenes: [
+    "assets/ImagenPlantilla1.jpg",
+"assets/ImagenPlantilla2.jpg",
+"assets/ImagenPlantilla3.jpg",
+"assets/ImagenPlantilla.jpg",
+]
+},   
+
+
     {
 id: "cascada-arcoiris-1126",
 nombre: "Cascada Arcoiris",
