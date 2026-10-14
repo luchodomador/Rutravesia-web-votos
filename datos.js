@@ -48,6 +48,89 @@ const rutasConfirmadas = [];
 // CATÁLOGO GENERAL DE RUTAS DISPONIBLES EN EL ÁVILA Y ALREDEDORES
 const catalogoGeneral = [
 
+
+    
+        {
+id: "trescascadas-1126",
+nombre: "Camping Tres Cascadas - Salmeron",
+dificultad: "Media",
+duracion: "3-5H",
+duracionTexto: "Puede tomar unas 4-5 horas hacer el recorrido completo",    
+descripcion: "En el Municipio Zamora , nos esperan 3 lugares maravillosos para conocer : Las Tres Casdadas , El pozo Azul y el Pozo Verde. Salimos desde Caracas en un jeep particular para llegar a Salmeron, donde llegamos al campamento Tres Cascadas para despues iniciar la caminata y hacer la visita de los 3 sitios, retornamos en la tarde y dependiendo de la logistica que hayamos organzido el grupo se hace la cena, se duerme en el campamento y al dia siguiente se hace el retorno a Caracas. ",
+imagen: "assets/Imagen3cascadas.jpg",
+precio: "Consultar via WhatsApp",
+tipo: ["cumbres", "camping", "cascadas"],
+interesados: 0,
+fechasPropuestas: [], // <--- SIN COMAS ADENTRO
+imagenes: [
+"assets/Imagen3cascadas.jpg",
+"assets/Imagen3cascadas1.jpg",
+"assets/Imagen3cascadas2.jpg",
+"assets/Imagen3cascadas3.jpg",
+"assets/Imagen3cascadas4.jpg",
+"assets/Imagen3cascadas5.jpg",
+"assets/Imagen3cascadas6.jpg",
+"assets/Imagen3cascadas7.jpg",
+"assets/Imagen3cascadas8.jpg",
+"assets/Imagen3cascadas9.jpg",
+"assets/Imagen3cascadas10.jpg",
+"assets/Imagen3cascadas11.jpg",
+"assets/Imagen3cascadas12.jpg",
+]
+},  
+
+
+        {
+id: "colonia-codazzi-1126",
+nombre: "Colonia Tovar - Camping Pico Codazzi",
+dificultad: "Baja",
+duracion: "3-5H",
+duracionTexto: "15 minutos caminando ( con transporte ) ",
+descripcion: "Con transporte privado agarramos rumbo hacia la Colonia Tovar en el estado Aragua para acampar en el Pico Codazzi, a su vez dependiendo de la logistica se pueden realizar varias visitas a los distintos lugares que ofrece la Colonia Tovar ",
+imagen: "assets/ImagenCodazzi.jpg",
+precio: "Consultar via WhatsApp",
+tipo: ["cumbres", "camping"],
+interesados: 0,
+fechasPropuestas: [], // <--- SIN COMAS ADENTRO
+imagenes: [
+
+    "assets/ImagenCodazzi.jpg",
+    "assets/ImagenCodazzi1.jpg",
+"assets/ImagenCodazzi2.jpg",
+"assets/ImagenCodazzi3.jpg",
+]
+},  
+
+
+
+        {
+id: "cascada-guairita-1126",
+nombre: "Cascada La Guairita",
+dificultad: "Baja",
+duracion: "3-5H",
+duracionTexto: "1h y 30 minutos para llegar a la Cascada",
+descripcion: "En el sector Curupao del Parque Nacional Waraira Repano, encontramos esta maravilla , esta Cascada super alta con una belleza natural impresionante , para llegar a esta belleza hay que hacer varios cruces de rios y escalar una pequeña parte para darle una toque extremo a la ruta a su vez se hara la visita al dique la Vela , un espacio bastante bonito ideal para sentarnos , relajarnos y comer comodamente. El transporte no va incluido en el pago de la guiatura ",
+imagen: "assets/ImagenGuairita1.jpg",
+precio: "Consultar via WhatsApp",
+tipo: ["cumbres", "cascadas"],
+interesados: 0,
+fechasPropuestas: [], // <--- SIN COMAS ADENTRO
+imagenes: [
+    "assets/ImagenGuairita1.jpg",
+    "assets/ImagenGuairita.jpg",
+"assets/ImagenGuairita2.jpg",
+"assets/ImagenGuairita3.jpg",
+"assets/ImagenGuairita4.jpg",
+"assets/ImagenGuairita5.jpg",
+"assets/ImagenGuairita6.jpg",
+"assets/ImagenGuairita7.jpg",
+
+]
+},  
+
+
+
+
         {
 id: "cascada-Velodenovia-1126",
 nombre: "Cascada Velo de Novia",
