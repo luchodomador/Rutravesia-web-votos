@@ -49,6 +49,138 @@ const rutasConfirmadas = [];
 const catalogoGeneral = [
 
 
+        {
+id: "reto2picos-1126",
+nombre: "Reto 2 Picos: Occidental y Avila",
+dificultad: "Alta",
+duracion: "6-9h",
+duracionTexto: "5-7h horas para completar la ruta",   
+descripcion: "Es un reto de alta exigencia fisica y mental, donde la idea principal es hacer 2 cumbres del Parque Nacional Waraira Repano: Pico Occidental y el Pico Avila. La mayor exigencia esta en los fuertes ascensos constantes que tiene esta ruta , las recompensas visuales si la montaña lo permite son sencillamente unicas ",    
+imagen: "assets/Imagen2Picos1.jpg",
+precio: "Consultar via WhatsApp",
+tipo: ["cumbres"],
+interesados: 0,
+fechasPropuestas: [], // <--- SIN COMAS ADENTRO
+imagenes: [
+"assets/Imagen2Picos1.jpg",
+"assets/Imagen2Picos2.jpg",
+"assets/Imagen2Picos5.jpg",
+"assets/Imagen2Picos6.jpg",
+"assets/Imagen2Picos7.jpg",
+"assets/Imagen2Picos8.jpg",
+"assets/Imagen2Picos9.jpg",
+]
+},  
+
+
+
+        {
+id: "reto3picos-1126",
+nombre: "Reto 3 Picos: Oriental, Occidental y Avila",
+dificultad: "Extrema",
+duracion: "multidia",
+duracionTexto: "23-27h horas para completar la ruta ",   
+descripcion: "Es un reto de alta exigencia fisica y mental, donde la idea principal es tocar las 3 cumbres del Parque Nacional Wairaia Repano: Pico Oriental , Pico Occidental y el Pico Avila. La mayor exigencia esta en la fuerte y constante subida hacia el Pico Oriental, se continua camino por la fila maestra hasta llegar al pico occidental y seguir hacia el Pico Avila , es decir el hotel Humboldt ",  
+imagen: "assets/Imagen3Picos1.jpg",
+precio: "Consultar via WhatsApp",
+tipo: ["cumbres"],
+interesados: 0,
+fechasPropuestas: [], // <--- SIN COMAS ADENTRO
+imagenes: [
+"assets/Imagen3Picos1.jpg",
+"assets/Imagen3Picos2.jpg",
+"assets/Imagen3Picos3.jpg",
+"assets/Imagen3Picos4.jpg",
+"assets/Imagen3Picos5.jpg",
+"assets/Imagen3Picos6.jpg",
+"assets/Imagen3Picos7.jpg",
+"assets/Imagen3Picos8.jpg",
+"assets/Imagen3Picos9.jpg",
+"assets/Imagen3Picos10.jpg",
+]
+},  
+
+
+
+        {
+id: "filamaestra-1126",
+nombre: "Reto 4 Picos: Fila Maestra",
+dificultad: "Extrema",
+duracion: "multidia",
+duracionTexto: "23-28h horas para completar la ruta ",   
+descripcion: "Es un reto de alta exigencia fisica y mental, donde la idea principal es tocar las 4 cumbres del Parque Nacional Waraira Repano: Pico Naigata , Pico Oriental , Pico Occidental y el Pico Avila. Se prescinde el uso de carpas , la modalidad de descanso es al estilo vivac",  
+imagen: "assets/ImagenFilaMaestra1.jpg",
+precio: "Consultar via WhatsApp",
+tipo: ["cumbres"],
+interesados: 0,
+fechasPropuestas: [], // <--- SIN COMAS ADENTRO
+imagenes: [
+"assets/ImagenFilaMaestra1.jpg",
+"assets/ImagenFilaMaestra2.jpg",
+"assets/ImagenFilaMaestra3.jpg",
+"assets/ImagenFilaMaestra4.jpg",
+"assets/ImagenFilaMaestra6.jpg",
+"assets/ImagenFilaMaestra5.jpg",
+"assets/ImagenFilaMaestra7.jpg",
+"assets/ImagenFilaMaestra8.jpg",
+"assets/ImagenFilaMaestra9.jpg",
+]
+},  
+
+
+
+
+        {
+id: "riotalma-1126",
+nombre: "Rio Talma - Pozos ",
+dificultad: "Baja",
+duracion: "3-5H",
+duracionTexto: "20 min aproximadamente para llegar a los Pozos del Rio Talma",    
+descripcion: "Una ruta super sencilla que solo tiene un tramo medio fuerte de 10 minutos de bajada y despues 10 minutos de subida de regreso, de resto es solo caminar por el rio hasta llegar a los pozos, tomaremos cafe recien colado , tomaremos todas las fotos y videos de su preferencia",   
+imagen: "assets/ImagenRioTalma1.jpg",
+precio: "Consultar via WhatsApp",
+tipo: ["cascadas"],
+interesados: 0,
+fechasPropuestas: [], // <--- SIN COMAS ADENTRO
+imagenes: [
+"assets/ImagenRioTalma1.jpg",
+"assets/ImagenRioTalma2.jpg",
+"assets/ImagenRioTalma3.jpg",
+"assets/ImagenRioTalma4.jpg",
+"assets/ImagenRioTalma5.jpg",
+"assets/ImagenRioTalma6.jpg"
+]
+},  
+
+
+
+        {
+id: "drknoche-1126",
+nombre: "Mausoleo del Dr Knoche - Pozos de Galipan",
+dificultad: "Media",
+duracion: "3-5H",
+duracionTexto: "1h:30 min aproximadamente para llegar al Mausoleo del Dr Knoche",    
+descripcion: "Se toma un jeep que nos deja en la entrada de la ruta hacia el Mausoleo, es una caminata por senderos amigables con algunas subidas y algunas bajadas, una vez que se llegue al monumento serviremos cafe con un pequeño snack, tomaremos las fotos y videos y de regreso. Una vez de regreso , tomamos rumbo hacia los Pozos de Galipan que estan a unos 10 minutos de la entrada de la ruta del Mausoleo, donde se puede disfrutar de un baño en los pozos y tomar mas fotos y mas videos. El servicio de transporte esta incluido en el costo publicado",
+imagen: "assets/ImagenDrKnoche2.jpg",
+precio: "Consultar via WhatsApp",
+tipo: ["cumbres", "patrimonio", "cascadas"],
+interesados: 0,
+fechasPropuestas: [], // <--- SIN COMAS ADENTRO
+imagenes: [
+"assets/ImagenDrKnoche1.jpg",
+"assets/ImagenDrKnoche5.jpg",
+"assets/ImagenDrKnoche3.jpg",
+"assets/ImagenDrKnoche4.jpg",
+"assets/ImagenDrKnoche6.jpg",
+"assets/ImagenDrKnoche7.jpg",
+"assets/ImagenDrKnoche8.jpg",
+"assets/ImagenDrKnoche9.jpg ",
+"assets/ImagenDrKnoche10.jpg"
+]
+},  
+
+
+
     
         {
 id: "trescascadas-1126",
@@ -96,8 +228,8 @@ imagenes: [
 
     "assets/ImagenCodazzi.jpg",
     "assets/ImagenCodazzi1.jpg",
-"assets/ImagenCodazzi2.jpg",
-"assets/ImagenCodazzi3.jpg",
+    "assets/ImagenCodazzi2.jpg",
+    "assets/ImagenCodazzi3.jpg",
 ]
 },  
 
@@ -339,7 +471,7 @@ imagenes: [
     duracion: "6-9h",
     duracionTexto: " Minimo 8 horas para completar la ruta",
     tipo: ["cumbres"],
-    descripcion: "Ascenso a la segunda cumbre más alta de toda la cordillera de la Costa: el Pico Oriental, a unos 2640 m s. n. m. Pasando por los miradores Piedra del Indio, Cabeza de Elefante, el emblemático Pino Solitario y la Cruz de los Palmeros, es una de las rutas con las vistas más impactantes y espectaculares hacia Caracas. La ruta es exigente y requiere de buena condición física, ya que el desnivel es continuo durante todo el recorrido. El descenso se hace por la misma ruta, por lo que se recomienda llevar al menos 3 litros de agua, frutos secos, abrigo para la cumbre y calzado de montaña con buen agarre.",    
+    descripcion: "Ascenso a la segunda cumbre más alta de toda la cordillera de la Costa: el Pico Oriental, a unos 2640 m s. n. m. Pasando por los miradores Piedra del Indio, Cabeza de Elefante, el emblemático Pino Solitario y la Cruz de los Palmeros, es una de las rutas con las vistas más impactantes y espectaculares hacia Caracas. La ruta es exigente y requiere de buena condición física, ya que el desnivel es continuo durante todo el recorrido. El descenso se hace por la misma via, por lo que se recomienda llevar al menos 3 litros de agua, frutos secos, abrigo para la cumbre y calzado de montaña con buen agarre. ",    
     incluye: "Guiatura y soporte durante toda la ruta, cafe recien colado, snack.",
     precio: "Consultar via WhatsApp",
     imagen: "assets/ImagenPicoOriental.png",
@@ -432,7 +564,7 @@ imagenes: [
         ]
     },
   {
-    id: "grietas-san-pedrov2",
+    id: "grietas-san-pedro1126",
     nombre: "Grietas de San Pedro - Camino de los Libertadores",
     dificultad: "Media",
     duracion: "6-9h",
@@ -442,10 +574,7 @@ imagenes: [
     incluye: "Guiatura y soporte durante toda la ruta, cafe recien colado, snack.",
     precio: "Consultar via WhatsApp",
     imagen: "assets/ImagenGrietasDeSanPedro.png",
-    fechasPropuestas: [
-        { fecha: "Domingo 1 de Noviembre", interesados: 0 },
-        { fecha: "Domingo 8 de Noviembre", interesados: 0 }
-    ], // <--- AHORA ESTÁ VACÍO Y NO ROMPERÁ
+    fechasPropuestas: [], // <--- AHORA ESTÁ VACÍO Y NO ROMPERÁ
     imagenes: [
         "assets/ImagenGrietasDeSanPedro.png",
         "assets/ImagenGrietasDeSanPedro2.png",
